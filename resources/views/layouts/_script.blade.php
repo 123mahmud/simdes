@@ -27,6 +27,103 @@
 <script src="{{asset('assets/js/vue.js')}}"></script>
 
 <script src="{{asset('assets/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
+{{-- Loading --}}
+
+
+<script type="text/javascript">
+  $(window).ready(function(){
+
+    setTimeout(function(){
+      $('.content').addClass('animated fadeInLeft');
+
+      $('.background-loading').fadeOut('slow');
+    },500);
+
+    //mask money
+    $('.currency').inputmask("currency", {
+      radixPoint: ".",
+      groupSeparator: ".",
+      digits: 2,
+      autoGroup: true,
+      prefix: '', //Space after $, this will not truncate the first character.
+      rightAlign: false,
+      autoUnmask: true,
+      nullable: false,
+      // unmaskAsNumber: true,
+    });
+    // add manually inputmask to each .currency
+    $('.currency-x').inputmask("currency", {
+      radixPoint: ".",
+      groupSeparator: ".",
+      digits: 0,
+      autoGroup: true,
+      prefix: '', //Space after $, this will not truncate the first character.
+      rightAlign: false,
+      autoUnmask: true,
+      // unmaskAsNumber: true,
+    });
+
+    $(".npwp").inputmask("99-999-999-9-999-999");
+
+    $('.hp').inputmask("9999 9999 9999", {
+      autoUnmask: true,
+    });
+
+    $('.email').inputmask({alias: "email"});
+  });
+
+  function messageSuccess(title, message) {
+      $.toast({
+          heading: title,
+          text: message,
+          bgColor: '#00b894',
+          textColor: 'white',
+          loaderBg: '#3C415E',
+          icon: 'success',
+          stack: false,
+          hideAfter: 3000
+      });
+  }
+
+  function messageFailed(title, message) {
+      $.toast({
+          heading: title,
+          text: message,
+          bgColor: '#FF4444',
+          textColor: 'white',
+          loaderBg: '#3C415E',
+          icon: 'warning',
+          stack: false,
+          hideAfter: 3000
+      });
+  }
+
+  function messageWarning(title, message) {
+      $.toast({
+          heading: title,
+          text: message,
+          bgColor: '#FF4444',
+          textColor: 'white',
+          loaderBg: '#3C415E',
+          icon: 'error',
+          stack: false,
+          hideAfter: 3000
+      });
+  }
+
+  $(document).on('click', '.color-item', function(){
+    $('.content').removeClass('animated fadeInLeft');
+    $('.background-loading').css('display', 'block');
+    // console.log('click');
+    setTimeout(function(){
+      $('.content').addClass('animated fadeInLeft');
+
+      $('.background-loading').fadeOut('slow');
+    },500);
+  })
+
+</script>
+{{-- End Loading --}}
 <script type="text/javascript">
   var getstorage;
   $('#sidebar-collapse-btn, #sidebar-overlay').click(function(){
@@ -41,7 +138,8 @@
   getstorage = localStorage.getItem('sidebar-collapse-storage');
   if (getstorage) {
     $('#app').addClass(getstorage);
-  }  
+  }
+
 
 </script>
 <script type="text/javascript">
@@ -69,13 +167,13 @@
   	});
 
 
-    
+
 $.ajaxSetup({
      headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
     });
-    
+
     $.extend( $.fn.dataTable.defaults, {
       "responsive":true,
 
@@ -97,7 +195,7 @@ $.ajaxSetup({
 
     });
     $('.table').attr('width', '100%');
-    
+
     var datatable = $('.data-table').dataTable();
 
     // new $.fn.dataTable.Responsive( datatable, {
@@ -106,7 +204,8 @@ $.ajaxSetup({
 
 		$('.datepicker').datepicker({
 			format:"dd-mm-yyyy",
-      enableOnReadonly:false
+      enableOnReadonly:false,
+      autoclose:true
 
 		});
 
@@ -126,17 +225,17 @@ $.ajaxSetup({
 
       if ($(window).width() > 768) {
         $('#search-container').css('display', 'block');
-      } 
-      
+      }
+
 
     });
 
     $('.input-daterange').datepicker({
         format:'dd-mm-yyyy',
         enableOnReadonly:false
-        
+
     });
-    
+
     $('.datetimepicker').datetimepicker({
         format:"D-M-Y HH:mm:ss",
         disabledTimeIntervals: false
@@ -145,7 +244,7 @@ $.ajaxSetup({
         format:"HH:mm:ss",
         disabledTimeIntervals: false,
         pickDate:false
-    });        
+    });
     // $('.modal.fade').on('scroll', function(){
     //     if($(this).hasClass('show')=== true){
     //         $('.datepicker').datepicker('hide');
@@ -157,7 +256,7 @@ $.ajaxSetup({
     $.fn.select2.defaults.set( 'dropdownAutoWidth', true );
     $.fn.select2.defaults.set( 'width', 'resolve' );
 
-    $('.select2').select2();
+    $('.select2').select2({width : '100%'});
 
     $('.select2').on('select2:close', function(){
       $(this).focus();
@@ -189,6 +288,18 @@ $.ajaxSetup({
 
     $(".persentase").inputmask({"regex": "^[1-9][0-9]?$|^100$" });
 	});
+
+    function regeneratedSession(){
+        $.ajax({
+            url: baseUrl+'/session-set-comp/'+$('.mem_comp').val(),
+            type: 'get',
+            timeout: 5000,
+            success: function(response){
+                location.reload();
+            }
+        })
+    }
+
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -204,7 +315,7 @@ $.ajaxSetup({
             hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
             stack: 8, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
             position: 'top-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
-            
+
             // bgColor: '#444444',  // Background color of the toast
             // textColor: '#eeeeee',  // Text color of the toast
             textAlign: 'left',  // Text alignment i.e. left, right or center
@@ -221,7 +332,7 @@ $.ajaxSetup({
         var random = Math.floor(Math.random() * coeg.length);
 
         // $.toast(coeg[random]);
-        
+
         $('#btn-logout').confirm({
             title:'Peringatan!',
             theme:'modular-admin',
@@ -295,7 +406,7 @@ $.ajaxSetup({
                       li[i].style.display = "none";
 
                   }
-              
+
               }
         });
 
