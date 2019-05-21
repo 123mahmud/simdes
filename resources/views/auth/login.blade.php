@@ -44,9 +44,9 @@
         <div class="container">
             <div class="ar-card">
                 <div class="ar-card-header">
-                    <img src="{{asset('assets/img/games.ico')}}" width="100px" height="100px" class="ar-card-logo">
+                    {{-- <img src="{{asset('assets/img/games.ico')}}" width="100px" height="100px" class="ar-card-logo"> --}}
                     <div class="ar-card-header-h3">
-                        CV. Alexis
+                        SISTIM INFORMASI DESA
                     </div>
                     <div class="ar-card-header-h2">
                         Login
@@ -71,9 +71,9 @@
             </div>
         </div>
 
-    <footer>
+    {{-- <footer>
         <span>Created by Alamraya Sebar Barokah.</span>
-    </footer>
+    </footer> --}}
     <script src="{{asset('assets/login-mirip-discrottt/js/jquery/jquery-3.3.1.js')}}"></script>
     <script src="{{asset('assets/login-mirip-discrottt/js/parallax-mousehover/parallax.js')}}"></script>
 
