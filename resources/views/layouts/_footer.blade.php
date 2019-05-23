@@ -5,7 +5,7 @@
               Copyright &copy; {{date('Y')}}
             </li>
             <li> 
-                <a target="_blank" href="https://alamraya.co.id">Alamraya Sebar Barokah</a>
+                <a target="_blank" href="">KKN Universitas 17 Agustus Surabaya</a>
             </li>
             <li>All rights reserved.</li>
         </ul>

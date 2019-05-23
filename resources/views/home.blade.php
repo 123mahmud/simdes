@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-<article class="content dashboard-page">
+{{-- <article class="content dashboard-page">
     <section class="section">
         <div class="row sameheight-container">
             <div class="col col-12 col-sm-12 col-md-6 col-xl-5 stats-col">
@@ -1423,5 +1423,5 @@
             </div>
         </div>
     </section>
-</article>
+</article> --}}
 @endsection

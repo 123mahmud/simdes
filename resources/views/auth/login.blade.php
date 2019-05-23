@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{asset('assets/img/games.ico')}}">
 
-    <title>Alexis</title>
+    <title>Wonokerto</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/login-mirip-discrottt/css/alamraya-style.css')}}">
 
@@ -46,7 +46,7 @@
                 <div class="ar-card-header">
                     {{-- <img src="{{asset('assets/img/games.ico')}}" width="100px" height="100px" class="ar-card-logo"> --}}
                     <div class="ar-card-header-h3">
-                        SISTIM INFORMASI DESA
+                        SISTIM INFORMASI MANAJEMEN DESA WONOKERTO
                     </div>
                     <div class="ar-card-header-h2">
                         Login

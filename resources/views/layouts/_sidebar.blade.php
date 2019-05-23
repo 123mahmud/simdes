@@ -34,7 +34,7 @@
         <div class="sidebar-header">
             <div class="brand">
                 <img src="{{asset('assets/img/games.ico')}}" height="45px" width="45px" class="mr-2">
-                <span class="brand-title">Alexis</span>
+                <span class="brand-title">Simdes Wonokerto</span>
             </div>
             <form role="search">
                 <div class="input-container">
@@ -66,59 +66,30 @@
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
+                        <li class="{{Request::is('master/datapegawai/*') ? 'active' : ''}}">
+                            <a href="{{route('datapegawai')}}">Pegawai Desa</a>
+                        </li>
                         <li class="{{Request::is('master/databarang/*') ? 'active' : ''}}">
-                            <a href="{{route('databarang')}}">Data Barang</a>
+                            <a href="{{route('databarang')}}">Penduduk</a>
                         </li>
                         <li class="{{Request::is('master/datasuplier/*') ? 'active' : ''}}">
-                            <a href="{{route('datasuplier')}}">Data Suplier</a>
+                            <a href="{{route('datasuplier')}}">Kelahiran</a>
                         </li>
                         <li class="{{Request::is('master/datacustomer/*') ? 'active' : ''}}">
-                            <a href="{{route('datacustomer')}}">Data Customer</a>
-                        </li>
-                        <li class="{{Request::is('master/datapegawai/*') ? 'active' : ''}}">
-                            <a href="{{route('datapegawai')}}">Data Pegawai</a>
+                            <a href="{{route('datacustomer')}}">Kematian</a>
                         </li>
                         <li class="{{Request::is('master/dataarmada/*') ? 'active' : ''}}">
-                            <a href="{{route('dataarmada')}}">Data Armada</a>
+                            <a href="{{route('dataarmada')}}">Penduduk Masuk</a>
                         </li>
                         <li class="{{Request::is('master/datasatuan/*') ? 'active' : ''}}">
-                            <a href="{{route('datasatuan')}}">Data Satuan</a>
+                            <a href="{{route('datasatuan')}}">Penduduk Keluar</a>
                         </li>
                         <li class="{{Request::is('master/datamesin/*') ? 'active' : ''}}">
-                            <a href="{{route('datamesin')}}">Data Mesin</a>
-                        </li>
-                        <li class="{{Request::is('master/barangsuplier/*') ? 'active' : ''}}">
-                            <a href="{{route('barangsuplier')}}">Item Barang Suplier</a>
-                        </li>
-                        <li class="{{Request::is('master/dataharga/*') ? 'active' : ''}}">
-                            <a href="{{route('dataharga')}}">Data Harga</a>
-                        </li>
-                        <li class="{{Request::is('master/upah/*') ? 'active' : ''}}">
-                            <a href="{{route('upah')}}">Data Upah</a>
-                        </li>
-                        <li class="{{Request::is('master/datatunjangan/*')}}">
-                            <a href="{{route('datatunjangan')}}">Data Tunjangan</a>
-                        </li>
-                        <li class="{{Request::is('master/datajabatan/*') ? 'active' : ''}}">
-                            <a href="{{route('datajabatan')}}">Data Jabatan</a>
+                            <a href="{{route('datamesin')}}">Penduduk Pindah RT</a>
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="{{Request::is('suplier/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-user"></i> Suplier
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('suplier/barangsuplier/*') ? 'active' : ''}}">
-                            <a href="{{url('suplier/barangsuplier/barangsuplier')}}">Item Barang Suplier</a>
-                        </li>
-                        <li class="{{Request::is('suplier/dataarmada/*') ? 'active' : ''}}">
-                            <a href="{{url('suplier/dataarmada/dataarmada')}}">Data Armada</a>
-                        </li>
-                    </ul>
-                </li> -->
-                <li class="{{Request::is('purchasing/*') ? 'active open' : ''}}">
+                {{-- <li class="{{Request::is('purchasing/*') ? 'active open' : ''}}">
                     <a href="#">
                         <i class="fa fa-credit-card"></i>
                         <span class="menu-title">Purchasing</span>
@@ -182,9 +153,6 @@
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        {{-- <li class="{{Request::is('produksi/perencanaanproduksi/*') ? 'active' : ''}}">
-                            <a href="{{url('produksi/perencanaanproduksi/perencanaanproduksi')}}"> Perencanaan Produksi </a>
-                        </li> --}}
                         <li class="{{Request::is('produksi/produksitanparencana/*') ? 'active' : ''}}">
                             <a href="{{route('produksitanparencana')}}"> Pencatatan Produksi Tanpa Rencana </a>
                         </li>
@@ -231,9 +199,9 @@
                         <li class="{{Request::is('penjualan/diskonpenjualan/*') ? 'active' : ''}}">
                             <a href="{{route('diskonpenjualan')}}"> Diskon Penjualan</a>
                         </li>
-                        {{-- <li class="{{Request::is('penjualan/penjualanproject/*') ? 'active' : ''}}">
+                        <li class="{{Request::is('penjualan/penjualanproject/*') ? 'active' : ''}}">
                             <a href="{{route('penjualanproject')}}"> Penjualan Project</a>
-                        </li> --}}
+                        </li>
                         <li class="{{Request::is('penjualan/returnpenjualan/*') ? 'active' : ''}}">
                             <a href="{{route('returnpenjualan')}}"> Return Penjualan</a>
                         </li>
@@ -264,33 +232,6 @@
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        {{-- <li class="{{Request::is('biayadanbeban/upahborongan/*') ? 'active' : ''}}">
-                            <a href="{{route('upahborongan')}}"> Upah Borongan</a>
-                        </li> --}}
-                        <li class="{{Request::is('biayadanbeban/upahharian/*') ? 'active' : ''}}">
-                            <a href="{{route('upahharian')}}"> Upah Harian</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/upahbulanan/*') ? 'active' : ''}}">
-                            <a href="{{route('upahbulanan')}}"> Upah Bulanan</a>
-                        </li>
-                        {{-- <li class="{{Request::is('biayadanbeban/sewalahan/*') ? 'active' : ''}}">
-                            <a href="{{route('sewalahan')}}"> Sewa Lahan</a>
-                        </li> --}}
-                        {{--  <li class="{{Request::is('biayadanbeban/biayaoperasional/*') ? 'active' : ''}}">
-                            <a href="{{route('biayaoperasional')}}"> Biaya Operasional</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/biayabahanbakar/*') ? 'active' : ''}}">
-                            <a href="{{route('biayabahanbakar')}}"> Biaya Bahan Bakar</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/biayakonsumsi/*') ? 'active' : ''}}">
-                            <a href="{{route('biayakonsumsi')}}"> Biaya Konsumsi</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/biayakesehatan/*') ? 'active' : ''}}">
-                            <a href="{{route('biayakesehatan')}}"> Biaya Kesehatan</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/alattuliskantor/*') ? 'active' : ''}}">
-                            <a href="{{route('alattuliskantor')}}"> Alat Tulis Kantor</a>
-                        </li> --}}
                         <li class="{{Request::is('biayadanbeban/pengeluarankecil/*') ? 'active' : ''}}">
                             <a href="{{route('pengeluarankecil')}}">Biaya Pengeluaran Kecil</a>
                         </li>
@@ -300,11 +241,6 @@
                         
                     </ul>
                 </li>
-                {{--                 <li class="{{Request::is('danasosial/*') ? 'active' : ''}}">
-                    <a href="{{route('danasosial')}}">
-                        <i class="fa fa-users"></i><span class="menu-title"> Dana Sosial</span>
-                    </a>
-                </li> --}}
                 <li class="{{Request::is('aset/*') ? 'active open' : ''}}">
                     <a href="#">
                         <i class="fa fa-line-chart"></i><span class="menu-title"> Aset</span>
@@ -347,9 +283,6 @@
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-{{--                         <li class="{{Request::is('system/manajemenuser/*') ? 'active' : ''}}">
-                            <a href="{{route('manajemenuser')}}"> Manajemen User</a>
-                        </li> --}}
                         <li class="{{Request::is('system/manajemenhakakses/*') ? 'active' : ''}}">
                             <a href="{{route('manajemenhakakses')}}"> Manajemen Hak Akses</a>
                         </li>
@@ -361,7 +294,7 @@
                         </li>
                         
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>
