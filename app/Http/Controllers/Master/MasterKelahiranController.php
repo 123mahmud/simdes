@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use DB;
 use Crypt;
 use carbon\Carbon;
 use App\MasterBarang;
 use DataTables;
 
-class MasterSupplierController extends Controller
+class MasterKelahiranController extends Controller
 {
     public function datasuplier()
     {
         $data['supplier'] = DB::table('m_supplier')
                             ->join('m_comp' , 'c_code' , '=' , 's_company')
                             ->get();
-    	return view('master/datasuplier/datasuplier' , compact('data'));
+    	return view('master/dataKelahiran/datasuplier' , compact('data'));
     }
     public function tambah_datasuplier()
     {   
         $data['cabang'] = DB::table('m_comp')
                         ->get();
                 
-          return view('master/datasuplier/tambah_datasuplier');
+          return view('master/dataKelahiran/tambah_datasuplier');
     }
 
    public function edit_datasuplier(Request $request)
@@ -38,7 +38,7 @@ class MasterSupplierController extends Controller
                             ->where('k_flag' , 'SUPPLIER')
                             ->get();
 
-      return view('master/datasuplier/edit_datasuplier' , compact('data'));
+      return view('master/dataKelahiran/edit_datasuplier' , compact('data'));
    }
 
    public function update(Request $request){

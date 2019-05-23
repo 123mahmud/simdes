@@ -28,39 +28,30 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('logout', 'mMemberController@logout')->middleware('auth');;
 	Route::get('/home', 'HomeController@index')->name('home');
 // Master
-	Route::get('/master/databarang/index', 'MasterBarangController@databarang')->name('databarang');
-	Route::get('/master/databarang/list', 'MasterBarangController@getList')->name('list_databarang');
-	Route::get('/master/databarang/create', 'MasterBarangController@tambah_databarang')->name('tambah_databarang');
-	Route::get('/master/databarang/edit/{id}', 'MasterBarangController@edit_databarang')->name('edit_databarang');
-	Route::get('/master/databarang/tipe_barang', 'MasterBarangController@tipe_barang');
-	Route::post('/master/databarang/save', 'MasterBarangController@save_barang');
-	Route::post('/master/databarang/update', 'MasterBarangController@update');
-	Route::get('/master/databarang/disabled', 'MasterBarangController@disabled');
-// Master Supplier
-	Route::get('/master/datasuplier/index', 'MasterSupplierController@datasuplier')->name('datasuplier');
-	Route::get('/master/datasuplier/create', 'MasterSupplierController@tambah_datasuplier')->name('tambah_datasuplier');
-	Route::get('/master/datasuplier/edit', 'MasterSupplierController@edit_datasuplier')->name('edit_datasuplier');
-	Route::get('/master/datasuplier/save', 'MasterSupplierController@save_datasupplier')->name('edit_datasuplier');
-	Route::get('/master/datasuplier/disabled', 'MasterSupplierController@disabled');
-	Route::get('/master/datasuplier/update', 'MasterSupplierController@update');
-	Route::get('/master/datasuplier/table', 'MasterSupplierController@table');
-
-	Route::get('/master/dataarmada/index', 'MasterArmadaController@dataarmada')->name('dataarmada');
-	Route::get('/master/dataarmada/create', 'MasterArmadaController@tambah_dataarmada_own')->name('tambah_dataarmada_own');
-	Route::post('/master/dataarmada/save', 'MasterArmadaController@save_dataarmada_own');
-
-
-
-	Route::get('/master/dataarmada/suplier/create', 'MasterArmadaController@tambah_dataarmada')->name('tambah_dataarmada');
-	Route::get('/master/dataarmada/suplier/edit', 'MasterArmadaController@edit_dataarmada')->name('edit_dataarmada');
-	Route::get('/master/dataarmada/customer/create', 'MasterArmadaController@tambah_dataarmada_customer')->name('tambah_dataarmada_customer');
-	Route::get('/master/dataarmada/modal_dataarmada', 'MasterArmadaController@modal_dataarmada')->name('modal_dataarmada');
-
+	Route::get('/master/databarang/index', 'Master\pendudukController@databarang')->name('databarang');
+	Route::get('/master/databarang/list', 'Master\pendudukController@getList')->name('list_databarang');
+	Route::get('/master/databarang/create', 'Master\pendudukController@tambah_databarang')->name('tambah_databarang');
+	Route::get('/master/databarang/edit/{id}', 'Master\pendudukController@edit_databarang')->name('edit_databarang');
+	Route::get('/master/databarang/tipe_barang', 'Master\pendudukController@tipe_barang');
+	Route::post('/master/databarang/save', 'Master\pendudukController@save_barang');
+	Route::post('/master/databarang/update', 'Master\pendudukController@update');
+	Route::get('/master/databarang/disabled', 'Master\pendudukController@disabled');
+// Master Kelahiran
+	Route::get('/master/datasuplier/index', 'Master\MasterKelahiranController@datasuplier')->name('datasuplier');
+	Route::get('/master/datasuplier/create', 'Master\MasterKelahiranController@tambah_datasuplier')->name('tambah_datasuplier');
+	Route::get('/master/datasuplier/edit', 'Master\MasterKelahiranController@edit_datasuplier')->name('edit_datasuplier');
+	Route::get('/master/datasuplier/save', 'Master\MasterKelahiranController@save_datasupplier')->name('edit_datasuplier');
+	Route::get('/master/datasuplier/disabled', 'Master\MasterKelahiranController@disabled');
+	Route::get('/master/datasuplier/update', 'Master\MasterKelahiranController@update');
+	Route::get('/master/datasuplier/table', 'Master\MasterKelahiranController@table');
+// Penduduk Masuk
+	Route::get('/master/dataarmada/index', 'Master\pendudukMasukController@dataarmada')->name('dataarmada');
+	Route::get('/master/dataarmada/create', 'Master\pendudukMasukController@tambah_dataarmada_own')->name('tambah_dataarmada_own');
+	Route::post('/master/dataarmada/save', 'Master\pendudukMasukController@save_dataarmada_own');
+// Master Pegawai
 	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah_datapegawai', 'MasterController@tambah_datapegawai')->name('tambah_datapegawai');
 	Route::get('/master/datapegawai/edit_datapegawai', 'MasterController@edit_datapegawai')->name('edit_datapegawai');
-
-
 	Route::get('/master/datasatuan/datasatuan', 'MasterController@datasatuan')->name('datasatuan');
 	Route::get('/master/datasatuan/getlist', 'MasterController@list_datasatuan')->name('list_datasatuan');
 	Route::get('/master/datasatuan/tambah_datasatuan', 'MasterController@tambah_datasatuan')->name('tambah_datasatuan');
@@ -68,26 +59,23 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('/master/datasatuan/save', 'MasterController@save_datasatuan');
 	Route::post('/master/datasatuan/update', 'MasterController@update_satuan');
 	Route::post('/master/datasatuan/disabled', 'MasterController@disabeld_satuan');
-//mahmud data mesin
-	Route::get('/master/datamesin/datamesin', 'Master\dataMesinController@index')->name('datamesin');
-	Route::get('/master/datamesin/tambah_datamesin', 'Master\dataMesinController@tambah_datamesin')->name('tambah_datamesin');
-	Route::get('/master/datamesin/edit_datamesin', 'Master\dataMesinController@edit_datamesin')->name('edit_datamesin');
-	Route::get('/master/datamesin/table', 'Master\dataMesinController@table');
-	Route::get('/master/datamesin/simpan', 'Master\dataMesinController@simpanMesin');
-	Route::get('/master/datamesin/edit/{id}', 'Master\dataMesinController@editDataMesin');
-	Route::get('/master/datamesin/update/{id}', 'Master\dataMesinController@updateDataMesin');
-	Route::get('/master/datamesin/status', 'Master\dataMesinController@ubahStatus');
+//pindah Rt
+	Route::get('/master/datamesin/datamesin', 'Master\pindahRtController@index')->name('datamesin');
+	Route::get('/master/datamesin/tambah_datamesin', 'Master\pindahRtController@tambah_datamesin')->name('tambah_datamesin');
+	Route::get('/master/datamesin/edit_datamesin', 'Master\pindahRtController@edit_datamesin')->name('edit_datamesin');
+	Route::get('/master/datamesin/table', 'Master\pindahRtController@table');
+	Route::get('/master/datamesin/simpan', 'Master\pindahRtController@simpanMesin');
+	Route::get('/master/datamesin/edit/{id}', 'Master\pindahRtController@editDataMesin');
+	Route::get('/master/datamesin/update/{id}', 'Master\pindahRtController@updateDataMesin');
+	Route::get('/master/datamesin/status', 'Master\pindahRtController@ubahStatus');
 //end data mesin
-
-	Route::get('/master/datacustomer/index', 'Master\MasterCustomerController@index')->name('datacustomer');
-	Route::get('/master/datacustomer/getlist', 'Master\MasterCustomerController@getlist')->name('getlist_datacustomer');
-	Route::get('/master/datacustomer/create', 'Master\MasterCustomerController@create')->name('tambah_datacustomer');
-	Route::get('/master/datacustomer/save', 'Master\MasterCustomerController@store')->name('simpan_datacustomer');
-;
-	Route::get('/master/datacustomer/update', 'Master\MasterCustomerController@update');
-	Route::get('/master/datacustomer/ubahstatus', 'Master\MasterCustomerController@ubahStatus');
-	Route::get('/master/datacustomer/edit', 'Master\MasterCustomerController@editCustomer');
-
+	Route::get('/master/datacustomer/index', 'Master\MasterKematianController@index')->name('datacustomer');
+	Route::get('/master/datacustomer/getlist', 'Master\MasterKematianController@getlist')->name('getlist_datacustomer');
+	Route::get('/master/datacustomer/create', 'Master\MasterKematianController@create')->name('tambah_datacustomer');
+	Route::get('/master/datacustomer/save', 'Master\MasterKematianController@store')->name('simpan_datacustomer');
+	Route::get('/master/datacustomer/update', 'Master\MasterKematianController@update');
+	Route::get('/master/datacustomer/ubahstatus', 'Master\MasterKematianController@ubahStatus');
+	Route::get('/master/datacustomer/edit', 'Master\MasterKematianController@editCustomer');
 //mahmud pegawai
 	Route::get('/master/datapegawai/index', 'Master\PegawaiController@pegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah-pegawai', 'Master\PegawaiController@tambahPegawai');
@@ -96,31 +84,6 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('/master/datapegawai/edit-pegawai/{id}', 'Master\PegawaiController@editPegawai');
 	Route::get('/master/datapegawai/update-pegawai/{id}', 'Master\PegawaiController@updatePegawai');
 	Route::get('/master/datapegawai/ubahstatus', 'Master\PegawaiController@ubahStatusMan');
-//end pegawai
-
-	Route::get('/master/datasatuan/index', 'MasterController@datasatuan')->name('datasatuan');
-	Route::get('/master/datasatuan/create', 'MasterController@tambah_datasatuan')->name('tambah_datasatuan');
-	Route::get('/master/datasatuan/edit', 'MasterController@edit_datasatuan')->name('edit_datasatuan');
-	Route::get('/master/barangsuplier/barangsuplier', 'MasterController@barangsuplier')->name('barangsuplier');
-	Route::get('/master/barangsuplier/tambah_barang', 'MasterController@tambah_barang')->name('tambah_barang');
-	Route::get('/master/barangsuplier/edit_barang', 'MasterController@edit_barang')->name('edit_barang');
-	Route::get('/master/barangsuplier/tambah_suplier', 'MasterController@tambah_suplier')->name('tambah_suplier');
-    Route::get('/master/barangsuplier/edit_suplier', 'MasterController@edit_suplier')->name('edit_suplier');
-	Route::get('/master/upah/index', 'MasterController@upah')->name('upah');
-	Route::get('/master/upah/create', 'MasterController@tambah_upah')->name('tambah_upah');
-// data harga
-	Route::get('/master/dataharga/index', 'Master\DataHargaController@index')->name('dataharga');
-	Route::get('/master/grouphargakhusus/tablegroup/{id}', 'Master\DataHargaController@tableGroup');
-    Route::get('/master/grouphargakhusus/mastergroup', 'Master\DataHargaController@tableMasterGroup');
-    Route::get('/master/grouphargakhusus/tambahgroup', 'Master\DataHargaController@tambahGroup');
-    Route::get('/master/grouphargakhusus/tambahgroup/baru', 'Master\DataHargaController@insertGroup');
-    Route::get('/master/grouphargakhusus/ubahstatusgrup/{id}', 'Master\DataHargaController@moveStatusGroup');
-    Route::get('/master/grouphargakhusus/updategroup/{id}', 'Master\DataHargaController@updateGroup');
-    Route::get('/master/grouphargakhusus/autocomplete', 'Master\DataHargaController@autocomplete');
-    Route::get('/master/grouphargakhusus/tambahItemHarga', 'Master\DataHargaController@saveHargaItem');
-    Route::get('/master/grouphargakhusus/itemharga/hapus/{id}', 'Master\DataHargaController@deleteItemHarga');
-    Route::get('/master/dataharga/edit', 'Master\DataHargaController@editGroup');
-
 //mahmud jabatan
 	Route::get('/master/datajabatan/index', 'Master\JabatanController@index')->name('datajabatan');
 	Route::get('/master/datajabatan/create', 'Master\JabatanController@tambahJabatan')->name('tambah_datajabatan');
@@ -129,15 +92,6 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('/master/datajabatan/update-jabatan/{id}', 'Master\JabatanController@updateJabatan');
 	Route::get('/master/datajabatan/data-jabatan', 'Master\JabatanController@jabatanData');
 	Route::get('/master/datajabatanman/ubahstatus', 'Master\JabatanController@ubahStatusMan');
-//end jabatan
-
-	Route::get('/master/datatunjangan/index', 'MasterTunjanganController@index')->name('datatunjangan');
-  Route::get('/master/datatunjangan/getlist', 'MasterTunjanganController@getlist')->name('getlist_datatunjangan');
-  Route::get('/master/datatunjangan/create', 'MasterTunjanganController@create')->name('tambah_datatunjangan');
-  Route::post('/master/datatunjangan/save', 'MasterTunjanganController@store')->name('save_datatunjangan');
-	Route::get('/master/datatunjangan/edit/{id}', 'MasterTunjanganController@edit')->name('edit_datatunjangan');
-	Route::post('/master/datatunjangan/update/{id}', 'MasterTunjanganController@update')->name('update_datatunjangan');
-	Route::post('/master/datatunjangan/disable/{id}', 'MasterTunjanganController@delete')->name('disable_datatunjangan');
 
 
 	// Purchasing

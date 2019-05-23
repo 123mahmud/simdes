@@ -7,11 +7,11 @@
 <article class="content">
 
 	<div class="title-block text-primary">
-	    <h1 class="title"> Data Barang </h1>
+	    <h1 class="title"> Data Penduduk </h1>
 	    <p class="title-description">
 	    	<i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
 	    	 / <span>Master Data</span>
-	    	 / <span class="text-primary" style="font-weight: bold;">Data Barang</span>
+	    	 / <span class="text-primary" style="font-weight: bold;">Data Penduduk</span>
 	     </p>
 	</div>
 
@@ -24,7 +24,7 @@
 				<div class="card">
                     <div class="card-header bordered p-2">
                     	<div class="header-block">
-                            <h3 class="title"> Data Barang </h3>
+                            <h3 class="title"> Data Penduduk </h3>
                         </div>
                         <div class="header-block pull-right">
 
@@ -38,11 +38,11 @@
 	                            <table class="table table-striped table-hover" cellspacing="0" id="table_barang">
 	                                <thead class="bg-primary">
 	                                    <tr>
-		                                		<th>Kode Barang</th>
-		                                		<th>Nama Barang</th>
-		                                		<th>Satuan</th>
-		                                		<th>Kelompok Barang</th>
-		                                		<!-- <th>Harga Beli</th> -->
+		                                		<th>Nik</th>
+		                                		<th>Nama</th>
+		                                		<th>Tempat Lahir</th>
+		                                		<th>Pekerjaan</th>
+		                                		<th>No. KK</th>
 		                                		<th>Aksi</th>
 		                                	</tr>
 	                                </thead>
@@ -140,11 +140,12 @@
 				}
 			},
 			columns: [
-				{data: 'i_code'},
-				{data: 'i_name'},
-				{data: 'satuan'},
-				{data: 'group'},
-				{data: 'action'}
+				{data: 'i_code', "width": "15%"},
+				{data: 'i_name', "width": "20%"},
+				{data: 'satuan', "width": "20%"},
+				{data: 'group', "width": "20%"},
+				{data: 'group', "width": "15%"},
+				{data: 'action', "width": "10%"}
 			],
 			pageLength: 10,
 			lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]

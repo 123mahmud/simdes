@@ -66,6 +66,9 @@
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
+                        <li class="{{Request::is('master/datajabatan/*') ? 'active' : ''}}">
+                            <a href="{{route('datajabatan')}}">Data Jabatan</a>
+                        </li>
                         <li class="{{Request::is('master/datapegawai/*') ? 'active' : ''}}">
                             <a href="{{route('datapegawai')}}">Pegawai Desa</a>
                         </li>
@@ -277,6 +280,7 @@
                         
                     </ul>
                 </li>
+                 --}}
                 <li class="{{Request::is('system/*') ? 'active open' : ''}}">
                     <a href="#">
                         <i class="fa fa-user-circle-o "></i><span class="menu-title"> Admin System</span>
@@ -289,12 +293,11 @@
                         <li class="{{Request::is('system/profilperusahaan/*') ? 'active' : ''}}">
                             <a href="{{route('profilperusahaan')}}"> Profil Perusahaan</a>
                         </li>
-                        <li class="{{Request::is('system/tahunfinansial/*') ? 'active' : ''}}">
+                       {{--  <li class="{{Request::is('system/tahunfinansial/*') ? 'active' : ''}}">
                             <a href="{{route('tahunfinansial')}}"> Tahun Financial</a>
-                        </li>
-                        
+                        </li> --}}
                     </ul>
-                </li> --}}
+                </li>
             </ul>
         </nav>
     </div>

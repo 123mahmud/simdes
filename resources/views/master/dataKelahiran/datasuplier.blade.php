@@ -33,12 +33,12 @@
 	                            <table class="table table-striped table-hover" cellspacing="0" id="table_suplier">
 	                                <thead class="bg-primary">
 	                                    <tr align="center">
-	                                    	<th width="10%">Code</th>
-							                <th width="10%">Company</th>
-							                <th width="17%">No Hp</th>
-							                <th width="10%">Alamat</th>
-											<th width="5%">Keterangan</th>
-							                <th width="5%">Aksi</th>
+	                                    	<th>Nik</th>
+	                                		<th>Nama</th>
+	                                		<th>Tempat Lahir</th>
+	                                		<th>Pekerjaan</th>
+	                                		<th>No. KK</th>
+	                                		<th>Aksi</th>
 							            </tr>
 	                                </thead>
 	                                <tbody>
@@ -77,10 +77,10 @@
 	        },
 	      ],
 	      "columns": [
-	        { "data": "s_code", "width":"10%" },
-	        { "data": "s_company", "width":"15%" },
-	        { "data": "s_phone1", "width":"20%" },
-	        { "data": "s_address", "width":"25%" },
+	        { "data": "s_code", "width":"15%" },
+	        { "data": "s_company", "width":"20%" },
+	        { "data": "s_phone1", "width":"15%" },
+	        { "data": "s_address", "width":"20%" },
 	        { "data": "s_note", "width":"20%" },
 	        { "data": "action", "width":"10%" }
 	      ],

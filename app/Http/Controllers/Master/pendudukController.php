@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Master;
 use Illuminate\Http\Request;
 use DB;
 use carbon\Carbon;
 use App\MasterBarang;
 use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
 
-class MasterBarangController extends Controller
+class pendudukController extends Controller
 {
-    /**
-     * Return DataTable list for view.
-     *
-     * @return Yajra/DataTables
-     */
     public function getList()
     {
       $datas = DB::table('m_item')
@@ -49,7 +44,7 @@ class MasterBarangController extends Controller
                 ->orderBy('i_id' , 'desc')
                 ->get();
 
-    	return view('master/databarang/databarang', compact('data'));
+        return view('master.dataPenduduk.databarang', compact('data'));
     }
     public function tambah_databarang()
     {
@@ -57,7 +52,7 @@ class MasterBarangController extends Controller
                           ->get();
         $data['group'] = DB::table('m_group')
           ->get();
-        return view('master/databarang/tambah_databarang', compact('data'));
+        return view('master/dataPenduduk/tambah_databarang', compact('data'));
     }
     public function edit_databarang($id)
     {
@@ -69,7 +64,7 @@ class MasterBarangController extends Controller
                          ->get();
         $data['group'] = DB::table('m_group')
         ->get();
-        return view('master/databarang/edit_databarang', compact('data'));
+        return view('master/dataPenduduk/edit_databarang', compact('data'));
     }
 
     public function tipe_barang(Request $request) {

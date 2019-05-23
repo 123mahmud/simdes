@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('master.dataarmada.modal_dataarmada')
+@include('master.pendudukMasuk.modal_dataarmada')
 
 <article class="content">
 
@@ -34,9 +34,9 @@
 				<div class="tab-content">	
 
 
-					@include('master.dataarmada.tab_armadaown')
-					@include('master.dataarmada.tab_armadasuplier')
-					@include('master.dataarmada.tab_armadacustomer')
+					@include('master.pendudukMasuk.tab_armadaown')
+					@include('master.pendudukMasuk.tab_armadasuplier')
+					@include('master.pendudukMasuk.tab_armadacustomer')
 
 
 			</div>

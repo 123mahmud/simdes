@@ -10,12 +10,12 @@ use DataTables;
 use App\m_mesin;
 use App\m_pegawai_man;
 
-class dataMesinController extends Controller
+class pindahRtController extends Controller
 {
 	public function index()
 	{
 
-		return view('master.datamesin.index');
+		return view('master.ppindahRt.index');
 	}
 
     public function table()
@@ -67,7 +67,7 @@ class dataMesinController extends Controller
    {
    	$pegawai = m_pegawai_man::select('c_id','c_nama')->get();
 
-   	return view('master.datamesin.tambah_datamesin', compact('pegawai'));
+   	return view('master.ppindahRt.tambah_datamesin', compact('pegawai'));
    }
 
    public function simpanMesin(Request $request)
@@ -104,7 +104,7 @@ class dataMesinController extends Controller
    	$pegawai = m_pegawai_man::select('c_id','c_nama')->get();
    	$mesin = m_mesin::where('m_id',$id)->first();
 
-   	return view('master.datamesin.edit_datamesin', compact('pegawai','mesin'));
+   	return view('master.ppindahRt.edit_datamesin', compact('pegawai','mesin'));
    }
 
    public function updateDataMesin(Request $request, $id)

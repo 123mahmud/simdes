@@ -13,7 +13,7 @@ use CodeGenerator;
 use Yajra\DataTables\DataTables;
 use Crypt;
 
-class MasterCustomerController extends Controller
+class MasterKematianController extends Controller
 {
 
     public function getList()
@@ -86,12 +86,12 @@ class MasterCustomerController extends Controller
 
     public function index()
     {
-      return view('master/datacustomer/datacustomer');
+      return view('master/dataKematian/datacustomer');
     }
 
     public function create()
     {
-      return view('master/datacustomer/tambah_datacustomer');
+      return view('master/dataKematian/tambah_datacustomer');
     }
 
     public function store(Request $request)
@@ -178,7 +178,7 @@ class MasterCustomerController extends Controller
                             ->where('k_flag' , 'CUSTOMER')
                             ->get();
 
-      return view('master.datacustomer.edit_datacustomer' , compact('customer','kendaraan'));
+      return view('master.dataKematian.edit_datacustomer' , compact('customer','kendaraan'));
    }
 
     public function update(Request $request)
