@@ -4,55 +4,57 @@ namespace App\Http\Controllers\Master;
 use Illuminate\Http\Request;
 use DB;
 use carbon\Carbon;
-use App\MasterBarang;
+use App\d_penduduk;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 
 class pendudukController extends Controller
 {
-    public function getList()
+    public function getPenduduk()
     {
-      $datas = DB::table('m_item')
-        ->join('m_satuan' , 's_id' , '=' , 'i_sat1')
-        ->join('m_group', 'g_id', '=', 'i_group')
-        ->orderBy('i_id' , 'desc')
-        ->get();
-      return Datatables::of($datas)
+      $data = d_penduduk::all();
+
+      return Datatables::of($data)
         ->addIndexColumn()
-        ->addColumn('satuan', function($datas) {
-          return $datas->s_name;
+        ->addColumn('tempat_tgl_lahir', function($data) {
+            return $data->p_tempat_lahir .'-'. $data->p_tgl_lahir;
+        })        
+
+        ->addColumn('action', function($data) {
+                return  '<div class="text-center">'.
+                            '<button class="btn btn-info btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    type="button" 
+                                    title="Info">
+                                    <i class="fa fa-exclamation-circle"></i>
+                            </button>'.'
+                            <button class="btn btn-warning btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    type="button" 
+                                    title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                            </button>'.'
+                            <button class="btn btn-danger btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    type="button" 
+                                    title="Hapus">
+                                    <i class="fa fa-times"></i>
+                            </button>'.
+                        '</div>';
         })
-        ->addColumn('group', function($datas) {
-          return $datas->g_name;
-        })
-        ->addColumn('action', function($datas) {
-          if ($datas->i_isactive == 'Y') {
-            return '<button class="btn btn-warning btn-edit btn-sm" onclick="window.location.href=\''. url("master/databarang/edit/".$datas->i_id) .'\'" type="button" title="Edit"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-primary btn-disable btn-sm" type="button" title="Disable" onclick="status(\'' .$datas->i_id .'\',\''. $datas->i_isactive .'\')"><i class="fa fa-check-square"></i></button>';
-          } elseif ($datas->i_isactive == 'T') {
-            return '<button class="btn btn-danger btn-enable btn-sm" type="button" title="Enable" onclick="status(\'' .$datas->i_id .'\',\''. $datas->i_isactive .'\')"><i class="fa fa-minus-square"></i></button>';
-          }
-        })
-        ->rawColumns(['group', 'satuan', 'action'])
+        ->rawColumns(['tempat_tgl_lahir', 'action'])
         ->make(true);
     }
 
-    public function databarang()
+    public function penduduk()
     {
-        $data = DB::table('m_item')
-                ->join('m_satuan' , 's_id' , '=' , 'i_sat1')
-                ->orderBy('i_id' , 'desc')
-                ->get();
-
-        return view('master.dataPenduduk.databarang', compact('data'));
+        
+        return view('master.Penduduk.index');
     }
-    public function tambah_databarang()
+    public function addPenduduk()
     {
-        $data['satuan'] = DB::table('m_satuan')
-                          ->get();
-        $data['group'] = DB::table('m_group')
-          ->get();
-        return view('master/dataPenduduk/tambah_databarang', compact('data'));
+
+        return view('master.Penduduk.add');
     }
     public function edit_databarang($id)
     {

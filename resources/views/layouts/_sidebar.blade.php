@@ -72,8 +72,8 @@
                         <li class="{{Request::is('master/datapegawai/*') ? 'active' : ''}}">
                             <a href="{{route('datapegawai')}}">Pegawai Desa</a>
                         </li>
-                        <li class="{{Request::is('master/databarang/*') ? 'active' : ''}}">
-                            <a href="{{route('databarang')}}">Penduduk</a>
+                        <li class="{{Request::is('/penduduk/*') ? 'active' : ''}}">
+                            <a href="{{route('penduduk')}}">Penduduk</a>
                         </li>
                         <li class="{{Request::is('master/datasuplier/*') ? 'active' : ''}}">
                             <a href="{{route('datasuplier')}}">Kelahiran</a>

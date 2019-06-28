@@ -27,15 +27,15 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('not-allowed', 'mMemberController@notAllowed');
 	Route::post('logout', 'mMemberController@logout')->middleware('auth');;
 	Route::get('/home', 'HomeController@index')->name('home');
-// Master
-	Route::get('/master/databarang/index', 'Master\pendudukController@databarang')->name('databarang');
-	Route::get('/master/databarang/list', 'Master\pendudukController@getList')->name('list_databarang');
-	Route::get('/master/databarang/create', 'Master\pendudukController@tambah_databarang')->name('tambah_databarang');
-	Route::get('/master/databarang/edit/{id}', 'Master\pendudukController@edit_databarang')->name('edit_databarang');
-	Route::get('/master/databarang/tipe_barang', 'Master\pendudukController@tipe_barang');
-	Route::post('/master/databarang/save', 'Master\pendudukController@save_barang');
-	Route::post('/master/databarang/update', 'Master\pendudukController@update');
-	Route::get('/master/databarang/disabled', 'Master\pendudukController@disabled');
+// Penduduk
+	Route::get('/penduduk/index', 'Master\pendudukController@penduduk')->name('penduduk');
+	Route::get('/penduduk/list', 'Master\pendudukController@getPenduduk')->name('get-penduduk');
+	Route::get('/penduduk/create', 'Master\pendudukController@addPenduduk')->name('add-penduduk');
+	Route::get('/penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
+	Route::get('/penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
+	Route::post('/penduduk/save', 'Master\pendudukController@save_barang');
+	Route::post('/penduduk/update', 'Master\pendudukController@update');
+	Route::get('/penduduk/disabled', 'Master\pendudukController@disabled');
 // Master Kelahiran
 	Route::get('/master/datasuplier/index', 'Master\MasterKelahiranController@datasuplier')->name('datasuplier');
 	Route::get('/master/datasuplier/create', 'Master\MasterKelahiranController@tambah_datasuplier')->name('tambah_datasuplier');
