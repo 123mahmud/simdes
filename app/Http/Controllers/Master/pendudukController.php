@@ -51,7 +51,7 @@ class pendudukController extends Controller
         
         return view('master.Penduduk.index');
     }
-    public function addPenduduk()
+    public function create()
     {
 
         return view('master.Penduduk.add');

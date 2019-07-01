@@ -7,92 +7,62 @@ use App\Http\Controllers\Controller;
 use DB;
 use Validator;
 use carbon\Carbon;
-use App\m_customer;
-use App\m_kendaraan;
 use CodeGenerator;
 use Yajra\DataTables\DataTables;
 use Crypt;
+use App\d_kematian;
 
-class MasterKematianController extends Controller
+class kematianController extends Controller
 {
 
-    public function getList()
-    {
-      $customer = DB::table('m_customer')
-      ->orderBy('c_id', 'desc')
-      ->get();
-      return Datatables::of($customer)
+   public function index()
+   {
 
-      ->addColumn('c_name', function($data) {
-         return $data->c_code.' - '.$data->c_name;
-      })
+      return view('master.Kematian.index');
+   }
 
-      ->addColumn('c_type', function($data) {
-         if ($data->c_type == 'KT')
-         {
-            return 'Kontraktor';
-         }
-         else
-         {
-            return 'Harian';
-         }
-      })
+   public function get()
+   {
+      $data = d_kematian::all();
 
-      ->addColumn('telp', function($data) {
-         if ($data->c_hp2 != null)
-         {
-            return '<td>'. $data->c_hp1 .'|'. $data->c_hp2 .'</td>';
-         }
-         else
-         {
-            return '<td>'. $data->c_hp1 .'</td>';
-         }
-      })
+      return Datatables::of($data)
+        ->addIndexColumn()
+        ->addColumn('rt/rw', function($data) {
+            return $data->rt .'/'. $data->rw;
+        })        
 
-      ->addColumn('action', function($data) {
-         if ($data->c_isactive == 'Y')
-         {
-            return  '<div class="text-center">'.
-                        '<button id="edit"
-                            onclick=edit("'.Crypt::encrypt($data->c_id).'")
-                            class="btn btn-warning btn-sm"
-                            title="Edit">
-                            <i class="fa fa-pencil"></i>
-                        </button>'.'
-                        <button id="status'.$data->c_id.'"
-                            onclick="ubahStatus('.$data->c_id.')"
-                            class="btn btn-primary btn-sm"
-                            title="Aktif">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>'.'
-                    </div>';
-         }
-         else
-         {
-            return  '<div class="text-center">'.
-                        '<button id="status'.$data->c_id.'"
-                            onclick="ubahStatus('.$data->c_id.')"
-                            class="btn btn-danger btn-sm"
-                            title="Tidak Aktif">
-                            <i class="fa fa-minus-square" aria-hidden="true"></i>
-                        </button>'.
-                    '</div>';
-         }
+        ->addColumn('action', function($data) {
+                return  '<div class="text-center">'.
+                            '<button class="btn btn-info btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Info">
+                                    <i class="fa fa-exclamation-circle"></i>
+                            </button>'.'
+                            <button class="btn btn-warning btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                            </button>'.'
+                            <button class="btn btn-danger btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Hapus">
+                                    <i class="fa fa-times"></i>
+                            </button>'.
+                        '</div>';
+        })
+        ->rawColumns(['tempat_tgl_lahir', 'action'])
+        ->make(true);
+   }
 
-      })
-      ->rawColumns(['telp', 'action'])
-      ->make(true);
-    }
 
-    public function index()
-    {
-      return view('master/dataKematian/datacustomer');
-    }
+   public function create()
+   {
 
-    public function create()
-    {
-      return view('master/dataKematian/tambah_datacustomer');
-    }
+      return view('master.Kematian.add');
+   }
 
     public function store(Request $request)
     {

@@ -55,7 +55,7 @@ class kelahiranController extends Controller
         ->make(true);
     }
 
-    public function add()
+    public function create()
     {   
                 
         return view('master.Kelahiran.add');

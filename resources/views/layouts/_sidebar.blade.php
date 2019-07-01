@@ -67,25 +67,25 @@
                     </a>
                     <ul class="sidebar-nav">
                         <li class="{{Request::is('master/datajabatan/*') ? 'active' : ''}}">
-                            <a href="{{route('datajabatan')}}">Data Jabatan</a>
+                            <a href="{{route('datajabatan')}}">Jabatan</a>
                         </li>
                         <li class="{{Request::is('master/datapegawai/*') ? 'active' : ''}}">
                             <a href="{{route('datapegawai')}}">Pegawai Desa</a>
                         </li>
-                        <li class="{{Request::is('/penduduk/*') ? 'active' : ''}}">
+                        <li class="{{Request::is('master/penduduk/*') ? 'active' : ''}}">
                             <a href="{{route('penduduk')}}">Penduduk</a>
                         </li>
-                        <li class="{{Request::is('/kelahiran/*') ? 'active' : ''}}">
+                        <li class="{{Request::is('master/kelahiran/*') ? 'active' : ''}}">
                             <a href="{{route('kelahiran')}}">Kelahiran</a>
                         </li>
-                        <li class="{{Request::is('master/datacustomer/*') ? 'active' : ''}}">
-                            <a href="{{route('datacustomer')}}">Kematian</a>
+                        <li class="{{Request::is('master/kematian/*') ? 'active' : ''}}">
+                            <a href="{{route('kematian')}}">Kematian</a>
                         </li>
-                        <li class="{{Request::is('master/dataarmada/*') ? 'active' : ''}}">
-                            <a href="{{route('dataarmada')}}">Penduduk Masuk</a>
+                        <li class="{{Request::is('master/pmasuk/*') ? 'active' : ''}}">
+                            <a href="{{route('pmasuk')}}">Penduduk Masuk</a>
                         </li>
-                        <li class="{{Request::is('master/datasatuan/*') ? 'active' : ''}}">
-                            <a href="{{route('datasatuan')}}">Penduduk Keluar</a>
+                        <li class="{{Request::is('master/pkeluar/*') ? 'active' : ''}}">
+                            <a href="{{route('pkeluar')}}">Penduduk Keluar</a>
                         </li>
                         <li class="{{Request::is('master/datamesin/*') ? 'active' : ''}}">
                             <a href="{{route('datamesin')}}">Penduduk Pindah RT</a>

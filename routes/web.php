@@ -28,38 +28,45 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('logout', 'mMemberController@logout')->middleware('auth');;
 	Route::get('/home', 'HomeController@index')->name('home');
 // Penduduk
-	Route::get('/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
-	Route::get('/penduduk/list', 'Master\pendudukController@get')->name('get-penduduk');
-	Route::get('/penduduk/create', 'Master\pendudukController@addPenduduk')->name('add-penduduk');
-	Route::get('/penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
-	Route::get('/penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
-	Route::post('/penduduk/save', 'Master\pendudukController@save_barang');
-	Route::post('/penduduk/update', 'Master\pendudukController@update');
-	Route::get('/penduduk/disabled', 'Master\pendudukController@disabled');
+	Route::get('master/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
+	Route::get('penduduk/list', 'Master\pendudukController@get')->name('get-penduduk');
+	Route::get('penduduk/create', 'Master\pendudukController@create')->name('create-penduduk');
+	Route::get('penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
+	Route::get('penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
+	Route::post('penduduk/save', 'Master\pendudukController@save_barang');
+	Route::post('penduduk/update', 'Master\pendudukController@update');
+	Route::get('penduduk/disabled', 'Master\pendudukController@disabled');
 // Kelahiran
-	Route::get('/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
-	Route::get('/kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
-	Route::get('/kelahiran/create', 'Master\kelahiranController@add')->name('add-kelahiran');
-	Route::get('/kelahiran/edit', 'Master\kelahiranController@edit')->name('edit_kelahiran');
-	Route::get('/kelahiran/save', 'Master\kelahiranController@save_datasupplier')->name('edit_kelahiran');
-	Route::get('/kelahiran/disabled', 'Master\kelahiranController@disabled');
-	Route::get('/kelahiran/update', 'Master\kelahiranController@update');
+	Route::get('master/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
+	Route::get('kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
+	Route::get('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
+	Route::get('kelahiran/edit', 'Master\kelahiranController@edit')->name('edit_kelahiran');
+	Route::get('kelahiran/save', 'Master\kelahiranController@save_datasupplier')->name('edit_kelahiran');
+	Route::get('kelahiran/disabled', 'Master\kelahiranController@disabled');
+	Route::get('kelahiran/update', 'Master\kelahiranController@update');
+// Kematian
+	Route::get('master/kematian/index', 'Master\kematianController@index')->name('kematian');
+	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');
+	Route::get('kematian/create', 'Master\kematianController@create')->name('create-kematian');
+	Route::get('kematian/save', 'Master\kematianController@store')->name('simpan-kematian');
+	Route::get('kematian/update', 'Master\kematianController@update');
+	Route::get('kematian/ubahstatus', 'Master\kematianController@ubahStatus');
+	Route::get('kematian/edit', 'Master\kematianController@editCustomer');
 	
 // Penduduk Masuk
-	Route::get('/master/dataarmada/index', 'Master\pendudukMasukController@dataarmada')->name('dataarmada');
-	Route::get('/master/dataarmada/create', 'Master\pendudukMasukController@tambah_dataarmada_own')->name('tambah_dataarmada_own');
-	Route::post('/master/dataarmada/save', 'Master\pendudukMasukController@save_dataarmada_own');
+	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');
+	Route::get('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
+
+// Penduduk Keluar
+	Route::get('/master/pkeluar/index', 'Master\pendudukKeluarController@index')->name('pkeluar');
+	Route::get('pkeluar/get', 'Master\pendudukKeluarController@get')->name('get-pkeluar');
+	Route::get('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
+
 // Master Pegawai
 	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah_datapegawai', 'MasterController@tambah_datapegawai')->name('tambah_datapegawai');
 	Route::get('/master/datapegawai/edit_datapegawai', 'MasterController@edit_datapegawai')->name('edit_datapegawai');
-	Route::get('/master/datasatuan/datasatuan', 'MasterController@datasatuan')->name('datasatuan');
-	Route::get('/master/datasatuan/getlist', 'MasterController@list_datasatuan')->name('list_datasatuan');
-	Route::get('/master/datasatuan/tambah_datasatuan', 'MasterController@tambah_datasatuan')->name('tambah_datasatuan');
-	Route::get('/master/datasatuan/edit_datasatuan/{id}', 'MasterController@edit_datasatuan');
-	Route::post('/master/datasatuan/save', 'MasterController@save_datasatuan');
-	Route::post('/master/datasatuan/update', 'MasterController@update_satuan');
-	Route::post('/master/datasatuan/disabled', 'MasterController@disabeld_satuan');
+	
 //pindah Rt
 	Route::get('/master/datamesin/datamesin', 'Master\pindahRtController@index')->name('datamesin');
 	Route::get('/master/datamesin/tambah_datamesin', 'Master\pindahRtController@tambah_datamesin')->name('tambah_datamesin');
@@ -69,14 +76,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('/master/datamesin/edit/{id}', 'Master\pindahRtController@editDataMesin');
 	Route::get('/master/datamesin/update/{id}', 'Master\pindahRtController@updateDataMesin');
 	Route::get('/master/datamesin/status', 'Master\pindahRtController@ubahStatus');
-//end data mesin
-	Route::get('/master/datacustomer/index', 'Master\MasterKematianController@index')->name('datacustomer');
-	Route::get('/master/datacustomer/getlist', 'Master\MasterKematianController@getlist')->name('getlist_datacustomer');
-	Route::get('/master/datacustomer/create', 'Master\MasterKematianController@create')->name('tambah_datacustomer');
-	Route::get('/master/datacustomer/save', 'Master\MasterKematianController@store')->name('simpan_datacustomer');
-	Route::get('/master/datacustomer/update', 'Master\MasterKematianController@update');
-	Route::get('/master/datacustomer/ubahstatus', 'Master\MasterKematianController@ubahStatus');
-	Route::get('/master/datacustomer/edit', 'Master\MasterKematianController@editCustomer');
+
 //mahmud pegawai
 	Route::get('/master/datapegawai/index', 'Master\PegawaiController@pegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah-pegawai', 'Master\PegawaiController@tambahPegawai');

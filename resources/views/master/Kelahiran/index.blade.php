@@ -23,7 +23,7 @@
 	                        <h3 class="title"> Data Suplier </h3>
 	                    </div>
 	                    <div class="header-block pull-right">
-                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('add-kelahiran')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
+                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('create-kelahiran')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
 	                    </div>
                     </div>
                     <div class="card-block">
