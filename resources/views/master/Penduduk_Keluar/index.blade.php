@@ -28,7 +28,7 @@
                         </div>
                         <div class="header-block pull-right">
 
-                			<a class="btn btn-primary" href="{{route('create-penduduk')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
+                			<a class="btn btn-primary" href="{{route('create-pkeluar')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
                         </div>
                     </div>
                     <div class="card-block">

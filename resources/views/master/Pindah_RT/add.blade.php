@@ -2,12 +2,12 @@
 @section('content')
 <article class="content">
    <div class="title-block text-primary">
-      <h1 class="title"> Tambah Data Penduduk Keluar </h1>
+      <h1 class="title"> Tambah Data Pindah RT </h1>
       <p class="title-description">
          <i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
          / <span>Master Data</span>
-         / <a href="{{route('penduduk')}}"><span>Data Penduduk Keluar</span></a>
-         / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk Keluar</span>
+         / <a href="{{route('pindahrt')}}"><span>Data Pindah RT</span></a>
+         / <span class="text-primary" style="font-weight: bold;">Tambah Data Pindah RT</span>
       </p>
    </div>
    <form id="formsukses">
@@ -17,10 +17,10 @@
                <div class="card">
                   <div class="card-header bordered p-2">
                      <div class="header-block">
-                        <h3 class="title">Tambah Data Penduduk Keluar </h3>
+                        <h3 class="title">Tambah Data Pindah RT </h3>
                      </div>
                      <div class="header-block pull-right">
-                        <a href="{{route('penduduk')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+                        <a href="{{route('pindahrt')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
                      </div>
                   </div>
                   <div class="card-block">
@@ -209,14 +209,6 @@
                            </div>
                            {{-- garis --}}
                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Alamat Tujuan<font color="red">*</font></label>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="alamat_tujuan">
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <label>RT Tujuan<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -231,30 +223,8 @@
                               <div class="form-group">
                                  <input type="text" class="form-control-sm form-control datepicker" name="rw_tujuan">
                               </div>
-                           </div><div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Kecamatan Tujuan<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="kecamatan_tujuan">
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Kabupaten Tujuan<font color="red">*</font></label>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="kabupaten_tujuan">
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Provinsi Tujuan<font color="red">*</font></label>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="provinsi_tujuan">
-                              </div>
-                           </div><div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Tanggal Pindah<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">

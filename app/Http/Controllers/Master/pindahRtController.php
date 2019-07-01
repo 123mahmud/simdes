@@ -7,67 +7,56 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
 use DataTables;
-use App\m_mesin;
-use App\m_pegawai_man;
+use App\d_pindahrt;
 
 class pindahRtController extends Controller
 {
 	public function index()
 	{
 
-		return view('master.ppindahRt.index');
+		return view('master.Pindah_RT.index');
 	}
 
-    public function table()
-    {
-    	$data = m_mesin::select('m_id',
-    									'm_code',
-    									'm_nama',
-    									'c_nama',
-    									'm_isactive')
-    		->join('m_pegawai_man','m_pegawai_man.c_id','=','m_pegawai');
+   public function get()
+   {
+      $data = d_pindahrt::all();
 
-    	return Datatables::of($data)           
-                ->addColumn('action', function ($data) {
-                    if ($data->m_isactive == 'TRUE') {
-                        return  '<div class="text-center">'.
-                                    '<button id="edit" 
-                                        onclick="edit('.$data->m_id.')" 
-                                        class="btn btn-warning btn-sm" 
-                                        title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>'.'
-                                    <button id="status'.$data->m_id.'" 
-                                        onclick="ubahStatus('.$data->m_id.')" 
-                                        class="btn btn-primary btn-sm" 
-                                        title="Aktif">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>'.'
-                                </div>';
-                    }
-                    else
-                    {
-                        return  '<div class="text-center">'.
-                                    '<button id="status'.$data->m_id.'" 
-                                        onclick="ubahStatus('.$data->m_id.')" 
-                                        class="btn btn-danger btn-sm" 
-                                        title="Tidak Aktif">
-                                        <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                    </button>'.
-                                '</div>';
-                    }
-                    
-                })
+      return Datatables::of($data)
+        ->addIndexColumn()
+        ->addColumn('tempat_tgl_lahir', function($data) {
+            return $data->tempat_lahir .'-'. $data->tgl_lahir;
+        })        
 
-                ->rawColumns(['action'])
-                ->make(true);
+        ->addColumn('action', function($data) {
+                return  '<div class="text-center">'.
+                            '<button class="btn btn-info btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Info">
+                                    <i class="fa fa-exclamation-circle"></i>
+                            </button>'.'
+                            <button class="btn btn-warning btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                            </button>'.'
+                            <button class="btn btn-danger btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Hapus">
+                                    <i class="fa fa-times"></i>
+                            </button>'.
+                        '</div>';
+        })
+        ->rawColumns(['tempat_tgl_lahir', 'action'])
+        ->make(true);
    }
 
-   public function tambah_datamesin()
+   public function create()
    {
-   	$pegawai = m_pegawai_man::select('c_id','c_nama')->get();
 
-   	return view('master.ppindahRt.tambah_datamesin', compact('pegawai'));
+   	return view('master.Pindah_RT.add');
    }
 
    public function simpanMesin(Request $request)

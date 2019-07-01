@@ -87,200 +87,41 @@
                         <li class="{{Request::is('master/pkeluar/*') ? 'active' : ''}}">
                             <a href="{{route('pkeluar')}}">Penduduk Keluar</a>
                         </li>
-                        <li class="{{Request::is('master/datamesin/*') ? 'active' : ''}}">
-                            <a href="{{route('datamesin')}}">Penduduk Pindah RT</a>
+                        <li class="{{Request::is('master/pindahrt/*') ? 'active' : ''}}">
+                            <a href="{{route('pindahrt')}}">Penduduk Pindah RT</a>
                         </li>
                     </ul>
                 </li>
-                {{-- <li class="{{Request::is('purchasing/*') ? 'active open' : ''}}">
+                <li class="{{Request::is('pembuatan/*') ? 'active open' : ''}}">
                     <a href="#">
                         <i class="fa fa-credit-card"></i>
-                        <span class="menu-title">Purchasing</span>
+                        <span class="menu-title">Pembuatan</span>
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        <li class="{{Request::is('purchasing/rencanapembelian/*') ? 'active' : ''}}">
-                            <a href="{{route('rencanapembelian')}}"> Rencana Pembelian</a>
+                        <li class="{{Request::is('pembuatan/surat/*') ? 'active' : ''}}">
+                            <a href="{{route('surat')}}"> Surat </a>
                         </li>
-                        <li class="{{Request::is('purchasing/orderpembelian/*') ? 'active' : ''}}">
-                            <a href="{{route('orderpembelian')}}">Order Pembelian</a>
-                        </li>
-                        <li class="{{Request::is('purchasing/returnpembelian/*') ? 'active' : ''}}">
-                            <a href="{{route('returnpembelian')}}">Return Pembelian</a>
-                        </li>
-                        <li class="{{Request::is('purchasing/rencanabahanbaku/*') ? 'active' : ''}}">
-                            <a href="{{route('rencanabahanbaku')}}" title="Rencana Bahan Baku Produksi">Bahan Baku Produksi</a>
+                        <li class="{{Request::is('pembuatan/laporan/*') ? 'active' : ''}}">
+                            <a href="{{route('laporan')}}"> Laporan </a>
                         </li>
                     </ul>
                 </li>
-                <li class="{{Request::is('stok/*') ? 'active open' : ''}}">
+                <li class="{{Request::is('reff/*') ? 'active open' : ''}}">
                     <a href="#">
-                        <i class="fa fa-desktop"></i>
-                        <span class="menu-title">Stok</span>
+                        <i class="fa fa-money"></i>
+                        <span class="menu-title">Data Referensi</span>
                         <i class="fa arrow"></i>
                     </a>
                     <ul class="sidebar-nav">
-                        <li class="{{Request::is('stok/dataadonan/*') ? 'active' : ''}}">
-                            <a href="{{route('dataadonan')}}">Data Adonan</a>
+                        <li class="{{Request::is('reff/rkode/*') ? 'active' : ''}}">
+                            <a href="{{route('rkode')}}"> Reff Kode Surat </a>
                         </li>
-                        <li class="{{Request::is('stok/tipemenghitunghpp/*') ? 'active' : ''}}">
-                            <a href="{{route('tipemenghitunghpp')}}">Tipe Menghitung HPP</a>
-                        </li>
-                        <li class="{{Request::is('stok/pencatatanbarangmasuk/*') ? 'active' : ''}}">
-                            <a href="{{route('pencatatanbarangmasuk')}}">Pencatatan Barang Masuk</a>
-                        </li>
-                        <li class="{{Request::is('stok/penggunaanbahanbaku/*') ? 'active' : ''}}">
-                            <a href="{{route('penggunaanbahanbaku')}}">Penggunaan Bahan Baku </a>
-                        </li>
-                        <li class="{{Request::is('stok/opnamebahanbaku/*') ? 'active' : ''}}">
-                            <a href="{{route('opnamebahanbaku')}}">Opname Stock </a>
-                        </li>
-                        <li class="{{Request::is('stok/stockgudang/*') ? 'active' : ''}}">
-                            <a href="{{route('stockgudang.index')}}">Stock Gudang</a>
-                        </li>
-                        <li class="{{Request::is('stok/p_suplier/*') ? 'active' : ''}}">
-                            <a href="{{route('p_suplier')}}">Penerimaan Barang Supplier</a>
-                        </li>
-                        <li class="{{Request::is('stok/p_returnsupplier/*') ? 'active' : ''}}">
-                            <a href="{{route('p_returnsupplier')}}">Penerimaan Barang Return Supplier</a>
-                        </li>
-                        <li class="{{Request::is('stok/b_rusak/*') ? 'active' : ''}}">
-                            <a href="{{route('b_rusak')}}">Barang Rusak</a>
+                        <li  class="{{Request::is('reff/rpekerjaan/*') ? 'active' : ''}}">
+                            <a href="{{route('rpekerjaan')}}"> Reff Pekerjaan </a>
                         </li>
                     </ul>
                 </li>
-                <li class="{{Request::is('produksi/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-product-hunt"></i>
-                        <span class="menu-title">Produksi</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('produksi/produksitanparencana/*') ? 'active' : ''}}">
-                            <a href="{{route('produksitanparencana')}}"> Pencatatan Produksi Tanpa Rencana </a>
-                        </li>
-                        <li  class="{{Request::is('produksi/produksirencana/*') ? 'active' : ''}}">
-                            <a href="{{route('produksirencana')}}"> Pencatatan Produksi Dengan Rencana </a>
-                        </li>
-                        <li  class="{{Request::is('produksi/pencatatanhasil/*') ? 'active' : ''}}">
-                            <a href="{{route('pencatatanhasil')}}"> Pencatatan Hasil Produksi</a>
-                        </li>
-                        <li  class="{{Request::is('produksi/upahboronganproduksi/*') ? 'active' : ''}}">
-                            <a href="{{route('upahboronganproduksi')}}"> Upah Borongan Produksi</a>
-                        </li>
-                        <li class="{{Request::is('produksi/spk/*') ? 'active' : ''}}">
-                            <a href="{{route('spk_produksi')}}">Manajemen SPK</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="{{Request::is('customer/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-group"></i>
-                        <span class="menu-title">Customer</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li  class="{{Request::is('customer/historitransaksi/*') ? 'active' : ''}}">
-                            <a href="{{route('historitransaksi')}}"> Histori Transaksi</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="{{Request::is('penjualan/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-usd"></i>
-                        <span class="menu-title">Penjualan</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li  class="{{Request::is('penjualan/penjualanorder/*') ? 'active' : ''}}">
-                            <a href="{{route('penjualanorder')}}"> Penjualan Dengan Order</a>
-                        </li>
-                        <li class="{{Request::is('penjualan/penjualantanpaorder/*') ? 'active' : ''}}">
-                            <a href="{{route('penjualantanpaorder')}}"> Penjualan Tanpa Order</a>
-                        </li>
-                        <li class="{{Request::is('penjualan/diskonpenjualan/*') ? 'active' : ''}}">
-                            <a href="{{route('diskonpenjualan')}}"> Diskon Penjualan</a>
-                        </li>
-                        <li class="{{Request::is('penjualan/penjualanproject/*') ? 'active' : ''}}">
-                            <a href="{{route('penjualanproject')}}"> Penjualan Project</a>
-                        </li>
-                        <li class="{{Request::is('penjualan/returnpenjualan/*') ? 'active' : ''}}">
-                            <a href="{{route('returnpenjualan')}}"> Return Penjualan</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="{{Request::is('pengiriman/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-truck"></i><span class="menu-title"> Pengiriman</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('pengiriman/perencanaanpengiriman/*') ? 'active' : ''}}">
-                            <a href="{{route('perencanaanpengiriman')}}"> Perencanaan Pengiriman</a>
-                        </li>
-                        <li class="{{Request::is('pengiriman/upahboronganpengiriman/*') ? 'active' : ''}}">
-                            <a href="{{route('upahboronganpengiriman')}}"> Upah Borongan Pengiriman</a>
-                        </li>
-                        <li class="{{Request::is('pengiriman/suratjalan/*') ? 'active' : ''}}">
-                            <a href="{{route('suratjalan')}}"> Surat Jalan</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="{{Request::is('biayadanbeban/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-balance-scale "></i><span class="menu-title"> Biaya dan Beban</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('biayadanbeban/pengeluarankecil/*') ? 'active' : ''}}">
-                            <a href="{{route('pengeluarankecil')}}">Biaya Pengeluaran Kecil</a>
-                        </li>
-                        <li class="{{Request::is('biayadanbeban/maintenance/*') ? 'active' : ''}}">
-                            <a href="{{route('maintenance')}}"> Maintenance</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="{{Request::is('aset/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-line-chart"></i><span class="menu-title"> Aset</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('aset/datagolongan/*') ? 'active' : ''}}">
-                            <a href="{{route('datagolongan')}}"> Data Golongan Aset</a>
-                        </li>
-                        <li class="{{Request::is('aset/dataaset/*') ? 'active' : ''}}">
-                            <a href="{{route('dataaset')}}"> Data Aset</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                <li class="{{Request::is('keuangan/*') ? 'active open' : ''}}">
-                    <a href="#">
-                        <i class="fa fa-money"></i><span class="menu-title"> Keuangan</span>
-                        <i class="fa arrow"></i>
-                    </a>
-                    <ul class="sidebar-nav">
-                        <li class="{{Request::is('keuangan/prosesinputtransaksi/*') ? 'active' : ''}}">
-                            <a href="{{route('pilih_prosesinputtransaksi')}}"> Proses Input Transaksi</a>
-                        </li>
-                        <li class="{{Request::is('keuangan/laporankeuangan/*') ? 'active' : ''}}">
-                            <a href="{{route('laporankeuangan')}}"> Laporan Keuangan</a>
-                        </li>
-                        <li class="{{Request::is('keuangan/analisa/*') ? 'active' : ''}}">
-                            <a href="{{route('analisa')}}">Analisa</a>
-                        </li>
-                        <li class="{{Request::is('keuangan/pembelian/*') ? 'active' : ''}}">
-                            <a href="{{route('pembelian')}}">Konfirmasi Pembelian</a>
-                        </li>
-                        
-                    </ul>
-                </li>
-                 --}}
                 <li class="{{Request::is('system/*') ? 'active open' : ''}}">
                     <a href="#">
                         <i class="fa fa-user-circle-o "></i><span class="menu-title"> Admin System</span>
@@ -290,12 +131,6 @@
                         <li class="{{Request::is('system/manajemenhakakses/*') ? 'active' : ''}}">
                             <a href="{{route('manajemenhakakses')}}"> Manajemen Hak Akses</a>
                         </li>
-                        <li class="{{Request::is('system/profilperusahaan/*') ? 'active' : ''}}">
-                            <a href="{{route('profilperusahaan')}}"> Profil Perusahaan</a>
-                        </li>
-                       {{--  <li class="{{Request::is('system/tahunfinansial/*') ? 'active' : ''}}">
-                            <a href="{{route('tahunfinansial')}}"> Tahun Financial</a>
-                        </li> --}}
                     </ul>
                 </li>
             </ul>

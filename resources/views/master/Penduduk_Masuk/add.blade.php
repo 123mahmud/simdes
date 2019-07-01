@@ -2,12 +2,12 @@
 @section('content')
 <article class="content">
    <div class="title-block text-primary">
-      <h1 class="title"> Tambah Data Penduduk </h1>
+      <h1 class="title"> Tambah Data Penduduk Masuk </h1>
       <p class="title-description">
          <i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
          / <span>Master Data</span>
-         / <a href="{{route('penduduk')}}"><span>Data Penduduk</span></a>
-         / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk</span>
+         / <a href="{{route('penduduk')}}"><span>Data Penduduk Masuk</span></a>
+         / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk Masuk</span>
       </p>
    </div>
    <form id="formsukses">
@@ -17,10 +17,10 @@
                <div class="card">
                   <div class="card-header bordered p-2">
                      <div class="header-block">
-                        <h3 class="title">Tambah Data Penduduk </h3>
+                        <h3 class="title">Tambah Data Penduduk Masuk </h3>
                      </div>
                      <div class="header-block pull-right">
-                        <a href="{{route('penduduk')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+                        <a href="{{route('pmasuk')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
                      </div>
                   </div>
                   <div class="card-block">
@@ -213,7 +213,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                                 <input type="text" class="form-control-sm form-control" name="alamat_asal">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -221,7 +221,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                                 <input type="text" class="form-control-sm form-control" name="rt_asal">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -229,14 +229,14 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tanggal_meninggal">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="rw_asal">
                               </div>
                            </div><div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Kecamatan Asal<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                                 <input type="text" class="form-control-sm form-control" name="kecamatan_asal">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -244,7 +244,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                                 <input type="text" class="form-control-sm form-control" name="kabupaten_asal">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -252,14 +252,14 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tanggal_meninggal">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="provinsi_asal">
                               </div>
                            </div><div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Tanggal Pindah<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                                 <input type="text" class="form-control-sm form-control" name="tgl_pindah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -267,7 +267,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                                 <input type="text" class="form-control-sm form-control" name="keterangan">
                               </div>
                            </div>
 

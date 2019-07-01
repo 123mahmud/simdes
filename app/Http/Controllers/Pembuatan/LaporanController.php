@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Master;
+namespace App\Http\Controllers\Pembuatan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class pendudukKeluarController extends Controller
+class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class pendudukKeluarController extends Controller
      */
     public function index()
     {
-        
-        return view('master.Penduduk_Keluar.index');
+        //
     }
 
     /**
@@ -25,8 +24,7 @@ class pendudukKeluarController extends Controller
      */
     public function create()
     {
-        
-        return view('master.Penduduk_Keluar.add');
+        //
     }
 
     /**
