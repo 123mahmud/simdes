@@ -28,22 +28,23 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('logout', 'mMemberController@logout')->middleware('auth');;
 	Route::get('/home', 'HomeController@index')->name('home');
 // Penduduk
-	Route::get('/penduduk/index', 'Master\pendudukController@penduduk')->name('penduduk');
-	Route::get('/penduduk/list', 'Master\pendudukController@getPenduduk')->name('get-penduduk');
+	Route::get('/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
+	Route::get('/penduduk/list', 'Master\pendudukController@get')->name('get-penduduk');
 	Route::get('/penduduk/create', 'Master\pendudukController@addPenduduk')->name('add-penduduk');
 	Route::get('/penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
 	Route::get('/penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
 	Route::post('/penduduk/save', 'Master\pendudukController@save_barang');
 	Route::post('/penduduk/update', 'Master\pendudukController@update');
 	Route::get('/penduduk/disabled', 'Master\pendudukController@disabled');
-// Master Kelahiran
-	Route::get('/master/datasuplier/index', 'Master\MasterKelahiranController@datasuplier')->name('datasuplier');
-	Route::get('/master/datasuplier/create', 'Master\MasterKelahiranController@tambah_datasuplier')->name('tambah_datasuplier');
-	Route::get('/master/datasuplier/edit', 'Master\MasterKelahiranController@edit_datasuplier')->name('edit_datasuplier');
-	Route::get('/master/datasuplier/save', 'Master\MasterKelahiranController@save_datasupplier')->name('edit_datasuplier');
-	Route::get('/master/datasuplier/disabled', 'Master\MasterKelahiranController@disabled');
-	Route::get('/master/datasuplier/update', 'Master\MasterKelahiranController@update');
-	Route::get('/master/datasuplier/table', 'Master\MasterKelahiranController@table');
+// Kelahiran
+	Route::get('/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
+	Route::get('/kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
+	Route::get('/kelahiran/create', 'Master\kelahiranController@add')->name('add-kelahiran');
+	Route::get('/kelahiran/edit', 'Master\kelahiranController@edit')->name('edit_kelahiran');
+	Route::get('/kelahiran/save', 'Master\kelahiranController@save_datasupplier')->name('edit_kelahiran');
+	Route::get('/kelahiran/disabled', 'Master\kelahiranController@disabled');
+	Route::get('/kelahiran/update', 'Master\kelahiranController@update');
+	
 // Penduduk Masuk
 	Route::get('/master/dataarmada/index', 'Master\pendudukMasukController@dataarmada')->name('dataarmada');
 	Route::get('/master/dataarmada/create', 'Master\pendudukMasukController@tambah_dataarmada_own')->name('tambah_dataarmada_own');

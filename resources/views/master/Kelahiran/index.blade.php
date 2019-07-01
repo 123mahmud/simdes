@@ -23,21 +23,20 @@
 	                        <h3 class="title"> Data Suplier </h3>
 	                    </div>
 	                    <div class="header-block pull-right">
-                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('tambah_datasuplier')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
+                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('add-kelahiran')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
 	                    </div>
                     </div>
                     <div class="card-block">
                         <section>
                         	
                         	<div class="table-responsive">
-	                            <table class="table table-striped table-hover" cellspacing="0" id="table_suplier">
+	                            <table class="table table-striped table-hover" cellspacing="0" id="table-kelahiran">
 	                                <thead class="bg-primary">
 	                                    <tr align="center">
 	                                    	<th>Nik</th>
 	                                		<th>Nama</th>
 	                                		<th>Tempat Lahir</th>
 	                                		<th>Pekerjaan</th>
-	                                		<th>No. KK</th>
 	                                		<th>Aksi</th>
 							            </tr>
 	                                </thead>
@@ -63,43 +62,27 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('#table_suplier').DataTable({
-	      processing: true,
-	      responsive:true,
-	      serverSide: true,
-	      ajax: {
-	        url: '{{ url("master/datasuplier/table") }}',
-	      },
-	      columnDefs: [
-	        {
-	          targets: 0,
-	          className: 'center d_id'
-	        },
-	      ],
-	      "columns": [
-	        { "data": "s_code", "width":"15%" },
-	        { "data": "s_company", "width":"20%" },
-	        { "data": "s_phone1", "width":"15%" },
-	        { "data": "s_address", "width":"20%" },
-	        { "data": "s_note", "width":"20%" },
-	        { "data": "action", "width":"10%" }
-	      ],
-	      "responsive": true,
-	      "pageLength": 10,
-	      "lengthMenu": [[10, 20, 50, - 1], [10, 20, 50, "All"]],
-	      "language": {
-	        "searchPlaceholder": "Cari Data",
-	        "emptyTable": "Tidak ada data",
-	        "sInfo": "Menampilkan _START_ - _END_ Dari _TOTAL_ Data",
-	        "sSearch": '<i class="fa fa-search"></i>',
-	        "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
-	        "infoEmpty": "",
-	        "paginate": {
-	          "previous": "Sebelumnya",
-	          "next": "Selanjutnya",
-	        }
-	      }
-	   });
+		$('#table-kelahiran').dataTable().fnDestroy();
+		$('#table-kelahiran').DataTable({
+			responsive: true,
+			serverSide: true,
+			ajax: {
+				url: "{{ route('get-kelahiran') }}",
+				type: "get",
+				data: {
+					"_token": "{{ csrf_token() }}"
+				}
+			},
+			columns: [
+				{data: 'nik', "width": "20%"},
+				{data: 'nama', "width": "25%"},
+				{data: 'tempat_tgl_lahir', "width": "20%"},
+				{data: 'p_pekerjaan', "width": "20%"},
+				{data: 'action', "width": "15%"}
+			],
+			pageLength: 10,
+			lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+		});
 
 	});
 

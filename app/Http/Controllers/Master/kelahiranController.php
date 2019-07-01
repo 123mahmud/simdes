@@ -9,22 +9,56 @@ use Crypt;
 use carbon\Carbon;
 use App\MasterBarang;
 use DataTables;
+use App\d_kelahiran;
 
-class MasterKelahiranController extends Controller
+class kelahiranController extends Controller
 {
-    public function datasuplier()
+    public function index()
     {
-        $data['supplier'] = DB::table('m_supplier')
-                            ->join('m_comp' , 'c_code' , '=' , 's_company')
-                            ->get();
-    	return view('master/dataKelahiran/datasuplier' , compact('data'));
+
+    	return view('master.Kelahiran.index');
     }
-    public function tambah_datasuplier()
+
+    public function get()
+    {
+      $data = d_kelahiran::all();
+
+      return Datatables::of($data)
+        ->addIndexColumn()
+        ->addColumn('tempat_tgl_lahir', function($data) {
+            return $data->tempat_lahir .'-'. $data->tgl_lahir;
+        })        
+
+        ->addColumn('action', function($data) {
+                return  '<div class="text-center">'.
+                            '<button class="btn btn-info btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Info">
+                                    <i class="fa fa-exclamation-circle"></i>
+                            </button>'.'
+                            <button class="btn btn-warning btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Edit">
+                                    <i class="fa fa-pencil"></i>
+                            </button>'.'
+                            <button class="btn btn-danger btn-edit btn-sm" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    type="button" 
+                                    title="Hapus">
+                                    <i class="fa fa-times"></i>
+                            </button>'.
+                        '</div>';
+        })
+        ->rawColumns(['tempat_tgl_lahir', 'action'])
+        ->make(true);
+    }
+
+    public function add()
     {   
-        $data['cabang'] = DB::table('m_comp')
-                        ->get();
                 
-          return view('master/dataKelahiran/tambah_datasuplier');
+        return view('master.Kelahiran.add');
     }
 
    public function edit_datasuplier(Request $request)
@@ -169,55 +203,5 @@ class MasterKelahiranController extends Controller
         return json_encode('sukses');
     }
  
-   public function table()
-   {
-   	$data = DB::table('m_supplier');
-
-        	return Datatables::of($data)           
-
-			->editColumn('s_phone1', function ($xyzab) {
-				if ($xyzab->s_phone2 != null) 
-				{
-				 	return $xyzab->s_phone1.' | '.$xyzab->s_phone2;
-				}
-				else 
-				{
-				 	return $xyzab->s_phone1;
-				}
-			})
-
-			->addColumn('action', function ($data) {
-                    if ($data->s_isactive == 'Y') {
-                        return  '<div class="text-center">'.
-                                    '<button id="edit" 
-                                        onclick=edit("'.Crypt::encrypt($data->s_id).'")
-                                        class="btn btn-warning btn-sm" 
-                                        title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>'.'
-                                    <button id="status'.$data->s_id.'" 
-                                        onclick="ubahStatusMan('.$data->s_id.')" 
-                                        class="btn btn-primary btn-sm" 
-                                        title="Aktif">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>'.'
-                                </div>';
-                    }
-                    else
-                    {
-                        return  '<div class="text-center">'.
-                                    '<button id="status'.$data->s_id.'" 
-                                        onclick="ubahStatusMan('.$data->s_id.')" 
-                                        class="btn btn-danger btn-sm" 
-                                        title="Tidak Aktif">
-                                        <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                    </button>'.
-                                '</div>';
-                    }
-                    
-                })
-			->rawColumns(['action','s_phone1'])
-			->make(true);
-			}
 }
 

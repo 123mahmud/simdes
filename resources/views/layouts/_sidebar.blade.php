@@ -75,8 +75,8 @@
                         <li class="{{Request::is('/penduduk/*') ? 'active' : ''}}">
                             <a href="{{route('penduduk')}}">Penduduk</a>
                         </li>
-                        <li class="{{Request::is('master/datasuplier/*') ? 'active' : ''}}">
-                            <a href="{{route('datasuplier')}}">Kelahiran</a>
+                        <li class="{{Request::is('/kelahiran/*') ? 'active' : ''}}">
+                            <a href="{{route('kelahiran')}}">Kelahiran</a>
                         </li>
                         <li class="{{Request::is('master/datacustomer/*') ? 'active' : ''}}">
                             <a href="{{route('datacustomer')}}">Kematian</a>

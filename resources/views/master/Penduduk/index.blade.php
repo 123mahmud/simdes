@@ -35,7 +35,7 @@
                         <section>
 
                         	<div class="table-responsive">
-	                            <table class="table table-striped table-hover" cellspacing="0" id="table_barang">
+	                            <table class="table table-striped table-hover" cellspacing="0" id="table-penduduk">
 	                                <thead class="bg-primary">
 	                                    <tr>
 		                                		<th>Nik</th>
@@ -67,7 +67,29 @@
 @section('extra_script')
 <script type="text/javascript">
 	$(document).ready(function() {
-		TableBarang();
+		//get penduduk
+		$('#table-penduduk').dataTable().fnDestroy();
+		tb_barang = $('#table-penduduk').DataTable({
+			responsive: true,
+			serverSide: true,
+			ajax: {
+				url: "{{ route('get-penduduk') }}",
+				type: "get",
+				data: {
+					"_token": "{{ csrf_token() }}"
+				}
+			},
+			columns: [
+				{data: 'nik', "width": "20%"},
+				{data: 'nama', "width": "25%"},
+				{data: 'tempat_tgl_lahir', "width": "20%"},
+				{data: 'p_pekerjaan', "width": "20%"},
+				{data: 'action', "width": "15%"}
+			],
+			pageLength: 10,
+			lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
+		});
+		
 	});
 
 	function status(id, x){
@@ -122,32 +144,6 @@
 			});
 	}
 
-  // data-table -> function to retrieve DataTable server side
-	var tb_barang;
-	function TableBarang()
-	{
-		$('#table_barang').dataTable().fnDestroy();
-		tb_barang = $('#table_barang').DataTable({
-			responsive: true,
-			serverSide: true,
-			ajax: {
-				url: "{{ route('get-penduduk') }}",
-				type: "get",
-				data: {
-					"_token": "{{ csrf_token() }}"
-				}
-			},
-			columns: [
-				{data: 'p_nik', "width": "20%"},
-				{data: 'p_nama', "width": "25%"},
-				{data: 'tempat_tgl_lahir', "width": "20%"},
-				{data: 'p_pekerjaan', "width": "20%"},
-				{data: 'action', "width": "15%"}
-			],
-			pageLength: 10,
-			lengthMenu: [[10, 20, 50, -1], [10, 20, 50, 'All']]
-		});
-	}
 
 </script>
 @endsection

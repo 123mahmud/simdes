@@ -10,32 +10,32 @@ use App\Http\Controllers\Controller;
 
 class pendudukController extends Controller
 {
-    public function getPenduduk()
+    public function get()
     {
       $data = d_penduduk::all();
 
       return Datatables::of($data)
         ->addIndexColumn()
         ->addColumn('tempat_tgl_lahir', function($data) {
-            return $data->p_tempat_lahir .'-'. $data->p_tgl_lahir;
+            return $data->tempat_lahir .'-'. $data->tgl_lahir;
         })        
 
         ->addColumn('action', function($data) {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
                             <button class="btn btn-danger btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->p_id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
@@ -46,7 +46,7 @@ class pendudukController extends Controller
         ->make(true);
     }
 
-    public function penduduk()
+    public function index()
     {
         
         return view('master.Penduduk.index');
