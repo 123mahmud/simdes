@@ -207,7 +207,6 @@
                                  <input type="text" class="form-control-sm form-control" value="INDONESIA" disabled="true" name="warga_negara">
                               </div>
                            </div>
-                           <div class="card-footer text-right">
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Tempat Meninggal<font color="red">*</font></label>
                            </div>
@@ -232,7 +231,6 @@
                                  <input type="text" class="form-control-sm form-control datepicker" name="tanggal_meninggal">
                               </div>
                            </div>
-                        </div>
 
                         </div>
                      </section>

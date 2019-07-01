@@ -207,6 +207,69 @@
                                  <input type="text" class="form-control-sm form-control" value="INDONESIA" disabled="true" name="warga_negara">
                               </div>
                            </div>
+                           {{-- garis --}}
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Alamat Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RT Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RW Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tanggal_meninggal">
+                              </div>
+                           </div><div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Kecamatan Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Kabupaten Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Provinsi Asal<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tanggal_meninggal">
+                              </div>
+                           </div><div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Tanggal Pindah<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Keterangan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="sebab_meninggal">
+                              </div>
+                           </div>
 
                         </div>
                      </section>

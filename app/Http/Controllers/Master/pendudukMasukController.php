@@ -16,5 +16,11 @@ class pendudukMasukController extends Controller
         return view('master.Penduduk_Masuk.index');
     }
 
+    public function create()
+    {
+
+        return view('master.Penduduk_Masuk.add');
+    }
+
 }
 

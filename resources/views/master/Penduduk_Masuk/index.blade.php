@@ -7,11 +7,11 @@
 <article class="content">
 
 	<div class="title-block text-primary">
-	    <h1 class="title"> Data Penduduk </h1>
+	    <h1 class="title"> Data Penduduk Masuk </h1>
 	    <p class="title-description">
 	    	<i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
 	    	 / <span>Master Data</span>
-	    	 / <span class="text-primary" style="font-weight: bold;">Data Penduduk</span>
+	    	 / <span class="text-primary" style="font-weight: bold;">Data Penduduk Masuk</span>
 	     </p>
 	</div>
 
@@ -24,11 +24,11 @@
 				<div class="card">
                     <div class="card-header bordered p-2">
                     	<div class="header-block">
-                            <h3 class="title"> Data Penduduk </h3>
+                            <h3 class="title"> Data Penduduk Masuk </h3>
                         </div>
                         <div class="header-block pull-right">
 
-                			<a class="btn btn-primary" href="{{route('create-penduduk')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
+                			<a class="btn btn-primary" href="{{route('create-pmasuk')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
                         </div>
                     </div>
                     <div class="card-block">
