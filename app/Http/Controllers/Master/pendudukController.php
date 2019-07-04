@@ -7,12 +7,23 @@ use carbon\Carbon;
 use App\d_penduduk;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\kabupaten;
+use App\d_pekerjaan;
 
 class pendudukController extends Controller
 {
+    public function index()
+    {
+
+        return view('master.Penduduk.index');
+    }
+
     public function get()
     {
-      $data = d_penduduk::all();
+      $data = d_penduduk::select('d_penduduk.*',
+                                'd_pekerjaan.nama as pekerjaan_nama')
+        ->join('d_pekerjaan','d_pekerjaan.id','=','d_penduduk.pekerjaan')
+        ->get();
 
       return Datatables::of($data)
         ->addIndexColumn()
@@ -21,6 +32,8 @@ class pendudukController extends Controller
         })        
 
         ->addColumn('action', function($data) {
+            if ($data->active == '1') 
+            {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-info btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
@@ -34,183 +47,119 @@ class pendudukController extends Controller
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
-                            <button class="btn btn-danger btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                            <button id="status'.$data->id.'" 
+                                        onclick="status('.$data->id.')" 
+                                        class="btn btn-primary btn-sm" 
+                                        title="Aktif">
+                                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                                    </button>'.'
+                            <button class="btn btn-danger btn-sm" 
+                                    id="destroy'.$data->id.'"
+                                    onclick="destroy('.$data->id.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
                             </button>'.
                         '</div>';
+            }else{
+                return  '<div class="text-center">'.
+                                    '<button id="status'.$data->id.'" 
+                                        onclick="status('.$data->id.')" 
+                                        class="btn btn-danger btn-sm" 
+                                        title="Tidak Aktif">
+                                        <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                    </button>'.
+                                '</div>';
+            }
         })
         ->rawColumns(['tempat_tgl_lahir', 'action'])
         ->make(true);
     }
 
-    public function index()
+    
+    public function add()
     {
-        
-        return view('master.Penduduk.index');
+        $kabupaten = kabupaten::all();
+        $pekerjaan = d_pekerjaan::all();
+
+        return view('master.Penduduk.add', compact('kabupaten','pekerjaan'));
     }
-    public function create()
+
+    public function create(Request $request)
     {
-
-        return view('master.Penduduk.add');
-    }
-    public function edit_databarang($id)
-    {
-
-        $data['barang'] = DB::table('m_item')
-                          ->where('i_id' ,  $id)
-                          ->get();
-        $data['satuan'] = DB::table('m_satuan')
-                         ->get();
-        $data['group'] = DB::table('m_group')
-        ->get();
-        return view('master/dataPenduduk/edit_databarang', compact('data'));
-    }
-
-    public function tipe_barang(Request $request) {
-        $tipe_barang = $request->tipe_barang;
-        $caritipe = DB::select("SELECT  substring(max(i_code),4) as id from m_item
-                                  WHERE i_type = '$tipe_barang'");
-        $index = (integer)$caritipe[0]->id + 1;
-        $index = str_pad($index, 4, '0' , STR_PAD_LEFT);
-        $nota = $tipe_barang . '-' . $index;
-        return json_encode($nota);
-    }
-
-    public function save_barang(Request $request){
-         return DB::transaction(function() use ($request){
-            $urut = DB::table('m_item')
-                    ->max('i_id');
-
-            $harga_satuan_utama = str_replace(".", "", $request->harga_satuan_utama);
-            $harga_satuan_utama = str_replace(",", ".", $harga_satuan_utama);
-
-            $harga_satuan_1 = str_replace(".", "", $request->harga_satuan_1);
-            $harga_satuan_1 = str_replace(",", ".", $harga_satuan_1);
-
-            $harga_satuan_2 = str_replace(".", "", $request->harga_satuan_2);
-            $harga_satuan_2 = str_replace(",", ".", $harga_satuan_2);
-
-            $urut = $urut + 1;
-            $now = Carbon::now();
-
-            // get a new 'kode barang'
-            $kode_barang = $this->tipe_barang($request);
-            $kode_barang = json_decode($kode_barang);
-
-            $masterbarang = new MasterBarang();
-            $masterbarang->i_id = $urut;
-            $masterbarang->i_code = $kode_barang;
-            $masterbarang->i_type = $request->tipe_barang;
-            $masterbarang->i_group = $request->kelompok_barang;
-            $masterbarang->i_name = $request->nama_barang;
-
-            $masterbarang->i_sat1 = $request->satuan_utama;
-            if($request->satuan_1 != ''){
-                $masterbarang->i_sat2 = $request->satuan_1;
-                // $masterbarang->i_sat_hrg2 = $harga_satuan_1;
-                $masterbarang->i_sat_isi2 = $request->isi_satuan_1;
-            }
-            if($request->satuan_2 != ''){
-                $masterbarang->i_sat_isi3 = $request->isi_satuan_2;
-                // $masterbarang->i_sat_hrg3 = $harga_satuan_2;
-                $masterbarang->i_sat3 = $request->satuan_2;
-            }
-
-            $masterbarang->i_sat_isi1 = $request->isi_satuan_utama;
-            // $masterbarang->i_sat_hrg1 =$harga_satuan_utama;
-            $masterbarang->i_min_stock =$request->min_stock;
-
-            $masterbarang->i_det = $request->detail;
-            $masterbarang->i_persentase = $request->persentase;
-            $masterbarang->i_insert_by = $request->username;
-            $masterbarang->i_updated_by = $request->username;
-            $masterbarang->i_isactive = 'Y';
-            $masterbarang->save();
-
-            return json_encode('sukses');
-         });
-    }
-
-    public function update(Request $request){
-          return DB::transaction(function() use ($request){
-            $idbarang = $request->id_barang;
-
-            $harga_satuan_utama = str_replace(".", "", $request->harga_satuan_utama);
-            $harga_satuan_utama = str_replace(",", ".", $harga_satuan_utama);
-
-            $harga_satuan_1 = str_replace(".", "", $request->harga_satuan_1);
-            $harga_satuan_1 = str_replace(",", ".", $harga_satuan_1);
-
-            $harga_satuan_2 = str_replace(".", "", $request->harga_satuan_2);
-            $harga_satuan_2 = str_replace(",", ".", $harga_satuan_2);
-
-
-            DB::table('m_item')
-            ->where('i_id' , $idbarang)
-            ->update([
-                'i_code' => $request->kode_barang,
-                'i_type' => $request->tipe_barang,
-                'i_code_group' => $request->kelompok_barang,
-                'i_name' => $request->nama_barang,
-                'i_sat1' => $request->satuan_utama,
-                'i_sat_isi1' => $request->isi_satuan_utama,
-                // 'i_sat_hrg1' => $harga_satuan_utama,
-                'i_min_stock' => $request->min_stock,
-                'i_det' => $request->detail,
-                'i_persentase' => $request->persentase,
-                'i_insert_by' => $request->username,
-                'i_updated_by' => $request->username,
-            ]);
-
-
-            if($request->satuan_1 != ''){
-                DB::table('m_item')
-                ->where('i_id' , $idbarang)
-                ->update([
-                    'i_sat2' => $request->satuan_1,
-                    // 'i_sat_hrg2' => $harga_satuan_1,
-                    'i_sat_isi2' => $request->isi_satuan_1,
-                ]);
-            }
-            if($request->satuan_2 != ''){
-                 DB::table('m_item')
-                ->where('i_id' , $idbarang)
-                ->update([
-                    'i_sat3' => $request->satuan_2,
-                    // 'i_sat_hrg3' => $harga_satuan_2,
-                    'i_sat_isi3' => $request->isi_satuan_2,
-                ]);
-            }
-
-            return json_encode('sukses');
-          });
-    }
-
-    public function disabled(Request $request){
-        $id = $request->data_id;
-        $data = DB::table('m_item')
-                ->where('i_id' , $id)
-                ->first();
-        $status = $data->i_isactive;
-
-        if($status == 'Y'){
-            DB::table('m_item')
-            ->where('i_id' , $id)
-            ->update([
-                'i_isactive' => 'T'
-            ]);
+        DB::beginTransaction();
+        try {
+            $penduduk = new d_penduduk;
+            $penduduk->nik = $request->nik;
+            $penduduk->nama = $request->nama;
+            $penduduk->urut_kk = $request->urut_kk;
+            $penduduk->kelamin = $request->kelamin;
+            $penduduk->tempat_lahir = $request->tempat_lahir;
+            $penduduk->tgl_lahir = date('Y-m-d',strtotime($request->tgl_lahir));
+            $penduduk->gol_darah = $request->gol_darah;
+            $penduduk->agama = $request->agama;
+            $penduduk->status_nikah = $request->status_nikah;
+            $penduduk->status_keluarga = $request->status_keluarga;
+            $penduduk->pendidikan = $request->pendidikan;
+            $penduduk->pekerjaan = $request->pekerjaan;
+            $penduduk->nama_ibu = $request->nama_ibu;
+            $penduduk->nama_ayah = $request->nama_ayah;
+            $penduduk->no_kk = $request->no_kk;
+            $penduduk->rt = $request->rt;
+            $penduduk->rw = $request->rw;
+            $penduduk->warga_negara = $request->warga_negara;
+            $penduduk->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
         }
-        else {
-            DB::table('m_item')
-            ->where('i_id' , $id)
-            ->update([
-                'i_isactive' => 'Y'
-            ]);
-        }
-        return json_encode('sukses');
     }
+
+    public function change(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $penduduk = d_penduduk::findOrFail($request->id);
+            $penduduk->active = $penduduk->active == 1 ? 0 : 1;
+            $penduduk->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $penduduk = d_penduduk::findOrFail($request->id);
+        DB::beginTransaction();
+        try {
+            $penduduk->delete();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
+    }
+
 
 }

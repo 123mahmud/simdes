@@ -23,7 +23,7 @@
 	                        <h3 class="title"> Data Suplier </h3>
 	                    </div>
 	                    <div class="header-block pull-right">
-                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('create-kelahiran')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
+                			<button class="btn btn-primary" data-toggle="modal" data-target="#tambah" onclick="window.location.href='{{route('add-kelahiran')}}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
 	                    </div>
                     </div>
                     <div class="card-block">
@@ -36,7 +36,7 @@
 	                                    	<th>Nik</th>
 	                                		<th>Nama</th>
 	                                		<th>Tempat Lahir</th>
-	                                		<th>Pekerjaan</th>
+	                                		<th>Nama Ayah</th>
 	                                		<th>Aksi</th>
 							            </tr>
 	                                </thead>
@@ -77,7 +77,7 @@
 				{data: 'nik', "width": "20%"},
 				{data: 'nama', "width": "25%"},
 				{data: 'tempat_tgl_lahir', "width": "20%"},
-				{data: 'p_pekerjaan', "width": "20%"},
+				{data: 'nama_ayah', "width": "20%"},
 				{data: 'action', "width": "15%"}
 			],
 			pageLength: 10,

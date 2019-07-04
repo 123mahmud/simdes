@@ -49,20 +49,19 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 // Penduduk
 	Route::get('master/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
 	Route::get('penduduk/list', 'Master\pendudukController@get')->name('get-penduduk');
-	Route::get('penduduk/create', 'Master\pendudukController@create')->name('create-penduduk');
+	Route::get('penduduk/create', 'Master\pendudukController@add')->name('add-penduduk');
 	Route::get('penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
 	Route::get('penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
-	Route::post('penduduk/save', 'Master\pendudukController@save_barang');
+	Route::post('penduduk/save', 'Master\pendudukController@create')->name('create-penduduk');
 	Route::post('penduduk/update', 'Master\pendudukController@update');
-	Route::get('penduduk/disabled', 'Master\pendudukController@disabled');
+	Route::put('penduduk/change', 'Master\pendudukController@change')->name('change-penduduk');
+	Route::delete('penduduk/delete', 'Master\pendudukController@destroy')->name('delete-penduduk');
 // Kelahiran
 	Route::get('master/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
 	Route::get('kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
-	Route::get('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
-	Route::get('kelahiran/edit', 'Master\kelahiranController@edit')->name('edit_kelahiran');
-	Route::get('kelahiran/save', 'Master\kelahiranController@save_datasupplier')->name('edit_kelahiran');
-	Route::get('kelahiran/disabled', 'Master\kelahiranController@disabled');
-	Route::get('kelahiran/update', 'Master\kelahiranController@update');
+	Route::get('kelahiran/add', 'Master\kelahiranController@add')->name('add-kelahiran');
+	Route::post('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
+	Route::delete('kelahiran/delete', 'Master\kelahiranController@destroy')->name('delete-kelahiran');
 // Kematian
 	Route::get('master/kematian/index', 'Master\kematianController@index')->name('kematian');
 	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');

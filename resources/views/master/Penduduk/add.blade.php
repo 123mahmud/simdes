@@ -10,7 +10,7 @@
          / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk</span>
       </p>
    </div>
-   <form id="formsukses">
+   <form id="data">
       <section class="section">
          <div class="row">
             <div class="col-12">
@@ -66,7 +66,11 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_lahir">
+                                 <select class="form-control form-control-sm select2" name="tempat_lahir">
+                                    @foreach ($kabupaten as $data)
+                                       <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                    @endforeach
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -155,7 +159,9 @@
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
                                  <select class="form-control form-control-sm" name="pekerjaan">
-
+                                    @foreach ($pekerjaan as $data)
+                                       <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                    @endforeach
                                  </select>
                               </div>
                            </div>
@@ -204,7 +210,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" value="INDONESIA" disabled="true" name="warga_negara">
+                                 <input type="text" class="form-control-sm form-control" value="INDONESIA" name="warga_negara">
                               </div>
                            </div>
 
@@ -212,7 +218,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" onclick="simpan()" type="button">Simpan</button>
                   </div>
                </div>
             </div>
@@ -224,6 +230,44 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+   $(document).ready(function(){
 
+   });
+
+   function simpan()
+   {
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $('.simpan').attr('disabled', 'disabled');
+      $.ajax({
+         url: "{{ route('create-penduduk') }}",
+         type: 'POST',
+         data: $('#data').serialize(),
+         success: function (response) {
+             if (response.status == 'sukses') {
+                 $.toast({
+                     heading: response.code,
+                     text: 'Berhasil di Simpan',
+                     bgColor: '#00b894',
+                     textColor: 'white',
+                     loaderBg: '#55efc4',
+                     icon: 'success'
+                  });
+                 window.location.href = "{{ route('penduduk') }}";
+             } else {
+                  $.toast({
+                      heading: 'Ada yang salah',
+                      text: 'Periksa data anda.',
+                      showHideTransition: 'plain',
+                      icon: 'warning'
+                  })
+                 $('.simpan').removeAttr('disabled', 'disabled');
+             }
+         }
+      })
+   }
 </script>
 @endsection
