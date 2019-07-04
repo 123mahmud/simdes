@@ -25,7 +25,7 @@
 	                        <h3 class="title"> Data Kematian </h3>
 	                    </div>
 	                    <div class="header-block pull-right">
-                    			<a class="btn btn-primary" href="{{route('create-kematian')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
+                    			<a class="btn btn-primary" href="{{route('add-kematian')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
 
 	                    </div>
                     </div>

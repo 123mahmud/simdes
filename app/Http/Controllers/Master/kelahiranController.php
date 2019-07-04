@@ -25,6 +25,7 @@ class kelahiranController extends Controller
     public function get()
     {
       $data = d_kelahiran::join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
+         ->where('active',1)
          ->get();
 
       return Datatables::of($data)
@@ -47,8 +48,9 @@ class kelahiranController extends Controller
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
-                            <button class="btn btn-danger btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                            <button class="btn btn-danger btn-sm" 
+                                    id="destroy'.$data->id_penduduk.'"
+                                    onclick="destroy('.$data->id_penduduk.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
@@ -108,6 +110,27 @@ class kelahiranController extends Controller
          'data' => $e
       ]);
       }
+   }
+
+   public function destroy(Request $request)
+   {
+         $penduduk = d_penduduk::findOrFail($request->id);
+         $kelahiran = d_kelahiran::where('id_penduduk',$request->id)->first();
+         DB::beginTransaction();
+         try {
+            $penduduk->delete();
+            $kelahiran->delete();
+         DB::commit();
+         return response()->json([
+            'status' => 'sukses'
+         ]);
+         } catch (\Exception $e) {
+            DB::rollback();
+               return response()->json([
+               'status' => 'gagal',
+               'data' => $e
+            ]);
+         }
    }
  
 }

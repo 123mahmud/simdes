@@ -65,11 +65,9 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 // Kematian
 	Route::get('master/kematian/index', 'Master\kematianController@index')->name('kematian');
 	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');
-	Route::get('kematian/create', 'Master\kematianController@create')->name('create-kematian');
-	Route::get('kematian/save', 'Master\kematianController@store')->name('simpan-kematian');
-	Route::get('kematian/update', 'Master\kematianController@update');
-	Route::get('kematian/ubahstatus', 'Master\kematianController@ubahStatus');
-	Route::get('kematian/edit', 'Master\kematianController@editCustomer');
+	Route::get('kematian/add', 'Master\kematianController@add')->name('add-kematian');
+	Route::get('kematian/autocomplete', 'Master\kematianController@autocomplete')->name('autocomplete-kematian');
+
 	
 // Penduduk Masuk
 	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');

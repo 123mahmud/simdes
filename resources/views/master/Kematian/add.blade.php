@@ -31,7 +31,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="nik">
+                                 <input type="text" class="form-control-sm form-control currency-x" id="nik" name="nik">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -39,7 +39,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -47,7 +47,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="urut_kk">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="urut_kk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -55,10 +55,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="kelamin">
-                                    <option value="L" selected="">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="kelamin">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -66,7 +63,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_lahir">
+                                 <input readonly type="text" class="form-control-sm form-control" name="tempat_lahir">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -74,7 +71,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
+                                 <input readonly type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -82,7 +79,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="gol_darah">
+                                 <input readonly type="text" class="form-control-sm form-control" name="gol_darah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -90,14 +87,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="agama">
-                                    <option value="IL" selected="">Islam</option>
-                                    <option value="HD">Hindu</option>
-                                    <option value="BD">Budha</option>
-                                    <option value="KP">Kristen Prostestan</option>
-                                    <option value="KL">Katolik</option>
-                                    <option value="KC">Kong Hu Cu</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="agama">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -105,12 +95,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="status_nikah">
-                                    <option value="KW" selected="">Kawin</option>
-                                    <option value="BK">Belum Kawin</option>
-                                    <option value="CH">Cerai Hidup</option>
-                                    <option value="CM">Cerai Mati</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_nikah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -118,16 +103,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="status_keluarga">
-                                    <option value="SM" selected="">Suami</option>
-                                    <option value="IS">Istri</option>
-                                    <option value="AN">Anak</option>
-                                    <option value="CU">Cucu</option>
-                                    <option value="OT">Orang Tua</option>
-                                    <option value="ME">Mertua</option>
-                                    <option value="FL">Famili Lain</option>
-                                    <option value="LA">Lainnya</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_keluarga">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -135,18 +111,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="pendidikan">
-                                    <option value="TBS" selected="">TIDAK / BELUM SEKOLAH</option>
-                                    <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
-                                    <option value="TSS">TAMAT SD / SEDERAJAT</option>
-                                    <option value="SMP">SLTP/SEDERAJAT</option>
-                                    <option value="SMA">SLTA / SEDERAJAT</option>
-                                    <option value="D1">DIPLOMA I / II</option>
-                                    <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
-                                    <option value="S1">DIPLOMA IV/ STRATA I</option>
-                                    <option value="S2">STRATA II</option>
-                                    <option value="S3">STRATA III</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="pendidikan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -154,9 +119,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="pekerjaan">
-
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="pekerjaan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -164,7 +127,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama_ibu">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ibu">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -172,7 +135,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama_ayah">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ayah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -180,7 +143,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="no_kk">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="no_kk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -188,7 +151,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rt">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rt">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -196,7 +159,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rw">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rw">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -204,7 +167,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" value="INDONESIA" disabled="true" name="warga_negara">
+                                 <input readonly type="text" class="form-control-sm form-control" value="INDONESIA" name="warga_negara">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -248,6 +211,27 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+   $(document).ready(function() {
+      $('#nik').on('click', function() {
+         clear();
+      });
+      $('#nik').autocomplete({
+         source: "{{ route('autocomplete-kematian') }}",
+         minLength: 2,
+         select: function(event, data){
+            // $('#address').val(data.item.address);
+            // $('#idCustomer').val(data.item.id);
+            // $('#barang').focus();
+         }
+      });
+      function clear()
+      {
+         // $('#customer').val('');
+         // $('#address').val('');
+         // $('#idCustomer').val('');
+      }
+   });
+   
 
 </script>
 @endsection

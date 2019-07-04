@@ -9,6 +9,7 @@ use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\kabupaten;
 use App\d_pekerjaan;
+use App\d_kelahiran;
 
 class pendudukController extends Controller
 {
@@ -145,9 +146,11 @@ class pendudukController extends Controller
     public function destroy(Request $request)
     {
         $penduduk = d_penduduk::findOrFail($request->id);
+        $kelahiran = d_kelahiran::where('id_penduduk',$request->id)->first();
         DB::beginTransaction();
         try {
             $penduduk->delete();
+            $kelahiran->delete();
         DB::commit();
         return response()->json([
          'status' => 'sukses'
