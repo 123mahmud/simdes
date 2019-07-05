@@ -11,6 +11,9 @@ use CodeGenerator;
 use Yajra\DataTables\DataTables;
 use Crypt;
 use App\d_kematian;
+use App\d_penduduk;
+use App\d_pekerjaan;
+use App\kabupaten;
 
 class kematianController extends Controller
 {
@@ -33,24 +36,24 @@ class kematianController extends Controller
 
         ->addColumn('action', function($data) {
                 return  '<div class="text-center">'.
-                            '<button class="btn btn-info btn-edit btn-sm" 
+                           '<button class="btn btn-info btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
-                            </button>'.'
-                            <button class="btn btn-warning btn-edit btn-sm" 
+                           </button>'.'
+                           <button class="btn btn-warning btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
-                            </button>'.'
-                            <button class="btn btn-danger btn-edit btn-sm" 
+                           </button>'.'
+                           <button class="btn btn-danger btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
-                            </button>'.
+                           </button>'.
                         '</div>';
         })
         ->rawColumns(['tempat_tgl_lahir', 'action'])
@@ -64,5 +67,44 @@ class kematianController extends Controller
       return view('master.Kematian.add');
    }
 
+   public function autocomplete(Request $request)
+   {
+      $term = $request->term;
+      $items = d_penduduk::where('nik', 'like', '%'.$term.'%')
+      ->where('active',1)
+      ->get();
+   
+      if (sizeof($items) > 0) {
+        foreach ($items as $item) {
+          $results[] = [
+            $tempatLahir = kabupaten::where('id',$item->tempat_lahir)->first(),
+            $pekerjaan = d_pekerjaan::where('id',$item->pekerjaan)->first(),
+            'label' => $item->nik .', '. $item->nama,
+            'id' => $item->id,
+            'nik' => $item->nik,
+            'nama' => $item->nama,
+            'urut_kk' => $item->urut_kk,
+            'kelamin' => $item->kelamin,
+            'tempat_lahir' => $tempatLahir->name,
+            'tgl_lahir' => $item->tgl_lahir,
+            'gol_darah' => $item->gol_darah,
+            'agama' => $item->agama,
+            'status_nikah' => $item->status_nikah,
+            'status_keluarga' => $item->status_keluarga,
+            'pendidikan' => $item->pendidikan,
+            'pekerjaan' => $pekerjaan->nama,
+            'nama_ibu' => $item->nama_ibu,
+            'nama_ayah' => $item->nama_ayah,
+            'no_kk' => $item->no_kk,
+            'rt' => $item->rt,
+            'rw' => $item->rw,
+            'warga_negara' => $item->warga_negara,
+          ];
+        }
+      } else {
 
+        $results[] = ['id' => null, 'label' => 'Tidak ditemukan data terkait'];
+      }
+      return response()->json($results);
+   }
 }
