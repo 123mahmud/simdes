@@ -26,7 +26,8 @@ class kematianController extends Controller
 
    public function get()
    {
-      $data = d_kematian::all();
+      $data = d_kematian::join('d_penduduk','d_penduduk.id','=','d_kematian.id_penduduk')
+         ->get();
 
       return Datatables::of($data)
         ->addIndexColumn()
@@ -106,5 +107,32 @@ class kematianController extends Controller
         $results[] = ['id' => null, 'label' => 'Tidak ditemukan data terkait'];
       }
       return response()->json($results);
+   }
+
+   public function create(Request $request)
+   {
+      DB::beginTransaction();
+        try {
+            $kematian = new d_kematian;
+            $kematian->id_penduduk = $request->id_penduduk;
+            $kematian->tempat_meninggal = $request->tempat_meninggal;
+            $kematian->sebab_meninggal = $request->sebab_meninggal;
+            $kematian->tanggal_meninggal = date('Y-m-d',strtotime($request->tanggal_meninggal));
+            $kematian->save();
+
+            $penduduk = d_penduduk::findOrFail($request->id_penduduk);
+            $penduduk->active = $penduduk->active == 1 ? 0 : 1;
+            $penduduk->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
    }
 }

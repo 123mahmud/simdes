@@ -1,5 +1,10 @@
 @extends('main')
 @section('content')
+   <style type="text/css">
+        .ui-autocomplete {
+            z-index: 2147483647;
+        }
+   </style>
 <article class="content">
    <div class="title-block text-primary">
       <h1 class="title"> Tambah Data Penduduk Masuk </h1>
@@ -10,7 +15,7 @@
          / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk Masuk</span>
       </p>
    </div>
-   <form id="formsukses">
+   <form id="data">
       <section class="section">
          <div class="row">
             <div class="col-12">
@@ -66,7 +71,11 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_lahir">
+                                 <select class="form-control form-control-sm select2" name="tempat_lahir">
+                                    @foreach ($kabupaten as $data)
+                                       <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                    @endforeach
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -155,7 +164,9 @@
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
                                  <select class="form-control form-control-sm" name="pekerjaan">
-
+                                    @foreach ($pekerjaan as $data)
+                                       <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                    @endforeach
                                  </select>
                               </div>
                            </div>
@@ -231,12 +242,14 @@
                               <div class="form-group">
                                  <input type="text" class="form-control-sm form-control datepicker" name="rw_asal">
                               </div>
-                           </div><div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Kecamatan Asal<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="kecamatan_asal">
+                                 <input type="hidden" class="form-control-sm form-control ui-autocomplete" name="kecamatan_asal">
+                                 <input type="text" class="form-control-sm form-control ui-autocomplete" id="kecamatan" name="nama_kecamatan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -244,7 +257,8 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="kabupaten_asal">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="kabupaten_asal">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_kabupaten">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -252,9 +266,11 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="provinsi_asal">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="provinsi_asal">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_provinsi">
                               </div>
-                           </div><div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Tanggal Pindah<font color="red">*</font></label>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -275,7 +291,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Simpan</button>
                   </div>
                </div>
             </div>
@@ -287,6 +303,72 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+   $(document).ready(function() {
+      $('#kecamatan').on('click', function() {
+         clear();
+      });
 
+      $('#kecamatan').autocomplete({
+         source: "{{ route('autocomplete-kecamatan') }}",
+         minLength: 2,
+         select: function(event, data){
+            $("input[name=kecamatan_asal]").val(data.item.id);
+            $("input[name=kabupaten_asal]").val(data.item.id_kabupaten);
+            $("input[name=nama_kabupaten]").val(data.item.nama_kabupaten);
+            $("input[name=provinsi_asal]").val(data.item.id_provinsi);
+            $("input[name=nama_provinsi]").val(data.item.nama_provinsi);
+         }
+      });
+
+      function clear()
+      {
+         $("input[name=kecamatan_asal]").val('');
+         $("input[name=nama_kecamatan]").val('');
+         $("input[name=kabupaten_asal]").val('');
+         $("input[name=nama_kabupaten]").val('');
+         $("input[name=provinsi_asal]").val('');
+         $("input[name=nama_provinsi]").val('');
+      }
+
+
+   });
+
+   function simpan()
+   {
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $('.simpan').attr('disabled', 'disabled');
+      $.ajax({
+         url: "{{ route('create-pmasuk') }}",
+         type: 'POST',
+         data: $('#data').serialize(),
+         success: function (response) {
+             if (response.status == 'sukses') {
+                 $.toast({
+                     heading: response.code,
+                     text: 'Berhasil di Simpan',
+                     bgColor: '#00b894',
+                     textColor: 'white',
+                     loaderBg: '#55efc4',
+                     icon: 'success'
+                  });
+                 window.location.href = "{{ route('pmasuk') }}";
+             } else {
+                  $.toast({
+                      heading: 'Ada yang salah',
+                      text: 'Periksa data anda.',
+                      showHideTransition: 'plain',
+                      icon: 'warning'
+                  })
+                 $('.simpan').removeAttr('disabled', 'disabled');
+             }
+         }
+      })
+   }
+
+   
 </script>
 @endsection

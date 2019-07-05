@@ -67,11 +67,15 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');
 	Route::get('kematian/add', 'Master\kematianController@add')->name('add-kematian');
 	Route::get('kematian/autocomplete', 'Master\kematianController@autocomplete')->name('autocomplete-kematian');
+	Route::post('kematian/create', 'Master\kematianController@create')->name('create-kematian');
 
 	
 // Penduduk Masuk
 	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');
+	Route::get('pmasuk/get', 'Master\pendudukMasukController@get')->name('get-pmasuk');
+	Route::get('pmasuk/add', 'Master\pendudukMasukController@add')->name('add-pmasuk');
 	Route::get('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
+	Route::get('pmasuk/autocomplete', 'Master\pendudukMasukController@autocomplete')->name('autocomplete-kecamatan');
 
 // Penduduk Keluar
 	Route::get('/master/pkeluar/index', 'Master\pendudukKeluarController@index')->name('pkeluar');

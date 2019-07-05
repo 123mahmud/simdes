@@ -37,10 +37,10 @@
 	                            <table class="table table-striped table-hover" cellspacing="0" id="table-kematian">
 	                                <thead class="bg-primary">
 	                                    <tr>
-							                <th>Nik - Nama Penduduk</th>
+							                <th>Nik</th>
+                                            <th>Nama</th>
 							                <th>Tempat Meninggal</th>
 							                <th>Tanggal Meninggal</th>
-							                <th>RT / RW</th>
 							                <th>Aksi</th>
 							            </tr>
 	                                </thead>
@@ -81,13 +81,13 @@
             data: 'nik',
             "width": "20%"
         }, {
-            data: 'tampat_meninggal',
+            data: 'nama',
             "width": "25%"
         }, {
-            data: 'tanggal_meninggal',
+            data: 'tempat_meninggal',
             "width": "20%"
         }, {
-            data: 'rt/rw',
+            data: 'tanggal_meninggal',
             "width": "20%"
         }, {
             data: 'action',
@@ -101,53 +101,6 @@
     });
     
    });
-
-    function ubahStatus(id) {
-        $.confirm({
-            title: 'Ehem!',
-            content: 'Apakah anda yakin?',
-            type: 'red',
-            typeAnimated: true,
-            buttons: {
-                tryAgain: {
-                    text: 'Ya',
-                    btnClass: 'btn-red',
-                    action: function() {
-                        $.ajax({
-                            url: baseUrl + '/master/datacustomer/ubahstatus',
-                            type: "get",
-                            dataType: "JSON",
-                            data: {
-                                id: id
-                            },
-                            success: function(response) {
-                                if (response.status == "sukses") {
-                                    $('#table_customer').DataTable().ajax.reload();
-                                    $.toast({
-                                        heading: '',
-                                        text: 'Status berhasil di update',
-                                        bgColor: '#00b894',
-                                        textColor: 'white',
-                                        loaderBg: '#55efc4',
-                                        icon: 'success'
-                                    });
-                                } else {
-                                    $.toast({
-                                        heading: '',
-                                        text: 'Status gagal di update',
-                                        showHideTransition: 'plain',
-                                        icon: 'warning'
-                                    })
-                                }
-                            }
-
-                        })
-                    }
-                },
-                close: function() {}
-            }
-        });
-    }
 
     function edit(id) {
         $.ajax({

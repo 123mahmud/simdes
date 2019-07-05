@@ -15,7 +15,7 @@
          / <span class="text-primary" style="font-weight: bold;">Tambah Data Kematian</span>
       </p>
    </div>
-   <form id="formsukses">
+   <form id="data">
       <section class="section">
          <div class="row">
             <div class="col-12">
@@ -37,6 +37,7 @@
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
                                  <input type="text" class="form-control-sm form-control currency-x ui-autocomplete" id="nik" name="nik">
+                                 <input type="hidden" class="form-control-sm form-control" id="id_penduduk" name="id_penduduk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -180,7 +181,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_meinggal">
+                                 <input type="text" class="form-control-sm form-control" name="tempat_meninggal">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -204,7 +205,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Simpan</button>
                   </div>
                </div>
             </div>
@@ -224,17 +225,83 @@
          source: "{{ route('autocomplete-kematian') }}",
          minLength: 2,
          select: function(event, data){
+            $("input[name=id_penduduk]").val(data.item.id);
             $("input[name=nik]").val(data.item.nik);
             $("input[name=nama]").val(data.item.nama);
             $("input[name=urut_kk]").val(data.item.urut_kk);
-            $("input[name=kelamin]").val(data.item.kelamin);
+            if (data.item.kelamin == 'L'){
+               var kelamin = 'Laki-laki'
+            }else{
+               var kelamin = 'Perempuan'
+            }
+            $("input[name=kelamin]").val(kelamin);
             $("input[name=tempat_lahir]").val(data.item.tempat_lahir);
             $("input[name=tgl_lahir]").val(data.item.tgl_lahir);
             $("input[name=gol_darah]").val(data.item.gol_darah);
-            $("input[name=agama]").val(data.item.agama);
-            $("input[name=status_nikah]").val(data.item.status_nikah);
-            $("input[name=status_keluarga]").val(data.item.status_keluarga);
-            $("input[name=pendidikan]").val(data.item.pendidikan);
+            if (data.item.agama == 'IL'){
+               var agama = 'Islam'
+            }else if(data.item.agama == 'HD'){
+               var agama = 'Hindu'
+            }else if(data.item.agama == 'BD'){
+               var agama = 'Budha'
+            }else if(data.item.agama == 'KP'){
+               var agama = 'Kristen Prostetan'
+            }else if(data.item.agama == 'KL'){
+               var agama = 'Katolik'
+            }else if(data.item.agama == 'KC'){
+               var agama = 'Kong Hu Cu'
+            }
+            $("input[name=agama]").val(agama);
+            if (data.item.status_nikah == 'KW'){
+               var status_nikah = 'Kawin'
+            }else if(data.item.status_nikah == 'BK'){
+               var status_nikah = 'Belum Kawin'
+            }else if(data.item.status_nikah == 'CH'){
+               var status_nikah = 'Cerai Hidup'
+            }else if(data.item.status_nikah == 'CM'){
+               var status_nikah = 'Cerai Mati'
+            }
+            $("input[name=status_nikah]").val(status_nikah);
+            if (data.item.status_keluarga == 'SM'){
+               var status_keluarga = 'Suami'
+            }else if(data.item.status_keluarga == 'IS'){
+               var status_keluarga = 'Istri'
+            }else if(data.item.status_keluarga == 'AN'){
+               var status_keluarga = 'Anak'
+            }else if(data.item.status_keluarga == 'CU'){
+               var status_keluarga = 'Cucu'
+            }else if(data.item.status_keluarga == 'OT'){
+               var status_keluarga = 'Orang Tua'
+            }else if(data.item.status_keluarga == 'ME'){
+               var status_keluarga = 'Mertua'
+            }else if(data.item.status_keluarga == 'FL'){
+               var status_keluarga = 'Family Lain'
+            }else if(data.item.status_keluarga == 'LA'){
+               var status_keluarga = 'Lainnya'
+            }
+            $("input[name=status_keluarga]").val(status_keluarga);
+            if (data.item.pendidikan == 'TBS'){
+               var pendidikan = 'TIDAK / BELUM SEKOLAH'
+            }else if(data.item.pendidikan == 'BTS'){
+               var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
+            }else if(data.item.pendidikan == 'TSS'){
+               var pendidikan = 'TAMAT SD / SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMP'){
+               var pendidikan = 'SLTP/SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMA'){
+               var pendidikan = 'SLTA / SEDERAJAT'
+            }else if(data.item.pendidikan == 'D1'){
+               var pendidikan = 'DIPLOMA I / II'
+            }else if(data.item.pendidikan == 'D2'){
+               var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
+            }else if(data.item.pendidikan == 'S1'){
+               var pendidikan = 'DIPLOMA IV/ STRATA I'
+            }else if(data.item.pendidikan == 'S2'){
+               var pendidikan = 'STRATA II'
+            }else if(data.item.pendidikan == 'S3'){
+               var pendidikan = 'STRATA III'
+            }
+            $("input[name=pendidikan]").val(pendidikan);
             $("input[name=pekerjaan]").val(data.item.pekerjaan);
             $("input[name=nama_ibu]").val(data.item.nama_ibu);
             $("input[name=nama_ayah]").val(data.item.nama_ayah);
@@ -244,8 +311,8 @@
          }
       });
 
-      function clear()
-      {
+      function clear(){
+         $("input[name=id_penduduk]").val('');
          $("input[name=nik]").val('');
          $("input[name=nama]").val('');
          $("input[name=urut_kk]").val('');
@@ -265,6 +332,42 @@
          $("input[name=rw]").val('');
       }
    });
+
+   function simpan()
+   {
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $('.simpan').attr('disabled', 'disabled');
+      $.ajax({
+         url: "{{ route('create-kematian') }}",
+         type: 'POST',
+         data: $('#data').serialize(),
+         success: function (response) {
+             if (response.status == 'sukses') {
+                 $.toast({
+                     heading: response.code,
+                     text: 'Berhasil di Simpan',
+                     bgColor: '#00b894',
+                     textColor: 'white',
+                     loaderBg: '#55efc4',
+                     icon: 'success'
+                  });
+                 window.location.href = "{{ route('kematian') }}";
+             } else {
+                  $.toast({
+                      heading: 'Ada yang salah',
+                      text: 'Periksa data anda.',
+                      showHideTransition: 'plain',
+                      icon: 'warning'
+                  })
+                 $('.simpan').removeAttr('disabled', 'disabled');
+             }
+         }
+      })
+   }
    
 
 </script>
