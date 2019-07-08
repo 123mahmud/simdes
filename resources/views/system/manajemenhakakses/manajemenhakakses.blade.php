@@ -40,7 +40,6 @@
 	                                       <tr>
 												<th>Nama User</th>
 												<th>Nama Pegawai</th>
-												<th>Tanggal Lahir</th>
 												<th>Alamat</th>
 												<th>Aksi</th>
 	                                    </tr>
@@ -85,25 +84,21 @@
 	        columns: [{
 	            data: 'm_username',
 	            name: 'm_username',
-	            width: '20%'
+	            width: '25%'
 	        }, {
 	            data: 'c_nama',
 	            name: 'm_username',
 	            width: '25%'
 	        }, {
-	            data: 'm_birth_tgl',
-	            name: 'm_birth_tgl',
-	            width: '20%'
-	        }, {
 	            data: 'm_addr',
 	            name: 'm_addr',
-	            width: '25%'
+	            width: '30%'
 	        }, {
 	            data: 'action',
 	            name: 'action',
 	            orderable: false,
 	            searchable: false,
-	            width: '10%'
+	            width: '20%'
 	        }, ],
 	    });
 

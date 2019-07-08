@@ -37,86 +37,48 @@ class hakuserController extends Controller
    public function simpan(Request $request)
    {  
       DB::beginTransaction();
-        try 
-        {
-            // $tgl_raw = explode(',', $request->TanggalLahir);
-            // $arr_tgl = explode(' ', trim($tgl_raw[1]));
-            // $tgl = $arr_tgl[0];
-            // $bln = $this->convertMonthToBulan($arr_tgl[1]);
-            // $thn = $arr_tgl[2];
-            // $hasilTgl = $thn.'-'.$bln.'-'.$tgl;
-
-         $passwd= sha1(md5('passwordAllah').$request->password);
-            $m_id=(int)mMember::max('m_id')+1;
-         mMember::create([
-               'm_id'=>$m_id,
-               'm_pegawai_id' => $request->IdPegawai,
-               'm_username' => $request->username,
-               'm_passwd' => $passwd,
-               'm_name' => $request->NamaLengkap,
-                // 'm_birth_tgl' => $hasilTgl,
-               'm_addr' => $request->alamat,
+      try {
+      $id = DB::table('d_mem')->max('m_id')+1;
+      $password = sha1(md5('passwordAllah') . $request->password);
+      DB::table('d_mem')
+         ->insert([
+         'm_id' => $id,
+         'm_pegawai_id' => $request->IdPegawai,
+         'm_username' => $request->username,
+         'm_passwd' => $password,
+         'm_name' => $request->NamaLengkap,
+         'm_addr' => $request->alamat,
+         'm_insert' => Carbon::now('Asia/Jakarta')
          ]);
 
-         $hakAkses=d_group::join('d_group_access','ga_group','=','g_id')
-           ->join('d_access','a_id','=','ga_access')
-           ->where('g_id',$request->groupAkses)->get();
+         d_mem_comp::insert([
+            'mc_mem' => $id,
+            'mc_comp' => '1',
+            'mc_active' => 'Y',
+            'mc_insert' => Carbon::now('Asia/Jakarta')
+         ]);
+         
 
+       for ($i=0; $i < count($request->id_access) ; $i++) 
+       {
+          d_mem_access::create([
+                'ma_mem' =>$id,
+                'ma_access'=>$request->id_access[$i],
+                'ma_type' =>'M',
+                'ma_read'=> $request->ma_read[$i],
+          ]);
+       }
 
-         for ($i=0; $i < count($hakAkses) ; $i++) {
-            // $ma_id=d_mem_access::max('ma_id')+1;
-            d_mem_access::create([
-                  // 'ma_id' =>$ma_id,
-                  'ma_mem' =>$m_id,
-                  'ma_access'=>$hakAkses[$i]->a_id,
-                  'ma_group' =>$hakAkses[$i]->g_id ,
-                  'ma_type' =>'G',
-                  'ma_read'=> $hakAkses[$i]->ga_read,
-                  'ma_insert' =>$hakAkses[$i]->ga_insert,
-                  'ma_update' =>$hakAkses[$i]->ga_update,
-                  'ma_delete' =>$hakAkses[$i]->ga_delete
-            ]);
-         }
-
-
-            if($request->groupAkses==null){
-                $hakAkses=d_access::get();
-
-                // $ma_id=d_mem_access::max('ma_id')+1;
-                d_mem_access::create([
-                       // 'ma_id' =>$ma_id,
-                       'ma_mem' =>$m_id,
-                       'ma_access'=>$hakAkses[$i]->a_id,
-                       'ma_group' =>0 ,
-                       'ma_type' =>'G'
-                ]);
-
-            }
-
-            for ($i=0; $i < count($request->id_access) ; $i++) {
-                d_mem_access::create([
-                        'ma_mem' =>$m_id,
-                        'ma_access' => $request->id_access[$i],
-                        'ma_type'  =>'M',
-                        'ma_read'=>$request->view[$i],
-                        'ma_insert'=>$request->insert[$i],
-                        'ma_update'=>$request->update[$i],
-                        'ma_delete'=>$request->delete[$i],
-                ]);
-            }
-
-            DB::commit();
-            return response()->json([
-                'status' => 'sukses'
-            ]);
-        } 
-        catch (\Exception $e) {
-            DB::rollback();
-            return response()->json([
-                'status' => 'gagal',
-                'data' => $e
-            ]);
-        }
+		DB::commit();
+			return response()->json([
+		'status' => 'berhasil'
+		]);
+		} catch (\Exception $e) {
+		DB::commit();
+			return response()->json([
+				'status' => 'gagal'
+			]);
+		}
 
    }
 

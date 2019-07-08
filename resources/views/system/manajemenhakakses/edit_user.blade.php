@@ -190,9 +190,6 @@
                                         
                                     </section>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <button class="btn btn-primary" type="button">Simpan</button>
-                                </div>
                             </div>
                         </div>
                     </div>
