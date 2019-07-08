@@ -83,24 +83,6 @@
                                             <textarea name="alamat" class="form-control form-control-sm " readonly></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-4 col-xs-12">
-                                        <label class="tebal">Outlet:<font color="red">*</font></label>
-                                    </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
-                                        <select class="js-example-basic-multiple form-control form-control-sm  input-sm" id="perusahaan" name="perusahaan[]" multiple="multiple">
-                                            @foreach ($perusahaan as $key => $value)
-                                            <option value="{{$value->c_id}}">{{$value->c_name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div align="right" style="padding-top:10px;" class="col-md-12 col-sm-12 col-xs-12">
-                                        <div id="div_button_save" class="form-group">
-                                            <button style="float: right;" class="btn btn-primary" onclick="simpan()"
-                                            type="button"><i class="fa fa-floppy-o" aria-hidden="true"></i>  &nbsp; Simpan User
-                                            
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-12" id="detail">
                                     <label class="tebal">- Hak Akses User:<font color="red">*</font></label>
@@ -111,9 +93,6 @@
                                                     <tr>
                                                         <th>Nama Fitur</th>
                                                         <th class="text-center">Read</th>
-                                                        <th class="text-center">Insert</th>
-                                                        <th class="text-center">Update</th>
-                                                        <th class="text-center">Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -133,24 +112,6 @@
                                                                 <input type="checkbox" class="" onchange="simpanRead('{{$data->a_id}}')" id="cRead-{{$data->a_id}}">
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <input type="hidden" value="N" class="checkbox" name="ma_insert[]" id="iInsert-{{$data->a_id}}">
-                                                                <input type="checkbox" class="" onchange="simpanInsert('{{$data->a_id}}')" id="cInsert-{{$data->a_id}}">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <input type="hidden" value="N" class="checkbox" name="ma_update[]" id="iUpdate-{{$data->a_id}}">
-                                                                <input type="checkbox" class="" onchange="simpanUpdate('{{$data->a_id}}')" id="cUpdate-{{$data->a_id}}">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <input type="hidden" value="N" class="checkbox" name="ma_delete[]" id="iDelete-{{$data->a_id}}">
-                                                                <input type="checkbox" class="" onchange="simpanDelete('{{$data->a_id}}')" id="cDelete-{{$data->a_id}}">
-                                                            </div>
-                                                        </td>
                                                         @php
                                                         $nomor++;
                                                         @endphp
@@ -167,174 +128,119 @@
                                                             <input type="checkbox" class="" onchange="simpanRead('{{$data->a_id}}')" id="cRead-{{$data->a_id}}">
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <input type="hidden" value="N" class="checkbox" name="ma_insert[]" id="iInsert-{{$data->a_id}}">
-                                                            <input type="checkbox" class="" onchange="simpanInsert('{{$data->a_id}}')" id="cInsert-{{$data->a_id}}">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <input type="hidden" value="N" class="checkbox" name="ma_update[]" id="iUpdate-{{$data->a_id}}">
-                                                            <input type="checkbox" class="" onchange="simpanUpdate('{{$data->a_id}}')" id="cUpdate-{{$data->a_id}}">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <input type="hidden" value="N" class="checkbox" name="ma_delete[]" id="iDelete-{{$data->a_id}}">
-                                                            <input type="checkbox" class="" onchange="simpanDelete('{{$data->a_id}}')" id="cDelete-{{$data->a_id}}">
-                                                        </div>
-                                                    </td>
                                                 </tr>
                                                 @endif
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        
-                                        <a style="float: right; margin-right: 10px;" type="button" class="btn btn-white"
-                                        href="{{ url('system/hakuser/index') }}">Kembali</a>
                                     </form>
                                     
                                 </section>
                             </div>
                             <div class="card-footer text-right">
-                                <button class="btn btn-primary" type="button">Simpan</button>
-                                <a href="{{route('manajemenhakakses')}}" class="btn btn-secondary">Kembali</a>
+                                <button class="btn btn-primary" type="button" onclick="simpan()">Simpan</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
         </article>
-@endsection
-@section('extra_script')
+        @endsection
+        @section('extra_script')
 <script type="text/javascript">
-    var iddinamis = 0;
-    $(document).ready(function () {
-
-        $('.js-example-basic-multiple').select2();
-
-        $('input[name="NamaLengkap"]').focus(function() {
-            var key = 1;
-            $('input[name="NamaLengkap"]').autocomplete({
-               source: baseUrl+'/system/hakuser/autocomplete-pegawai',
-               minLength: 1,
-               select: function(event, ui) {
-                 $('input[name="NamaLengkap"]').val(ui.item.label);
-                 $('input[name="IdPegawai"]').val(ui.item.id);
-                 $('input[name="TanggalLahir"]').val(ui.item.lahir_txt);
-                 $('input[name="id_jabatan"]').val(ui.item.jabatan_id);
-                 $('input[name="pp_jabatan"]').val(ui.item.jabatan_txt);
-                 $('textarea[name="alamat"]').text(ui.item.alamat_txt);
-               }
-             });
-             $('input[name="NamaLengkap"]').val('');
-             $('input[name="IdPegawai"]').val('');
-             $('input[name="TanggalLahir"]').val('');
-             $('input[name="id_jabatan"]').val('');
-             $('input[name="pp_jabatan"]').val('');
-             $('textarea[name="alamat"]').text('');
-         });
-
-    });
-
-    $(".toggle-password").click(function () {
-
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-            input.attr("type", "text");
-        } else {
-            input.attr("type", "password");
-        }
-    });
-
-
-    function simpan() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+var iddinamis = 0;
+$(document).ready(function () {
+    $('.js-example-basic-multiple').select2();
+    $('input[name="NamaLengkap"]').focus(function() {
+        var key = 1;
+        $('input[name="NamaLengkap"]').autocomplete({
+            source: baseUrl + '/system/hakuser/autocomplete-pegawai',
+            minLength: 1,
+            select: function(event, ui) {
+                $('input[name="NamaLengkap"]').val(ui.item.label);
+                $('input[name="IdPegawai"]').val(ui.item.id);
+                $('input[name="TanggalLahir"]').val(ui.item.lahir_txt);
+                $('input[name="id_jabatan"]').val(ui.item.jabatan_id);
+                $('input[name="pp_jabatan"]').val(ui.item.jabatan_txt);
+                $('textarea[name="alamat"]').text(ui.item.alamat_txt);
             }
         });
-        $.confirm({
-            title: 'Ehem!',
-            content: 'Apakah anda yakin?',
-            type: 'red',
-            typeAnimated: true,
-            buttons: {
-                tryAgain: {
-                    text: 'Ya',
-                    btnClass: 'btn-red',
-                    action: function() {
-                        $.ajax({
-                            url: baseUrl + '/system/hakuser/simpan',
-                            type: "POST",
-                            dataType: "JSON",
-                            data: $('#data').serialize() + '&' + $('.form-akses').serialize(),
-                            success: function(response) {
-                                if (response.status == "berhasil") {
-                                    $.toast({
-                                        heading: '',
-                                        text: 'User berhasil tersimpan',
-                                        bgColor: '#00b894',
-                                        textColor: 'white',
-                                        loaderBg: '#55efc4',
-                                        icon: 'success'
-                                    });
-                                    window.location = baseUrl + '/system/manajemenhakakses/index';
-                                    $('input[type=text]').val('');
-                                    $('input[type=password]').val('');
-                                    $('#alamat').val('');
-                                    $('#perusahaan').val('').trigger('change');
-                                    $('#gudang').val('').trigger('change');
-                                } else {
-                                    $.toast({
-                                        heading: '',
-                                        text: 'Mohon melengkapi data',
-                                        showHideTransition: 'plain',
-                                        icon: 'warning'
-                                    })
-                                }
+        $('input[name="NamaLengkap"]').val('');
+        $('input[name="IdPegawai"]').val('');
+        $('input[name="TanggalLahir"]').val('');
+        $('input[name="id_jabatan"]').val('');
+        $('input[name="pp_jabatan"]').val('');
+        $('textarea[name="alamat"]').text('');
+    });
+});
+$(".toggle-password").click(function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+});
+function simpan() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.confirm({
+        title: 'Ehem!',
+        content: 'Apakah anda yakin?',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+            tryAgain: {
+                text: 'Ya',
+                btnClass: 'btn-red',
+                action: function() {
+                    $.ajax({
+                        url: baseUrl + '/system/hakuser/simpan',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: $('#data').serialize() + '&' + $('.form-akses').serialize(),
+                        success: function(response) {
+                            if (response.status == "berhasil") {
+                                $.toast({
+                                    heading: '',
+                                    text: 'User berhasil tersimpan',
+                                    bgColor: '#00b894',
+                                    textColor: 'white',
+                                    loaderBg: '#55efc4',
+                                    icon: 'success'
+                                });
+                                window.location = baseUrl + '/system/manajemenhakakses/index';
+                                $('input[type=text]').val('');
+                                $('input[type=password]').val('');
+                                $('#alamat').val('');
+                                $('#perusahaan').val('').trigger('change');
+                                $('#gudang').val('').trigger('change');
+                            } else {
+                                $.toast({
+                                    heading: '',
+                                    text: 'Mohon melengkapi data',
+                                    showHideTransition: 'plain',
+                                    icon: 'warning'
+                                })
                             }
-
-                        })
-                    }
-                },
-                close: function() {}
-            }
-        });
-    }
-
-    function simpanRead(id) {
-        if ($('#cRead-' + id).prop('checked')) {
-            $('#iRead-' + id).val('Y')
-        } else {
-            $('#iRead-' + id).val('N')
+                        }
+                    })
+                }
+            },
+            close: function() {}
         }
+    });
+}
+function simpanRead(id) {
+    if ($('#cRead-' + id).prop('checked')) {
+        $('#iRead-' + id).val('Y')
+    } else {
+        $('#iRead-' + id).val('N')
     }
-
-    function simpanInsert(id) {
-        if ($('#cInsert-' + id).prop('checked')) {
-            $('#iInsert-' + id).val('Y')
-        } else {
-            $('#iInsert-' + id).val('N')
-        }
-    }
-
-    function simpanUpdate(id) {
-        if ($('#cUpdate-' + id).prop('checked')) {
-            $('#iUpdate-' + id).val('Y')
-        } else {
-            $('#iUpdate-' + id).val('N')
-        }
-    }
-
-    function simpanDelete(id) {
-        if ($('#cDelete-' + id).prop('checked')) {
-            $('#iDelete-' + id).val('Y')
-        } else {
-            $('#iDelete-' + id).val('N')
-        }
-    }
+}
 </script>
 @endsection

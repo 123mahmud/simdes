@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Reff;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\surat;
+use DB;
 
 class KodeController extends Controller
 {
@@ -14,7 +16,9 @@ class KodeController extends Controller
      */
     public function index()
     {
-        //
+        $surat = surat::all();
+
+        return view('reff.reff_surat.index',compact('surat'));
     }
 
     /**
@@ -67,9 +71,25 @@ class KodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $surat = surat::where('id','1')->first();
+            $surat->kode_surat = $surat->kode_surat;
+            $surat->kode_desa = $surat->kode_desa;
+            $surat->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
     /**

@@ -105,12 +105,11 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('laporan/create', 'Pembuatan\LaporanController@create')->name('create-laporan');
 
 // reff kode
-	Route::get('/master/rkode/index', 'Reff\KodeController@index')->name('rkode');
-	Route::get('rkode/get', 'Reff\KodeController@get')->name('get-rkode');
-	Route::get('rkode/create', 'Reff\KodeController@create')->name('create-rkode');
+	Route::get('/reff/rkode/index', 'Reff\KodeController@index')->name('rkode');
+	Route::put('rkode/update', 'Reff\KodeController@update')->name('update-rkode');
 
 // reff pekerjaan
-	Route::get('/master/rpekerjaan/index', 'Reff\PekerjaanController@index')->name('rpekerjaan');
+	Route::get('/reff/rpekerjaan/index', 'Reff\PekerjaanController@index')->name('rpekerjaan');
 	Route::get('rpekerjaan/get', 'Reff\PekerjaanController@get')->name('get-rpekerjaan');
 	Route::get('rpekerjaan/create', 'Reff\PekerjaanController@create')->name('create-rpekerjaan');
 
