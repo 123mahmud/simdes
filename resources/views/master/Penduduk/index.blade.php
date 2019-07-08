@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('master.Penduduk.detail')
 
 <article class="content">
 
@@ -192,6 +192,105 @@
            }
          }
       });
+   }
+
+   function detail(id) {
+       $.ajax({
+           url: baseUrl + "/penduduk/detail/" + id,
+           type: "GET",
+           dataType: "JSON",
+           success: function(data) {
+               $('#nik').text(data.nik);
+               $("#nama").text(data.nama);
+               $('#urut_kk').text(data.urut_kk);
+               if (data.kelamin == 'L'){
+                  var kelamin = 'Laki-laki'
+               }else{
+                  var kelamin = 'Perempuan'
+               }
+               $('#kelamin').text(kelamin);
+               $('#tempat_lahir').text(data.tempat_lahir);
+               $('#tgl_lahir').text(data.tgl_lahir);
+               $("#gol_darah").text(data.gol_darah);
+               if (data.agama == 'IL'){
+                  var agama = 'Islam'
+               }else if(data.item.agama == 'HD'){
+                  var agama = 'Hindu'
+               }else if(data.item.agama == 'BD'){
+                  var agama = 'Budha'
+               }else if(data.item.agama == 'KP'){
+                  var agama = 'Kristen Prostetan'
+               }else if(data.item.agama == 'KL'){
+                  var agama = 'Katolik'
+               }else if(data.item.agama == 'KC'){
+                  var agama = 'Kong Hu Cu'
+               }
+               $('#agama').text(agama);
+               if (data.status_nikah == 'KW'){
+                  var status_nikah = 'Kawin'
+               }else if(data.item.status_nikah == 'BK'){
+                  var status_nikah = 'Belum Kawin'
+               }else if(data.item.status_nikah == 'CH'){
+                  var status_nikah = 'Cerai Hidup'
+               }else if(data.item.status_nikah == 'CM'){
+                  var status_nikah = 'Cerai Mati'
+               }
+               $('#status_nikah').text(status_nikah);
+               if (data.status_keluarga == 'SM'){
+                  var status_keluarga = 'Suami'
+               }else if(data.item.status_keluarga == 'IS'){
+                  var status_keluarga = 'Istri'
+               }else if(data.item.status_keluarga == 'AN'){
+                  var status_keluarga = 'Anak'
+               }else if(data.item.status_keluarga == 'CU'){
+                  var status_keluarga = 'Cucu'
+               }else if(data.item.status_keluarga == 'OT'){
+                  var status_keluarga = 'Orang Tua'
+               }else if(data.item.status_keluarga == 'ME'){
+                  var status_keluarga = 'Mertua'
+               }else if(data.item.status_keluarga == 'FL'){
+                  var status_keluarga = 'Family Lain'
+               }else if(data.item.status_keluarga == 'LA'){
+                  var status_keluarga = 'Lainnya'
+               }
+               $('#status_keluarga').text(status_keluarga);
+               if (data.pendidikan == 'TBS'){
+                  var pendidikan = 'TIDAK / BELUM SEKOLAH'
+               }else if(data.item.pendidikan == 'BTS'){
+                  var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
+               }else if(data.item.pendidikan == 'TSS'){
+                  var pendidikan = 'TAMAT SD / SEDERAJAT'
+               }else if(data.item.pendidikan == 'SMP'){
+                  var pendidikan = 'SLTP/SEDERAJAT'
+               }else if(data.item.pendidikan == 'SMA'){
+                  var pendidikan = 'SLTA / SEDERAJAT'
+               }else if(data.item.pendidikan == 'D1'){
+                  var pendidikan = 'DIPLOMA I / II'
+               }else if(data.item.pendidikan == 'D2'){
+                  var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
+               }else if(data.item.pendidikan == 'S1'){
+                  var pendidikan = 'DIPLOMA IV/ STRATA I'
+               }else if(data.item.pendidikan == 'S2'){
+                  var pendidikan = 'STRATA II'
+               }else if(data.item.pendidikan == 'S3'){
+                  var pendidikan = 'STRATA III'
+               }
+               $('#pendidikan').text(pendidikan);
+               $("#pekerjaan").text(data.pekerjaan);
+               $('#nama_ibu').text(data.nama_ibu);
+               $('#nama_ayah').text(data.nama_ayah);
+               $('#no_kk').text(data.no_kk);
+               $('#rt').text(data.rt);
+               $('#rw').text(data.rw);
+               $('#warga_negara').text(data.warga_negara);
+
+               $('#append-footer-detail').html('<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>');
+               $('#modal-detail').modal('show');
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+               alert('Error get data from ajax');
+           }
+       });
    }
 
 

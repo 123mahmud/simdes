@@ -98,13 +98,7 @@ class PekerjaanController extends Controller
             if ($data->active == '1') 
             {
                 return  '<div class="text-center">'.
-                            '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
-                                    type="button" 
-                                    title="Info">
-                                    <i class="fa fa-exclamation-circle"></i>
-                            </button>'.'
-                            <button class="btn btn-warning btn-edit btn-sm" 
+                            '<button class="btn btn-warning btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
                                     type="button" 
                                     title="Edit">

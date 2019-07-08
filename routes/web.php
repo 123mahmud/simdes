@@ -48,14 +48,12 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 
 // Penduduk
 	Route::get('master/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
-	Route::get('penduduk/list', 'Master\pendudukController@get')->name('get-penduduk');
+	Route::get('penduduk/get', 'Master\pendudukController@get')->name('get-penduduk');
 	Route::get('penduduk/create', 'Master\pendudukController@add')->name('add-penduduk');
-	Route::get('penduduk/edit/{id}', 'Master\pendudukController@edit_databarang');
-	Route::get('penduduk/tipe_barang', 'Master\pendudukController@tipe_barang');
 	Route::post('penduduk/save', 'Master\pendudukController@create')->name('create-penduduk');
-	Route::post('penduduk/update', 'Master\pendudukController@update');
 	Route::put('penduduk/change', 'Master\pendudukController@change')->name('change-penduduk');
 	Route::delete('penduduk/delete', 'Master\pendudukController@destroy')->name('delete-penduduk');
+	Route::get('penduduk/detail/{id}', 'Master\pendudukController@show')->name('show-penduduk');
 // Kelahiran
 	Route::get('master/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
 	Route::get('kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');

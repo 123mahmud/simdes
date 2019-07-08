@@ -37,7 +37,7 @@ class pendudukController extends Controller
             {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick=detail("'.$data->id.'")
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
@@ -49,10 +49,10 @@ class pendudukController extends Controller
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
                             <button id="status'.$data->id.'" 
-                                        onclick="status('.$data->id.')" 
-                                        class="btn btn-primary btn-sm" 
-                                        title="Aktif">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                                    onclick="status('.$data->id.')" 
+                                    class="btn btn-primary btn-sm" 
+                                    title="Aktif">
+                                    <i class="fa fa-check-square" aria-hidden="true"></i>
                                     </button>'.'
                             <button class="btn btn-danger btn-sm" 
                                     id="destroy'.$data->id.'"
@@ -164,5 +164,33 @@ class pendudukController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $penduduk = d_penduduk::where('id', $id)->first();
+        $pekerjaan = d_pekerjaan::where('id',$penduduk->pekerjaan)->first();
+        $kabupaten = kabupaten::where('id',$penduduk->tempat_lahir)->first();
+
+        return response()->json([
+            'nik' => $penduduk->nik,
+            'nama' => $penduduk->nama,
+            'urut_kk' => $penduduk->urut_kk,
+            'kelamin' => $penduduk->kelamin,
+            'tempat_lahir' => $kabupaten->name,
+            'tgl_lahir' => date('d M Y', strtotime($penduduk->tgl_lahir)),
+            'gol_darah' => $penduduk->gol_darah,
+            'agama' => $penduduk->agama,
+            'status_nikah' => $penduduk->status_nikah,
+            'status_keluarga' => $penduduk->status_keluarga,
+            'pendidikan' => $penduduk->pendidikan,
+            'pekerjaan' => $pekerjaan->nama,
+            'nama_ibu' => $penduduk->nama_ibu,
+            'nama_ayah' => $penduduk->nama_ayah,
+            'no_kk' => $penduduk->no_kk,
+            'rt' => $penduduk->rt,
+            'rw' => $penduduk->rw,
+            'warga_negara' => $penduduk->warga_negara,
+        ]);
+    }
 
 }
+
