@@ -14,6 +14,7 @@ use App\d_pekerjaan;
 use App\provinsi;
 use App\kecamatan;
 use Response;
+use App\d_penduduk;
 
 class pendudukMasukController extends Controller
 {
@@ -48,8 +49,6 @@ class pendudukMasukController extends Controller
         })        
 
         ->addColumn('action', function($data) {
-            if ($data->active == '1') 
-            {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-info btn-edit btn-sm" 
                                     onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
@@ -63,12 +62,6 @@ class pendudukMasukController extends Controller
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
-                            <button id="status'.$data->id.'" 
-                                        onclick="status('.$data->id.')" 
-                                        class="btn btn-primary btn-sm" 
-                                        title="Aktif">
-                                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>'.'
                             <button class="btn btn-danger btn-sm" 
                                     id="destroy'.$data->id.'"
                                     onclick="destroy('.$data->id.')" 
@@ -77,16 +70,6 @@ class pendudukMasukController extends Controller
                                     <i class="fa fa-times"></i>
                             </button>'.
                         '</div>';
-            }else{
-                return  '<div class="text-center">'.
-                                    '<button id="status'.$data->id.'" 
-                                        onclick="status('.$data->id.')" 
-                                        class="btn btn-danger btn-sm" 
-                                        title="Tidak Aktif">
-                                        <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                    </button>'.
-                                '</div>';
-            }
         })
         ->rawColumns(['tempat_tgl_lahir', 'action'])
         ->make(true);
@@ -122,9 +105,9 @@ class pendudukMasukController extends Controller
             $penduduk_masuk->id_penduduk = $penduduk->id;
             $penduduk_masuk->alamat_asal = $request->alamat_asal;
             $penduduk_masuk->rt_asal = $request->rt_asal;
-            $penduduk_masuk->kec_asal = $request->kec_asal;
-            $penduduk_masuk->kab_asal = $request->kab_asal;
-            $penduduk_masuk->prov_asal = $request->prov_asal;
+            $penduduk_masuk->kecamatan_asal = $request->kecamatan_asal;
+            $penduduk_masuk->kabupaten_asal = $request->kabupaten_asal;
+            $penduduk_masuk->provinsi_asal = $request->provinsi_asal;
             $penduduk_masuk->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
             $penduduk_masuk->keterangan = $request->keterangan;
             $penduduk_masuk->save();

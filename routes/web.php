@@ -74,13 +74,14 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');
 	Route::get('pmasuk/get', 'Master\pendudukMasukController@get')->name('get-pmasuk');
 	Route::get('pmasuk/add', 'Master\pendudukMasukController@add')->name('add-pmasuk');
-	Route::get('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
+	Route::post('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
 	Route::get('pmasuk/autocomplete', 'Master\pendudukMasukController@autocomplete')->name('autocomplete-kecamatan');
 
 // Penduduk Keluar
 	Route::get('/master/pkeluar/index', 'Master\pendudukKeluarController@index')->name('pkeluar');
 	Route::get('pkeluar/get', 'Master\pendudukKeluarController@get')->name('get-pkeluar');
-	Route::get('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
+	Route::get('pkeluar/add', 'Master\pendudukKeluarController@add')->name('add-pkeluar');
+	Route::post('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
 
 // Master Pegawai
 	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
@@ -89,8 +90,9 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	
 //pindah Rt
 	Route::get('/master/pindahrt/index', 'Master\pindahRtController@index')->name('pindahrt');
-	Route::get('pindahrt/create', 'Master\pindahRtController@create')->name('create-pindahrt');
+	Route::post('pindahrt/create', 'Master\pindahRtController@create')->name('create-pindahrt');
 	Route::get('pindahrt/get', 'Master\pindahRtController@get')->name('get-pindahrt');
+	Route::get('pindahrt/add', 'Master\pindahRtController@add')->name('add-pindahrt');
 
 // Pembuatan Surat
 	Route::get('/master/surat/index', 'Pembuatan\SuratController@index')->name('surat');

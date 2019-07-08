@@ -10,7 +10,7 @@
          / <span class="text-primary" style="font-weight: bold;">Tambah Data Pindah RT</span>
       </p>
    </div>
-   <form id="formsukses">
+   <form id="data">
       <section class="section">
          <div class="row">
             <div class="col-12">
@@ -31,7 +31,8 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="nik">
+                                 <input type="text" class="form-control-sm form-control currency-x ui-autocomplete" id="nik" name="nik">
+                                 <input type="hidden" class="form-control-sm form-control" id="id_penduduk" name="id_penduduk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -39,7 +40,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -47,7 +48,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="urut_kk">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="urut_kk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -55,10 +56,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="kelamin">
-                                    <option value="L" selected="">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="kelamin">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -66,7 +64,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tempat_lahir">
+                                 <input readonly type="text" class="form-control-sm form-control" name="tempat_lahir">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -74,7 +72,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
+                                 <input readonly type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -82,7 +80,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="gol_darah">
+                                 <input readonly type="text" class="form-control-sm form-control" name="gol_darah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -90,14 +88,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="agama">
-                                    <option value="IL" selected="">Islam</option>
-                                    <option value="HD">Hindu</option>
-                                    <option value="BD">Budha</option>
-                                    <option value="KP">Kristen Prostestan</option>
-                                    <option value="KL">Katolik</option>
-                                    <option value="KC">Kong Hu Cu</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="agama">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -105,12 +96,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="status_nikah">
-                                    <option value="KW" selected="">Kawin</option>
-                                    <option value="BK">Belum Kawin</option>
-                                    <option value="CH">Cerai Hidup</option>
-                                    <option value="CM">Cerai Mati</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_nikah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -118,16 +104,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="status_keluarga">
-                                    <option value="SM" selected="">Suami</option>
-                                    <option value="IS">Istri</option>
-                                    <option value="AN">Anak</option>
-                                    <option value="CU">Cucu</option>
-                                    <option value="OT">Orang Tua</option>
-                                    <option value="ME">Mertua</option>
-                                    <option value="FL">Famili Lain</option>
-                                    <option value="LA">Lainnya</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_keluarga">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -135,18 +112,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="pendidikan">
-                                    <option value="TBS" selected="">TIDAK / BELUM SEKOLAH</option>
-                                    <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
-                                    <option value="TSS">TAMAT SD / SEDERAJAT</option>
-                                    <option value="SMP">SLTP/SEDERAJAT</option>
-                                    <option value="SMA">SLTA / SEDERAJAT</option>
-                                    <option value="D1">DIPLOMA I / II</option>
-                                    <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
-                                    <option value="S1">DIPLOMA IV/ STRATA I</option>
-                                    <option value="S2">STRATA II</option>
-                                    <option value="S3">STRATA III</option>
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="pendidikan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -154,9 +120,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="pekerjaan">
-
-                                 </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="pekerjaan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -164,7 +128,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama_ibu">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ibu">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -172,7 +136,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama_ayah">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ayah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -180,7 +144,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="no_kk">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="no_kk">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -188,7 +152,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rt">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rt">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -196,7 +160,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rw">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rw">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -204,7 +168,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" value="INDONESIA" disabled="true" name="warga_negara">
+                                 <input readonly type="text" class="form-control-sm form-control" value="INDONESIA" name="warga_negara">
                               </div>
                            </div>
                            {{-- garis --}}
@@ -213,7 +177,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="rt_tujuan">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rt_tujuan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -221,7 +185,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="rw_tujuan">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rw_tujuan">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -229,7 +193,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="tgl_pindah">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_pindah">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -245,7 +209,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Simpan</button>
                   </div>
                </div>
             </div>
@@ -257,6 +221,159 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
+$(document).ready(function() {
 
+      $('#nik').on('click', function() {
+         clear2();
+      });
+      $('#nik').autocomplete({
+         source: "{{ route('autocomplete-kematian') }}",
+         minLength: 2,
+         select: function(event, data){
+            $("input[name=id_penduduk]").val(data.item.id);
+            $("input[name=nik]").val(data.item.nik);
+            $("input[name=nama]").val(data.item.nama);
+            $("input[name=urut_kk]").val(data.item.urut_kk);
+            if (data.item.kelamin == 'L'){
+               var kelamin = 'Laki-laki'
+            }else{
+               var kelamin = 'Perempuan'
+            }
+            $("input[name=kelamin]").val(kelamin);
+            $("input[name=tempat_lahir]").val(data.item.tempat_lahir);
+            $("input[name=tgl_lahir]").val(data.item.tgl_lahir);
+            $("input[name=gol_darah]").val(data.item.gol_darah);
+            if (data.item.agama == 'IL'){
+               var agama = 'Islam'
+            }else if(data.item.agama == 'HD'){
+               var agama = 'Hindu'
+            }else if(data.item.agama == 'BD'){
+               var agama = 'Budha'
+            }else if(data.item.agama == 'KP'){
+               var agama = 'Kristen Prostetan'
+            }else if(data.item.agama == 'KL'){
+               var agama = 'Katolik'
+            }else if(data.item.agama == 'KC'){
+               var agama = 'Kong Hu Cu'
+            }
+            $("input[name=agama]").val(agama);
+            if (data.item.status_nikah == 'KW'){
+               var status_nikah = 'Kawin'
+            }else if(data.item.status_nikah == 'BK'){
+               var status_nikah = 'Belum Kawin'
+            }else if(data.item.status_nikah == 'CH'){
+               var status_nikah = 'Cerai Hidup'
+            }else if(data.item.status_nikah == 'CM'){
+               var status_nikah = 'Cerai Mati'
+            }
+            $("input[name=status_nikah]").val(status_nikah);
+            if (data.item.status_keluarga == 'SM'){
+               var status_keluarga = 'Suami'
+            }else if(data.item.status_keluarga == 'IS'){
+               var status_keluarga = 'Istri'
+            }else if(data.item.status_keluarga == 'AN'){
+               var status_keluarga = 'Anak'
+            }else if(data.item.status_keluarga == 'CU'){
+               var status_keluarga = 'Cucu'
+            }else if(data.item.status_keluarga == 'OT'){
+               var status_keluarga = 'Orang Tua'
+            }else if(data.item.status_keluarga == 'ME'){
+               var status_keluarga = 'Mertua'
+            }else if(data.item.status_keluarga == 'FL'){
+               var status_keluarga = 'Family Lain'
+            }else if(data.item.status_keluarga == 'LA'){
+               var status_keluarga = 'Lainnya'
+            }
+            $("input[name=status_keluarga]").val(status_keluarga);
+            if (data.item.pendidikan == 'TBS'){
+               var pendidikan = 'TIDAK / BELUM SEKOLAH'
+            }else if(data.item.pendidikan == 'BTS'){
+               var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
+            }else if(data.item.pendidikan == 'TSS'){
+               var pendidikan = 'TAMAT SD / SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMP'){
+               var pendidikan = 'SLTP/SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMA'){
+               var pendidikan = 'SLTA / SEDERAJAT'
+            }else if(data.item.pendidikan == 'D1'){
+               var pendidikan = 'DIPLOMA I / II'
+            }else if(data.item.pendidikan == 'D2'){
+               var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
+            }else if(data.item.pendidikan == 'S1'){
+               var pendidikan = 'DIPLOMA IV/ STRATA I'
+            }else if(data.item.pendidikan == 'S2'){
+               var pendidikan = 'STRATA II'
+            }else if(data.item.pendidikan == 'S3'){
+               var pendidikan = 'STRATA III'
+            }
+            $("input[name=pendidikan]").val(pendidikan);
+            $("input[name=pekerjaan]").val(data.item.pekerjaan);
+            $("input[name=nama_ibu]").val(data.item.nama_ibu);
+            $("input[name=nama_ayah]").val(data.item.nama_ayah);
+            $("input[name=no_kk]").val(data.item.no_kk);
+            $("input[name=rt]").val(data.item.rt);
+            $("input[name=rw]").val(data.item.rw);
+         }
+      });
+
+      function clear2(){
+         $("input[name=id_penduduk]").val('');
+         $("input[name=nik]").val('');
+         $("input[name=nama]").val('');
+         $("input[name=urut_kk]").val('');
+         $("input[name=kelamin]").val('');
+         $("input[name=tempat_lahir]").val('');
+         $("input[name=tgl_lahir]").val('');
+         $("input[name=gol_darah]").val('');
+         $("input[name=agama]").val('');
+         $("input[name=status_nikah]").val('');
+         $("input[name=status_keluarga]").val('');
+         $("input[name=pendidikan]").val('');
+         $("input[name=pekerjaan]").val('');
+         $("input[name=nama_ibu]").val('');
+         $("input[name=nama_ayah]").val('');
+         $("input[name=no_kk]").val('');
+         $("input[name=rt]").val('');
+         $("input[name=rw]").val('');
+      }
+
+
+   });
+
+   function simpan()
+   {
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $('.simpan').attr('disabled', 'disabled');
+      $.ajax({
+         url: "{{ route('create-pindahrt') }}",
+         type: 'POST',
+         data: $('#data').serialize(),
+         success: function (response) {
+             if (response.status == 'sukses') {
+                 $.toast({
+                     heading: response.code,
+                     text: 'Berhasil di Simpan',
+                     bgColor: '#00b894',
+                     textColor: 'white',
+                     loaderBg: '#55efc4',
+                     icon: 'success'
+                  });
+                 window.location.href = "{{ route('pindahrt') }}";
+             } else {
+                  $.toast({
+                      heading: 'Ada yang salah',
+                      text: 'Periksa data anda.',
+                      showHideTransition: 'plain',
+                      icon: 'warning'
+                  })
+                 $('.simpan').removeAttr('disabled', 'disabled');
+             }
+         }
+      })
+   }
 </script>
 @endsection

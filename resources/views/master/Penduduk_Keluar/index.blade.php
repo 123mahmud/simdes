@@ -28,7 +28,7 @@
                         </div>
                         <div class="header-block pull-right">
 
-                			<a class="btn btn-primary" href="{{route('create-pkeluar')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
+                			<a class="btn btn-primary" href="{{route('add-pkeluar')}}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
                         </div>
                     </div>
                     <div class="card-block">
@@ -73,7 +73,7 @@
 			responsive: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('get-penduduk') }}",
+				url: "{{ route('get-pkeluar') }}",
 				type: "get",
 				data: {
 					"_token": "{{ csrf_token() }}"
@@ -83,7 +83,7 @@
 				{data: 'nik', "width": "20%"},
 				{data: 'nama', "width": "25%"},
 				{data: 'tempat_tgl_lahir', "width": "20%"},
-				{data: 'p_pekerjaan', "width": "20%"},
+				{data: 'pekerjaan_nama', "width": "20%"},
 				{data: 'action', "width": "15%"}
 			],
 			pageLength: 10,

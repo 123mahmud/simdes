@@ -23,7 +23,7 @@
 						</div>
 						<div class="header-block pull-right">
 							
-							<button class="btn btn-primary" onclick="window.location.href='{{ route('create-pindahrt') }}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
+							<button class="btn btn-primary" onclick="window.location.href='{{ route('add-pindahrt') }}'"><i class="fa fa-plus"></i>&nbsp;Tambah Data</button>
 						</div>
 					</div>
 					<div class="card-block">
@@ -74,7 +74,7 @@
 				{data: 'nik', "width": "20%"},
 				{data: 'nama', "width": "25%"},
 				{data: 'tempat_tgl_lahir', "width": "20%"},
-				{data: 'p_pekerjaan', "width": "20%"},
+				{data: 'pekerjaan_nama', "width": "20%"},
 				{data: 'action', "width": "15%"}
 			],
 			pageLength: 10,
@@ -83,76 +83,6 @@
 
 	});
 
-	function edit(a) 
-   	{
-		var parent = $(a).parents('tr');
-		var id = $(parent).find('.d_id').text();
-		$.ajax({
-			type: "PUT",
-			url: '{{ url("master/datamesin/edit") }}' + '/' + a,
-			data: { id },
-			success: function (data) {
-			},
-			complete: function (argument) {
-			window.location = (this.url)
-			},
-			error: function () {
-
-			},
-			async: false
-      });
-   	}
-
-   	function ubahStatus(id)
-   	{
-      $.confirm({
-         title: 'Ehem!',
-         content: 'Apakah anda yakin?',
-         type: 'red',
-         typeAnimated: true,
-         buttons: {
-           tryAgain: {
-               text: 'Ya',
-               btnClass: 'btn-red',
-               action: function(){
-                  $.ajax({
-                     url: baseUrl +'/master/datamesin/status',
-                     type: "get",
-                     dataType: "JSON",
-                     data: {id:id},
-                     success: function(response)
-                     {
-                        if(response.status == "sukses")
-                        {
-                           $('#table_mesin').DataTable().ajax.reload();
-                           $.toast({
-                              heading: '',
-                              text: 'Status berhasil di update',
-                              bgColor: '#00b894',
-                              textColor: 'white',
-                              loaderBg: '#55efc4',
-                              icon: 'success'
-                           });
-                        }
-                        else
-                        {
-                           $.toast({
-                               heading: '',
-                               text: 'Status gagal di update',
-                               showHideTransition: 'plain',
-                               icon: 'warning'
-                           })
-                        }
-                     }
-                     
-                  })
-               }
-           },
-           close: function () {
-           }
-         }
-      });
-   	}
 
 </script>
 @endsection
