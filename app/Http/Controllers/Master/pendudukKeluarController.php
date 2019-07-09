@@ -92,7 +92,8 @@ class pendudukKeluarController extends Controller
     public function get()
     {
         $data = d_penduduk_keluar::select('d_penduduk.*',
-                                'd_pekerjaan.nama as pekerjaan_nama')
+                                        'd_pekerjaan.nama as pekerjaan_nama',
+                                        'd_penduduk_keluar.id as id_penduduk_keluar')
         ->join('d_penduduk','d_penduduk.id','=','d_penduduk_keluar.id_penduduk')
         ->join('d_pekerjaan','d_pekerjaan.id','=','d_penduduk.pekerjaan')
         ->get();
@@ -105,21 +106,21 @@ class pendudukKeluarController extends Controller
 
         ->addColumn('action', function($data) {
                 return  '<div class="text-center">'.
-                            '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                            '<button class="btn btn-info btn-sm" 
+                                    onclick=detail("'.$data->id_penduduk_keluar.'")
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_penduduk_keluar) .'\'" 
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
                             <button class="btn btn-danger btn-sm" 
-                                    id="destroy'.$data->id.'"
-                                    onclick="destroy('.$data->id.')" 
+                                    id="destroy'.$data->id_penduduk_keluar.'"
+                                    onclick="destroy('.$data->id_penduduk_keluar.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
@@ -161,5 +162,49 @@ class pendudukKeluarController extends Controller
          ]);
         }
    }
+
+   public function show($id)
+   {
+        $penduduk_keluar = d_penduduk_keluar::select('d_penduduk_keluar.*',
+                             'd_penduduk.*')
+            ->join('d_penduduk','d_penduduk.id','=','d_penduduk_keluar.id_penduduk')
+            ->where('d_penduduk_keluar.id',$id)->first();
+
+        $pekerjaan = d_pekerjaan::where('id',$penduduk_keluar->pekerjaan)->first();
+        $kabupaten = kabupaten::where('id',$penduduk_keluar->tempat_lahir)->first();
+        $kecamatan_tujuan = kecamatan::where('id',$penduduk_keluar->kecamatan_tujuan)->first();
+        $kabupaten_tujuan = kabupaten::where('id',$penduduk_keluar->kabupaten_tujuan)->first();
+        $provinsi_tujuan = provinsi::where('id',$penduduk_keluar->provinsi_tujuan)->first();
+
+        return response()->json([
+            'nik' => $penduduk_keluar->nik,
+            'nama' => $penduduk_keluar->nama,
+            'urut_kk' => $penduduk_keluar->urut_kk,
+            'kelamin' => $penduduk_keluar->kelamin,
+            'tempat_lahir' => $kabupaten->name,
+            'tgl_lahir' => date('d M Y', strtotime($penduduk_keluar->tgl_lahir)),
+            'gol_darah' => $penduduk_keluar->gol_darah,
+            'agama' => $penduduk_keluar->agama,
+            'status_nikah' => $penduduk_keluar->status_nikah,
+            'status_keluarga' => $penduduk_keluar->status_keluarga,
+            'pendidikan' => $penduduk_keluar->pendidikan,
+            'pekerjaan' => $pekerjaan->nama,
+            'nama_ibu' => $penduduk_keluar->nama_ibu,
+            'nama_ayah' => $penduduk_keluar->nama_ayah,
+            'no_kk' => $penduduk_keluar->no_kk,
+            'rt' => $penduduk_keluar->rt,
+            'rw' => $penduduk_keluar->rw,
+            'warga_negara' => $penduduk_keluar->warga_negara,
+            'alamat_tujuan' => $penduduk_keluar->alamat_tujuan,
+            'rt_tujuan' => $penduduk_keluar->rt_tujuan,
+            'rw_tujuan' => $penduduk_keluar->rw_tujuan,
+            'kecamatan_tujuan' => $kecamatan_tujuan->name,
+            'kabupaten_tujuan' => $kabupaten_tujuan->name,
+            'provinsi_tujuan' => $provinsi_tujuan->name,
+            'tgl_pindah' => date('d M Y', strtotime($penduduk_keluar->tgl_pindah)),
+            'keterangan' => $penduduk_keluar->keterangan,
+        ]);
+   }
+
     
 }

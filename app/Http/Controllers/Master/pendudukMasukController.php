@@ -37,7 +37,9 @@ class pendudukMasukController extends Controller
     public function get()
     {
     	$data = d_penduduk_masuk::select('d_penduduk.*',
-                                'd_pekerjaan.nama as pekerjaan_nama')
+                                        'd_pekerjaan.nama as pekerjaan_nama',
+                                        'd_penduduk_masuk.id as id_penduduk_masuk',
+                                        'd_penduduk_masuk.*')
     	->join('d_penduduk','d_penduduk.id','=','d_penduduk_masuk.id_penduduk')
         ->join('d_pekerjaan','d_pekerjaan.id','=','d_penduduk.pekerjaan')
         ->get();
@@ -51,20 +53,20 @@ class pendudukMasukController extends Controller
         ->addColumn('action', function($data) {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick=detail("'.$data->id_penduduk_masuk.'")
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_penduduk_masuk) .'\'" 
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
                             <button class="btn btn-danger btn-sm" 
-                                    id="destroy'.$data->id.'"
-                                    onclick="destroy('.$data->id.')" 
+                                    id="destroy'.$data->id_penduduk_masuk.'"
+                                    onclick="destroy('.$data->id_penduduk_masuk.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
@@ -150,6 +152,49 @@ class pendudukMasukController extends Controller
 		
 		return response()->json($results);
 	}
+
+   public function show($id)
+   {
+        $penduduk_masuk = d_penduduk_masuk::select('d_penduduk_masuk.*',
+                             'd_penduduk.*')
+            ->join('d_penduduk','d_penduduk.id','=','d_penduduk_masuk.id_penduduk')
+            ->where('d_penduduk_masuk.id',$id)->first();
+
+        $pekerjaan = d_pekerjaan::where('id',$penduduk_masuk->pekerjaan)->first();
+        $kabupaten = kabupaten::where('id',$penduduk_masuk->tempat_lahir)->first();
+        $kecamatan_asal = kecamatan::where('id',$penduduk_masuk->kecamatan_asal)->first();
+        $kabupaten_asal = kabupaten::where('id',$penduduk_masuk->kabupaten_asal)->first();
+        $provinsi_asal = provinsi::where('id',$penduduk_masuk->provinsi_asal)->first();
+
+        return response()->json([
+            'nik' => $penduduk_masuk->nik,
+            'nama' => $penduduk_masuk->nama,
+            'urut_kk' => $penduduk_masuk->urut_kk,
+            'kelamin' => $penduduk_masuk->kelamin,
+            'tempat_lahir' => $kabupaten->name,
+            'tgl_lahir' => date('d M Y', strtotime($penduduk_masuk->tgl_lahir)),
+            'gol_darah' => $penduduk_masuk->gol_darah,
+            'agama' => $penduduk_masuk->agama,
+            'status_nikah' => $penduduk_masuk->status_nikah,
+            'status_keluarga' => $penduduk_masuk->status_keluarga,
+            'pendidikan' => $penduduk_masuk->pendidikan,
+            'pekerjaan' => $pekerjaan->nama,
+            'nama_ibu' => $penduduk_masuk->nama_ibu,
+            'nama_ayah' => $penduduk_masuk->nama_ayah,
+            'no_kk' => $penduduk_masuk->no_kk,
+            'rt' => $penduduk_masuk->rt,
+            'rw' => $penduduk_masuk->rw,
+            'warga_negara' => $penduduk_masuk->warga_negara,
+            'alamat_asal' => $penduduk_masuk->alamat_asal,
+            'rt_asal' => $penduduk_masuk->rt_asal,
+            'rw_asal' => $penduduk_masuk->rw_asal,
+            'kecamatan_asal' => $kecamatan_asal->name,
+            'kabupaten_asal' => $kabupaten_asal->name,
+            'provinsi_asal' => $provinsi_asal->name,
+            'tgl_pindah' => date('d M Y', strtotime($penduduk_masuk->tgl_pindah)),
+            'keterangan' => $penduduk_masuk->keterangan,
+        ]);
+   }
 
 }
 

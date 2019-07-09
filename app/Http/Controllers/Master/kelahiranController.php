@@ -24,7 +24,8 @@ class kelahiranController extends Controller
 
     public function get()
     {
-      $data = d_kelahiran::join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
+      $data = d_kelahiran::select('d_kelahiran.id as id_kelahiran','d_penduduk.*')
+         ->join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
          ->where('active',1)
          ->get();
 
@@ -36,21 +37,21 @@ class kelahiranController extends Controller
 
         ->addColumn('action', function($data) {
                 return  '<div class="text-center">'.
-                            '<button class="btn btn-info btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                            '<button class="btn btn-info btn-sm" 
+                                    onclick=detail("'.$data->id_kelahiran.'") 
                                     type="button" 
                                     title="Info">
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_kelahiran) .'\'" 
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                             </button>'.'
                             <button class="btn btn-danger btn-sm" 
-                                    id="destroy'.$data->id_penduduk.'"
-                                    onclick="destroy('.$data->id_penduduk.')" 
+                                    id="destroy'.$data->id_kelahiran.'"
+                                    onclick="destroy('.$data->id_kelahiran.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
@@ -131,6 +132,36 @@ class kelahiranController extends Controller
                'data' => $e
             ]);
          }
+   }
+
+   public function show($id)
+   {
+      $kelahiran = d_kelahiran::select('d_kelahiran.id as id_kelahiran','d_penduduk.*')
+         ->join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
+         ->where('d_kelahiran.id',$id)->first();
+      $pekerjaan = d_pekerjaan::where('id',$kelahiran->pekerjaan)->first();
+      $kabupaten = kabupaten::where('id',$kelahiran->tempat_lahir)->first();
+
+      return response()->json([
+         'nik' => $kelahiran->nik,
+         'nama' => $kelahiran->nama,
+         'urut_kk' => $kelahiran->urut_kk,
+         'kelamin' => $kelahiran->kelamin,
+         'tempat_lahir' => $kabupaten->name,
+         'tgl_lahir' => date('d M Y', strtotime($kelahiran->tgl_lahir)),
+         'gol_darah' => $kelahiran->gol_darah,
+         'agama' => $kelahiran->agama,
+         'status_nikah' => $kelahiran->status_nikah,
+         'status_keluarga' => $kelahiran->status_keluarga,
+         'pendidikan' => $kelahiran->pendidikan,
+         'pekerjaan' => $pekerjaan->nama,
+         'nama_ibu' => $kelahiran->nama_ibu,
+         'nama_ayah' => $kelahiran->nama_ayah,
+         'no_kk' => $kelahiran->no_kk,
+         'rt' => $kelahiran->rt,
+         'rw' => $kelahiran->rw,
+         'warga_negara' => $kelahiran->warga_negara,
+      ]);
    }
  
 }

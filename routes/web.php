@@ -60,13 +60,14 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('kelahiran/add', 'Master\kelahiranController@add')->name('add-kelahiran');
 	Route::post('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
 	Route::delete('kelahiran/delete', 'Master\kelahiranController@destroy')->name('delete-kelahiran');
+	Route::get('kelahiran/detail/{id}', 'Master\kelahiranController@show')->name('detail-kelahiran');
 // Kematian
 	Route::get('master/kematian/index', 'Master\kematianController@index')->name('kematian');
 	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');
 	Route::get('kematian/add', 'Master\kematianController@add')->name('add-kematian');
 	Route::get('kematian/autocomplete', 'Master\kematianController@autocomplete')->name('autocomplete-kematian');
 	Route::post('kematian/create', 'Master\kematianController@create')->name('create-kematian');
-
+	Route::get('kematian/detail/{id}', 'Master\kematianController@show')->name('detail-kematian');
 	
 // Penduduk Masuk
 	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');
@@ -74,13 +75,14 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pmasuk/add', 'Master\pendudukMasukController@add')->name('add-pmasuk');
 	Route::post('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
 	Route::get('pmasuk/autocomplete', 'Master\pendudukMasukController@autocomplete')->name('autocomplete-kecamatan');
+	Route::get('pmasuk/detail/{id}', 'Master\pendudukMasukController@show')->name('detail-kecamatan');
 
 // Penduduk Keluar
 	Route::get('/master/pkeluar/index', 'Master\pendudukKeluarController@index')->name('pkeluar');
 	Route::get('pkeluar/get', 'Master\pendudukKeluarController@get')->name('get-pkeluar');
 	Route::get('pkeluar/add', 'Master\pendudukKeluarController@add')->name('add-pkeluar');
 	Route::post('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
-
+	Route::post('pkeluar/detail', 'Master\pendudukKeluarController@show')->name('detail-pkeluar');
 // Master Pegawai
 	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah_datapegawai', 'MasterController@tambah_datapegawai')->name('tambah_datapegawai');

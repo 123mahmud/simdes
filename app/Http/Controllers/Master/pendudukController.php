@@ -36,7 +36,7 @@ class pendudukController extends Controller
             if ($data->active == '1') 
             {
                 return  '<div class="text-center">'.
-                            '<button class="btn btn-info btn-edit btn-sm" 
+                            '<button class="btn btn-info btn-sm" 
                                     onclick=detail("'.$data->id.'")
                                     type="button" 
                                     title="Info">
