@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pkeluar/get', 'Master\pendudukKeluarController@get')->name('get-pkeluar');
 	Route::get('pkeluar/add', 'Master\pendudukKeluarController@add')->name('add-pkeluar');
 	Route::post('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
-	Route::post('pkeluar/detail', 'Master\pendudukKeluarController@show')->name('detail-pkeluar');
+	Route::get('pkeluar/detail/{id}', 'Master\pendudukKeluarController@show')->name('detail-pkeluar');
 // Master Pegawai
 	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
 	Route::get('/master/datapegawai/tambah_datapegawai', 'MasterController@tambah_datapegawai')->name('tambah_datapegawai');
@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('pindahrt/create', 'Master\pindahRtController@create')->name('create-pindahrt');
 	Route::get('pindahrt/get', 'Master\pindahRtController@get')->name('get-pindahrt');
 	Route::get('pindahrt/add', 'Master\pindahRtController@add')->name('add-pindahrt');
+	Route::get('pindahrt/detail/{id}', 'Master\pindahRtController@show')->name('detail-pindahrt');
 
 // Pembuatan Surat
 	Route::get('/master/surat/index', 'Pembuatan\SuratController@index')->name('surat');

@@ -8,6 +8,10 @@ use App\d_penduduk_keluar;
 use Yajra\DataTables\DataTables;
 use DB;
 use App\d_penduduk;
+use App\d_pekerjaan;
+use App\provinsi;
+use App\kabupaten;
+use App\kecamatan;
 
 class pendudukKeluarController extends Controller
 {
@@ -52,7 +56,45 @@ class pendudukKeluarController extends Controller
      */
     public function show($id)
     {
-        //
+        $penduduk_keluar = d_penduduk_keluar::select('d_penduduk_keluar.*',
+                             'd_penduduk.*')
+            ->join('d_penduduk','d_penduduk.id','=','d_penduduk_keluar.id_penduduk')
+            ->where('d_penduduk_keluar.id',$id)->first();
+
+        $pekerjaan = d_pekerjaan::where('id',$penduduk_keluar->pekerjaan)->first();
+        $kabupaten = kabupaten::where('id',$penduduk_keluar->tempat_lahir)->first();
+        $kecamatan_tujuan = kecamatan::where('id',$penduduk_keluar->kecamatan_tujuan)->first();
+        $kabupaten_tujuan = kabupaten::where('id',$penduduk_keluar->kabupaten_tujuan)->first();
+        $provinsi_tujuan = provinsi::where('id',$penduduk_keluar->provinsi_tujuan)->first();
+
+        return response()->json([
+            'nik' => $penduduk_keluar->nik,
+            'nama' => $penduduk_keluar->nama,
+            'urut_kk' => $penduduk_keluar->urut_kk,
+            'kelamin' => $penduduk_keluar->kelamin,
+            'tempat_lahir' => $kabupaten->name,
+            'tgl_lahir' => date('d M Y', strtotime($penduduk_keluar->tgl_lahir)),
+            'gol_darah' => $penduduk_keluar->gol_darah,
+            'agama' => $penduduk_keluar->agama,
+            'status_nikah' => $penduduk_keluar->status_nikah,
+            'status_keluarga' => $penduduk_keluar->status_keluarga,
+            'pendidikan' => $penduduk_keluar->pendidikan,
+            'pekerjaan' => $pekerjaan->nama,
+            'nama_ibu' => $penduduk_keluar->nama_ibu,
+            'nama_ayah' => $penduduk_keluar->nama_ayah,
+            'no_kk' => $penduduk_keluar->no_kk,
+            'rt' => $penduduk_keluar->rt,
+            'rw' => $penduduk_keluar->rw,
+            'warga_negara' => $penduduk_keluar->warga_negara,
+            'alamat_tujuan' => $penduduk_keluar->alamat_tujuan,
+            'rt_tujuan' => $penduduk_keluar->rt_tujuan,
+            'rw_tujuan' => $penduduk_keluar->rw_tujuan,
+            'kecamatan_tujuan' => $kecamatan_tujuan->name,
+            'kabupaten_tujuan' => $kabupaten_tujuan->name,
+            'provinsi_tujuan' => $provinsi_tujuan->name,
+            'tgl_pindah' => date('d M Y', strtotime($penduduk_keluar->tgl_pindah)),
+            'keterangan' => $penduduk_keluar->keterangan,
+        ]);
     }
 
     /**
@@ -162,49 +204,5 @@ class pendudukKeluarController extends Controller
          ]);
         }
    }
-
-   public function show($id)
-   {
-        $penduduk_keluar = d_penduduk_keluar::select('d_penduduk_keluar.*',
-                             'd_penduduk.*')
-            ->join('d_penduduk','d_penduduk.id','=','d_penduduk_keluar.id_penduduk')
-            ->where('d_penduduk_keluar.id',$id)->first();
-
-        $pekerjaan = d_pekerjaan::where('id',$penduduk_keluar->pekerjaan)->first();
-        $kabupaten = kabupaten::where('id',$penduduk_keluar->tempat_lahir)->first();
-        $kecamatan_tujuan = kecamatan::where('id',$penduduk_keluar->kecamatan_tujuan)->first();
-        $kabupaten_tujuan = kabupaten::where('id',$penduduk_keluar->kabupaten_tujuan)->first();
-        $provinsi_tujuan = provinsi::where('id',$penduduk_keluar->provinsi_tujuan)->first();
-
-        return response()->json([
-            'nik' => $penduduk_keluar->nik,
-            'nama' => $penduduk_keluar->nama,
-            'urut_kk' => $penduduk_keluar->urut_kk,
-            'kelamin' => $penduduk_keluar->kelamin,
-            'tempat_lahir' => $kabupaten->name,
-            'tgl_lahir' => date('d M Y', strtotime($penduduk_keluar->tgl_lahir)),
-            'gol_darah' => $penduduk_keluar->gol_darah,
-            'agama' => $penduduk_keluar->agama,
-            'status_nikah' => $penduduk_keluar->status_nikah,
-            'status_keluarga' => $penduduk_keluar->status_keluarga,
-            'pendidikan' => $penduduk_keluar->pendidikan,
-            'pekerjaan' => $pekerjaan->nama,
-            'nama_ibu' => $penduduk_keluar->nama_ibu,
-            'nama_ayah' => $penduduk_keluar->nama_ayah,
-            'no_kk' => $penduduk_keluar->no_kk,
-            'rt' => $penduduk_keluar->rt,
-            'rw' => $penduduk_keluar->rw,
-            'warga_negara' => $penduduk_keluar->warga_negara,
-            'alamat_tujuan' => $penduduk_keluar->alamat_tujuan,
-            'rt_tujuan' => $penduduk_keluar->rt_tujuan,
-            'rw_tujuan' => $penduduk_keluar->rw_tujuan,
-            'kecamatan_tujuan' => $kecamatan_tujuan->name,
-            'kabupaten_tujuan' => $kabupaten_tujuan->name,
-            'provinsi_tujuan' => $provinsi_tujuan->name,
-            'tgl_pindah' => date('d M Y', strtotime($penduduk_keluar->tgl_pindah)),
-            'keterangan' => $penduduk_keluar->keterangan,
-        ]);
-   }
-
     
 }

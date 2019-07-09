@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('master.Penduduk_Keluar.detail')
 
 <article class="content">
 
@@ -146,7 +146,7 @@
 
 	function detail(id) {
        $.ajax({
-           url: baseUrl + "/pmasuk/detail/" + id,
+           url: baseUrl + "/pkeluar/detail/" + id,
            type: "GET",
            dataType: "JSON",
            success: function(data) {
