@@ -72,16 +72,21 @@ class pindahRtController extends Controller
    {
       DB::beginTransaction();
         try {
-            $penduduk_keluar = new d_pindah_rt;
-            $penduduk_keluar->id_penduduk = $request->id_penduduk;
-            $penduduk_keluar->rt_tujuan = $request->rt_tujuan;
-            $penduduk_keluar->rw_tujuan = $request->rw_tujuan;
-            $penduduk_keluar->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
-            $penduduk_keluar->keterangan = $request->keterangan;
-            $penduduk_keluar->save();
+            $penduduk = d_penduduk::findOrFail($request->id_penduduk);
+
+            $pindah_rt = new d_pindah_rt;
+            $pindah_rt->id_penduduk = $request->id_penduduk;
+            $pindah_rt->rt_lama = $penduduk->rt;
+            $pindah_rt->rw_lama = $penduduk->rw;
+            $pindah_rt->rt_tujuan = $request->rt_tujuan;
+            $pindah_rt->rw_tujuan = $request->rw_tujuan;
+            $pindah_rt->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
+            $pindah_rt->keterangan = $request->keterangan;
+            $pindah_rt->save();
 
             $penduduk = d_penduduk::findOrFail($request->id_penduduk);
-            $penduduk->active = $penduduk->active == 1 ? 0 : 1;
+            $penduduk->rt = $request->rt_tujuan;
+            $penduduk->rw = $request->rw_tujuan;
             $penduduk->save();
         DB::commit();
         return response()->json([
@@ -125,11 +130,16 @@ class pindahRtController extends Controller
             'rw' => $pindah_rt->rw,
             'warga_negara' => $pindah_rt->warga_negara,
             'alamat_tujuan' => $pindah_rt->alamat_tujuan,
-            'rt_tujuan' => $pindah_rt->rt_tujuan,
-            'rw_tujuan' => $pindah_rt->rw_tujuan,
+            'rt_lama' => $pindah_rt->rt_lama,
+            'rw_lama' => $pindah_rt->rw_lama,
             'tgl_pindah' => date('d M Y', strtotime($pindah_rt->tgl_pindah)),
             'keterangan' => $pindah_rt->keterangan,
         ]);
+   }
+
+   public function distroy($id)
+   {
+    
    }
 
 }

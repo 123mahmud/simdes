@@ -23,14 +23,14 @@
           </div>
           <div class="header-block pull-right">
             
-            <a class="btn btn-primary" href="{{ route('tambah_datajabatan') }}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
+            <a class="btn btn-primary" href="{{ route('create-rpekerjaan') }}"><i class="fa fa-plus"></i>&nbsp;Tambah Data</a>
           </div>
         </div>
         <div class="card-block">
           <section>
             
             <div class="table-responsive">
-              <table class="table table-striped table-hover table-bordered" cellspacing="0" id="tbl_jabatan">
+              <table class="table table-striped table-hover table-bordered" cellspacing="0" id="table-pekerjaan">
                 <thead class="bg-primary">
                   <tr>
                     <th>Nama</th>
@@ -55,8 +55,8 @@
 
 	$(document).ready(function(){
 
-		$('#tbl_jabatan').dataTable().fnDestroy();
-    tb_barang = $('#tbl_jabatan').DataTable({
+		$('#table-pekerjaan').dataTable().fnDestroy();
+    tb_barang = $('#table-pekerjaan').DataTable({
       responsive: true,
       serverSide: true,
       ajax: {
@@ -79,12 +79,9 @@
 	function edit(a) 
 	{
       var parent = $(a).parents('tr');
-      var id = $(parent).find('.d_id').text();
-      console.log(id);
       $.ajax({
-        type: "PUT",
-        url: '{{ url("master/datajabatan/edit-jabatan") }}' + '/' + a,
-        data: { id },
+        type: "GET",
+        url: '{{ url("rpekerjaan/edit") }}' + '/' + a,
         success: function (data) {
         },
         complete: function (argument) {
@@ -97,7 +94,7 @@
       });
    }
 
-   function ubahStatusMan(id)
+   function status(id)
    {
    	$.confirm({
          title: 'Ehem!',
@@ -110,15 +107,15 @@
                btnClass: 'btn-red',
                action: function(){
                   $.ajax({
-                     url: baseUrl +'/master/datajabatanman/ubahstatus',
-                     type: "get",
+                     url: "{{ route('change-rpekerjaan') }}",
+                     type: "PUT",
                      dataType: "JSON",
                      data: {id:id},
                      success: function(response)
                      {
                         if(response.status == "sukses")
                         {
-                           $('#tbl_jabatan').DataTable().ajax.reload();
+                           $('#table-pekerjaan').DataTable().ajax.reload();
                            $.toast({
                               heading: '',
                               text: 'Status berhasil di update',

@@ -113,6 +113,10 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('/reff/rpekerjaan/index', 'Reff\PekerjaanController@index')->name('rpekerjaan');
 	Route::get('rpekerjaan/get', 'Reff\PekerjaanController@get')->name('get-rpekerjaan');
 	Route::get('rpekerjaan/create', 'Reff\PekerjaanController@create')->name('create-rpekerjaan');
+	Route::post('rpekerjaan/store', 'Reff\PekerjaanController@store')->name('store-rpekerjaan');
+	Route::put('rpekerjaan/change', 'Reff\PekerjaanController@change')->name('change-rpekerjaan');
+	Route::get('rpekerjaan/edit/{id}', 'Reff\PekerjaanController@edit')->name('edit-rpekerjaan');
+	Route::post('rpekerjaan/update/{id}', 'Reff\PekerjaanController@update')->name('update-rpekerjaan');
 
 // Admin System
 	Route::get('/system/manajemenhakakses/index', 'SystemController@manajemenhakakses')->name('manajemenhakakses');

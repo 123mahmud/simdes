@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 use App\kabupaten;
 use App\d_pekerjaan;
 use App\d_kelahiran;
+use App\d_kematian;
+use App\d_penduduk_masuk;
+use App\d_penduduk_keluar;
+use App\d_pindah_rt;
 
 class pendudukController extends Controller
 {
@@ -53,14 +57,7 @@ class pendudukController extends Controller
                                     class="btn btn-primary btn-sm" 
                                     title="Aktif">
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>'.'
-                            <button class="btn btn-danger btn-sm" 
-                                    id="destroy'.$data->id.'"
-                                    onclick="destroy('.$data->id.')" 
-                                    type="button" 
-                                    title="Hapus">
-                                    <i class="fa fa-times"></i>
-                            </button>'.
+                                    </button>'.
                         '</div>';
             }else{
                 return  '<div class="text-center">'.
@@ -127,9 +124,25 @@ class pendudukController extends Controller
     {
         DB::beginTransaction();
         try {
-            $penduduk = d_penduduk::findOrFail($request->id);
-            $penduduk->active = $penduduk->active == 1 ? 0 : 1;
-            $penduduk->save();
+            $kematian = d_kematian::where('id_penduduk',$request->id)->first();
+            if ($kematian == null) {
+               $penduduk_keluar = d_penduduk_keluar::where('id_penduduk',$request->id)->first();
+               if ($penduduk_keluar == null) {
+                    $penduduk = d_penduduk::findOrFail($request->id);
+                    $penduduk->active = $penduduk->active == 1 ? 0 : 1;
+                    $penduduk->save();
+               }else{
+                    DB::commit();
+                    return response()->json([
+                     'status' => 'cek'
+                    ]);
+               }
+            }else{
+                DB::commit();
+                return response()->json([
+                 'status' => 'cek'
+                ]);
+            }
         DB::commit();
         return response()->json([
          'status' => 'sukses'
@@ -147,10 +160,18 @@ class pendudukController extends Controller
     {
         $penduduk = d_penduduk::findOrFail($request->id);
         $kelahiran = d_kelahiran::where('id_penduduk',$request->id)->first();
+        $kematian = d_kematian::where('id_penduduk',$request->id)->first();
+        $penduduk_masuk = d_penduduk_masuk::where('id_penduduk',$request->id)->first();
+        $penduduk_keluar = d_penduduk_keluar::where('id_penduduk',$request->id)->first();
+        $pindah_rt = d_pindah_rt::where('id_penduduk',$request->id)->first();
         DB::beginTransaction();
         try {
             $penduduk->delete();
             $kelahiran->delete();
+            $kematian->delete();
+            $penduduk_masuk->delete();
+            $penduduk_keluar->delete();
+            $pindah_rt->delete();
         DB::commit();
         return response()->json([
          'status' => 'sukses'

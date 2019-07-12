@@ -160,19 +160,19 @@
                   </div>
                   <div id="append-modal-detail"></div>
                   <div class="col-md-3 col-sm-12 col-xs-12">
-                     <label class="tebal">RT Tujuan</label>
+                     <label class="tebal">RT Lama</label>
                   </div>
                   <div class="col-md-3 col-sm-12 col-xs-12">
                      <div class="form-group">
-                        <label id="rt_tujuan"></label>
+                        <label id="rt_lama"></label>
                      </div>
                   </div>
                   <div class="col-md-3 col-sm-12 col-xs-12">
-                     <label class="tebal">RW Tujuan</label>
+                     <label class="tebal">RW Lama</label>
                   </div>
                   <div class="col-md-3 col-sm-12 col-xs-12">
                      <div class="form-group">
-                        <label id="rw_tujuan"></label>
+                        <label id="rw_lama"></label>
                      </div>
                   </div>
                   <div class="col-md-3 col-sm-12 col-xs-12">

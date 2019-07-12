@@ -123,11 +123,20 @@
                               icon: 'success'
                            });
                         }
-                        else
+                        else if(response.status == "gagal")
                         {
                            $.toast({
                                heading: '',
                                text: 'Status gagal di update',
+                               showHideTransition: 'plain',
+                               icon: 'warning'
+                           })
+                        }
+                        else if(response.status == "cek")
+                        {
+                           $.toast({
+                               heading: '',
+                               text: 'Status gagal di update, mohon cek di data penduduk keluar dan kematian',
                                showHideTransition: 'plain',
                                icon: 'warning'
                            })

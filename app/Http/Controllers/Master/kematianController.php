@@ -31,7 +31,6 @@ class kematianController extends Controller
                                  'd_kematian.tanggal_meninggal',
                                  'd_penduduk.*')
          ->join('d_penduduk','d_penduduk.id','=','d_kematian.id_penduduk')
-         ->where('active',1)
          ->get();
 
       return Datatables::of($data)

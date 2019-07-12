@@ -174,8 +174,8 @@
                $('#rt').text(data.rt);
                $('#rw').text(data.rw);
                $('#warga_negara').text(data.warga_negara);
-               $('#rt_tujuan').text(data.rt_tujuan);
-               $('#rw_tujuan').text(data.rw_tujuan);
+               $('#rt_lama').text(data.rt_lama);
+               $('#rw_lama').text(data.rw_lama);
                $('#tgl_pindah').text(data.tgl_pindah);
                $('#keterangan').text(data.keterangan);
 

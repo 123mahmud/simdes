@@ -28,7 +28,8 @@ class PekerjaanController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('reff.reff_pekerjaan.add');
     }
 
     /**
@@ -39,7 +40,23 @@ class PekerjaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $pekerjaan = new d_pekerjaan;
+            $pekerjaan->nama = $request->nama;
+            $pekerjaan->active = 1;
+            $pekerjaan->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
     /**
@@ -61,7 +78,9 @@ class PekerjaanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pekerjaan = d_pekerjaan::where('id',$id)->firstOrFail();
+
+        return view('reff.reff_pekerjaan.edit', compact('pekerjaan'));
     }
 
     /**
@@ -73,7 +92,22 @@ class PekerjaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $pekerjaan = d_pekerjaan::findOrFail($id);
+            $pekerjaan->nama = $request->nama;
+            $pekerjaan->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
     /**
@@ -99,7 +133,7 @@ class PekerjaanController extends Controller
             {
                 return  '<div class="text-center">'.
                             '<button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    onclick="edit('.$data->id.')"
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
@@ -109,14 +143,7 @@ class PekerjaanController extends Controller
                                         class="btn btn-primary btn-sm" 
                                         title="Aktif">
                                         <i class="fa fa-check-square" aria-hidden="true"></i>
-                                    </button>'.'
-                            <button class="btn btn-danger btn-sm" 
-                                    id="destroy'.$data->id.'"
-                                    onclick="destroy('.$data->id.')" 
-                                    type="button" 
-                                    title="Hapus">
-                                    <i class="fa fa-times"></i>
-                            </button>'.
+                                    </button>'.
                         '</div>';
             }else{
                 return  '<div class="text-center">'.
@@ -132,4 +159,25 @@ class PekerjaanController extends Controller
         ->rawColumns(['tempat_tgl_lahir', 'action'])
         ->make(true);
     }
+
+    public function change(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $pekerjaan = d_pekerjaan::findOrFail($request->id);
+            $pekerjaan->active = $pekerjaan->active == 1 ? 0 : 1;
+            $pekerjaan->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
+    }
+
 }
