@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pembuatan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\m_pegawai_man;
 
 class SuratController extends Controller
 {
@@ -14,7 +15,11 @@ class SuratController extends Controller
      */
     public function index()
     {
-        //
+        
+        $pegawai = m_pegawai_man::join('m_jabatan','m_jabatan.c_id','m_pegawai_man.c_jabatan_id')
+            ->where('m_pegawai_man.c_isactive','TRUE')
+            ->get();
+        return view('pembuatan.surat.index',compact('pegawai'));
     }
 
     /**

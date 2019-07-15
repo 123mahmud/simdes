@@ -96,12 +96,12 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pindahrt/detail/{id}', 'Master\pindahRtController@show')->name('detail-pindahrt');
 
 // Pembuatan Surat
-	Route::get('/master/surat/index', 'Pembuatan\SuratController@index')->name('surat');
+	Route::get('pembuatan/surat/index', 'Pembuatan\SuratController@index')->name('surat');
 	Route::get('surat/get', 'Pembuatan\SuratController@get')->name('get-surat');
 	Route::get('surat/create', 'Pembuatan\SuratController@create')->name('create-surat');
 
 // Pembuatan Laporan
-	Route::get('/master/laporan/index', 'Pembuatan\LaporanController@index')->name('laporan');
+	Route::get('pembuatan/laporan/index', 'Pembuatan\LaporanController@index')->name('laporan');
 	Route::get('laporan/get', 'Pembuatan\LaporanController@get')->name('get-laporan');
 	Route::get('laporan/create', 'Pembuatan\LaporanController@create')->name('create-laporan');
 
