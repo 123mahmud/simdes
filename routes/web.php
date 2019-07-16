@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 
 // Pembuatan Surat
 	Route::get('pembuatan/surat/index', 'Pembuatan\SuratController@index')->name('surat');
-	Route::get('surat/get', 'Pembuatan\SuratController@get')->name('get-surat');
+	Route::post('surat/store', 'Pembuatan\SuratController@store')->name('store-surat');
 	Route::get('surat/create', 'Pembuatan\SuratController@create')->name('create-surat');
 
 // Pembuatan Laporan

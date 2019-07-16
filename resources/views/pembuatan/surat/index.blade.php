@@ -27,24 +27,11 @@
                      <section>
                         <div class="row" id="myRow">
                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Jenis Surat<font color="red">*</font></label>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
-                              <div class="form-group">
-                              <select class="form-control form-control-sm" name="jenis_surat">
-                                 <option value="SKCK" selected="">Pengantar SKCK</option>
-                                 <option value="UMUM">Pengantar UMUM</option>
-                                 <option value="Dmoisili">Pengantar Dmoisili</option>
-                                 <option value="Bank">Pengantar Bank</option>
-                              </select>
-                           </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <label>Tanggal Surat<font color="red">*</font></label>
                            </div>
-                           <div class="col-md-3 col-sm-6 col-xs-12">
+                           <div class="col-md-9 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_surat">
+                                 <input type="text" class="form-control-sm form-control" name="tgl_surat" value="{{ date('d-m-Y') }}" readonly>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -197,7 +184,7 @@
                            </div>
                            <div class="col-md-9 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="masa_berlaku">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_berlaku" value="{{ date('d-m-Y') }}">
                               </div>
                            </div>
                            {{-- garis --}}
@@ -214,27 +201,26 @@
                            </div>
                            <div class="col-md-9 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <textarea class="form-control-sm form-control" name="tujuan"></textarea>
+                                 <textarea class="form-control-sm form-control" name="keterangan" value="">Orang tersebut di atas benar-benar warga Desa kami dan beradat istiadat baik</textarea>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-4 col-xs-12">
-                           <label>Pendanda Tangan</label>
+                              <label>Pendanda Tangan</label>
                            </div>
                            <div class="col-md-9 col-sm-8 col-xs-12">
                               <div class="form-group">
-                                 <select class="form-control form-control-sm" name="pegawai">
+                                 <select class="form-control form-control-sm" name="id_pegawai">
                                     @foreach ($pegawai as $data)
-                                       <option value="{{ $data->c_nama }}">{{ $data->c_posisi }} - {{ $data->c_nama }}</option>
+                                    <option value="{{ $data->id_pegawai }}">{{ $data->posisi }} - {{ $data->nama }}</option>
                                     @endforeach
                                  </select>
                               </div>
                            </div>
-
                         </div>
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Cetak Surat</button>
+                     <button class="btn btn-primary btn-submit" id="print" type="button">Cetak Surat</button>
                   </div>
                </div>
             </div>
@@ -247,6 +233,7 @@
 @section('extra_script')
 <script type="text/javascript">
 $(document).ready(function() {
+
       $('#kecamatan').on('click', function() {
          clear();
       });
@@ -387,44 +374,34 @@ $(document).ready(function() {
          $("input[name=rw]").val('');
       }
 
+      $('#print').on('click', function() {
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         $('.simpan').attr('disabled', 'disabled');
+         $.ajax({
+            url: "{{ route('store-surat') }}",
+            type: 'POST',
+            data: $('#data').serialize(),
+            success: function (response) {
+                if (response.status == 'sukses') {
+                    window.open("{{ route('create-surat') }}");
+                } else {
+                     $.toast({
+                         heading: 'Ada yang salah',
+                         text: 'Periksa data anda.',
+                         showHideTransition: 'plain',
+                         icon: 'warning'
+                     })
+                    $('.simpan').removeAttr('disabled', 'disabled');
+                }
+            }
+         })
+      });
 
    });
-
-   function simpan()
-   {
-      $.ajaxSetup({
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         }
-      });
-      $('.simpan').attr('disabled', 'disabled');
-      $.ajax({
-         url: "{{ route('create-surat') }}",
-         type: 'POST',
-         data: $('#data').serialize(),
-         success: function (response) {
-             if (response.status == 'sukses') {
-                 $.toast({
-                     heading: response.code,
-                     text: 'Berhasil di Simpan',
-                     bgColor: '#00b894',
-                     textColor: 'white',
-                     loaderBg: '#55efc4',
-                     icon: 'success'
-                  });
-                 window.location.href = "{{ route('surat') }}";
-             } else {
-                  $.toast({
-                      heading: 'Ada yang salah',
-                      text: 'Periksa data anda.',
-                      showHideTransition: 'plain',
-                      icon: 'warning'
-                  })
-                 $('.simpan').removeAttr('disabled', 'disabled');
-             }
-         }
-      })
-   }
 
 </script>
 @endsection
