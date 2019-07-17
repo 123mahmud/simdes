@@ -137,9 +137,27 @@ class pindahRtController extends Controller
         ]);
    }
 
-   public function distroy($id)
+   public function destroy(Request $request)
    {
-    
+         $pindah_rt = d_pindah_rt::where('id',$request->id)->first();
+         $penduduk = d_penduduk::findOrFail($pindah_rt->id_penduduk);
+         DB::beginTransaction();
+         try {
+            $penduduk->rt = $pindah_rt->rt_lama;
+            $penduduk->rw = $pindah_rt->rw_lama;
+            $penduduk->save();
+            $pindah_rt->delete();
+         DB::commit();
+         return response()->json([
+            'status' => 'sukses'
+         ]);
+         } catch (\Exception $e) {
+            DB::rollback();
+               return response()->json([
+               'status' => 'gagal',
+               'data' => $e
+            ]);
+         }
    }
 
 }

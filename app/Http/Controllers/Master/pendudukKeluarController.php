@@ -126,10 +126,6 @@ class pendudukKeluarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function get()
     {
@@ -203,6 +199,28 @@ class pendudukKeluarController extends Controller
             'data' => $e
          ]);
         }
+   }
+
+   public function destroy(Request $request)
+   {
+         $penduduk_keluar = d_penduduk_keluar::where('id',$request->id)->first();
+         $penduduk = d_penduduk::findOrFail($penduduk_keluar->id_penduduk);
+         DB::beginTransaction();
+         try {
+            $penduduk->active = 1;
+            $penduduk->save();
+            $penduduk_keluar->delete();
+         DB::commit();
+         return response()->json([
+            'status' => 'sukses'
+         ]);
+         } catch (\Exception $e) {
+            DB::rollback();
+               return response()->json([
+               'status' => 'gagal',
+               'data' => $e
+            ]);
+         }
    }
     
 }

@@ -53,12 +53,13 @@ class kematianController extends Controller
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
                            </button>'.'
-                           <button class="btn btn-danger btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_kematian) .'\'" 
+                           <button class="btn btn-danger btn-sm" 
+                                    id="destroy'.$data->id_kematian.'"
+                                    onclick="destroy('.$data->id_kematian.')" 
                                     type="button" 
                                     title="Hapus">
                                     <i class="fa fa-times"></i>
-                           </button>'.
+                            </button>'.
                         '</div>';
          })
          ->rawColumns(['tempat_tgl_lahir', 'action'])
@@ -175,5 +176,27 @@ class kematianController extends Controller
          'sebab_meninggal' => $kematian->sebab_meninggal,
          'tanggal_meninggal' => date('d M Y', strtotime($kematian->tanggal_meninggal)),
       ]);
+   }
+
+   public function destroy(Request $request)
+   {
+         $kematian = d_kematian::where('id',$request->id)->first();
+         $penduduk = d_penduduk::findOrFail($kematian->id_penduduk);
+         DB::beginTransaction();
+         try {
+            $penduduk->active = 1;
+            $penduduk->save();
+            $kematian->delete();
+         DB::commit();
+         return response()->json([
+            'status' => 'sukses'
+         ]);
+         } catch (\Exception $e) {
+            DB::rollback();
+               return response()->json([
+               'status' => 'gagal',
+               'data' => $e
+            ]);
+         }
    }
 }

@@ -115,8 +115,8 @@ class kelahiranController extends Controller
 
    public function destroy(Request $request)
    {
-         $penduduk = d_penduduk::findOrFail($request->id);
-         $kelahiran = d_kelahiran::where('id_penduduk',$request->id)->first();
+         $kelahiran = d_kelahiran::where('id',$request->id)->first();
+         $penduduk = d_penduduk::findOrFail($kelahiran->id_penduduk);
          DB::beginTransaction();
          try {
             $penduduk->delete();

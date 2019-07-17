@@ -254,6 +254,57 @@
        });
    }
 
+   function destroy(id)
+   {
+      $.confirm({
+         title: 'Ehem!',
+         content: 'Apakah anda yakin?',
+         type: 'red',
+         typeAnimated: true,
+         buttons: {
+           tryAgain: {
+               text: 'Ya',
+               btnClass: 'btn-red',
+               action: function(){
+                  $.ajax({
+                     url: "{{ route('delete-pkeluar') }}",
+                     type: "DELETE",
+                     dataType: "JSON",
+                     data: {id:id},
+                     success: function(response)
+                     {
+                        if(response.status == "sukses")
+                        {
+                           $('#table-penduduk').DataTable().ajax.reload();
+                           $.toast({
+                              heading: '',
+                              text: 'Berhasil Hapus Data',
+                              bgColor: '#00b894',
+                              textColor: 'white',
+                              loaderBg: '#55efc4',
+                              icon: 'success'
+                           });
+                        }
+                        else
+                        {
+                           $.toast({
+                               heading: '',
+                               text: 'Gagal Hapus Data',
+                               showHideTransition: 'plain',
+                               icon: 'warning'
+                           })
+                        }
+                     }
+                     
+                  })
+               }
+           },
+           close: function () {
+           }
+         }
+      });
+   }
+
 
 </script>
 @endsection

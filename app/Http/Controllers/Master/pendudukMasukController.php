@@ -196,5 +196,26 @@ class pendudukMasukController extends Controller
         ]);
    }
 
+   public function destroy(Request $request)
+   {
+         $penduduk_masuk = d_penduduk_masuk::where('id',$request->id)->first();
+         $penduduk = d_penduduk::findOrFail($penduduk_masuk->id_penduduk);
+         DB::beginTransaction();
+         try {
+            $penduduk->delete();
+            $penduduk_masuk->delete();
+         DB::commit();
+         return response()->json([
+            'status' => 'sukses'
+         ]);
+         } catch (\Exception $e) {
+            DB::rollback();
+               return response()->json([
+               'status' => 'gagal',
+               'data' => $e
+            ]);
+         }
+   }
+
 }
 
