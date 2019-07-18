@@ -217,8 +217,11 @@ class pendudukController extends Controller
 
     public function edit(Request $request)
     {   
+        $penduduk = d_penduduk::where('id', Crypt::decrypt($request->id))->first();
+        $kabupaten = kabupaten::all();
+        $pekerjaan = d_pekerjaan::all();
 
-        return view('master.Penduduk.edit');
+        return view('master.Penduduk.edit',compact('penduduk','kabupaten','pekerjaan'));
     }
 
 }

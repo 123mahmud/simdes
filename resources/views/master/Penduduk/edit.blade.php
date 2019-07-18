@@ -31,7 +31,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="nik">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="nik" value="{{ $penduduk->nik }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -39,7 +39,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="nama">
+                                 <input type="text" class="form-control-sm form-control" name="nama" value="{{ $penduduk->nama }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -47,7 +47,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="urut_kk">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="urut_kk" value="{{ $penduduk->urut_kk }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -56,6 +56,13 @@
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
                                  <select class="form-control form-control-sm" name="kelamin">
+                                    @if ($penduduk->kelamin == 'L')
+                                       <option value="L" selected="">Laki-laki</option>
+                                       <option value="P">Perempuan</option>
+                                    @else
+                                       <option value="L">Laki-laki</option>
+                                       <option value="P" selected="">Perempuan</option>
+                                    @endif
                                     <option value="L" selected="">Laki-laki</option>
                                     <option value="P">Perempuan</option>
                                  </select>
@@ -68,7 +75,12 @@
                               <div class="form-group">
                                  <select class="form-control form-control-sm select2" name="tempat_lahir">
                                     @foreach ($kabupaten as $data)
-                                       <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                       @if ($penduduk->tempat_lahir == $data->id)
+                                          <option value="{{ $data->id }}" selected="">{{ $data->name }}</option>
+                                       @else
+                                          <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                       @endif
+                                       
                                     @endforeach
                                  </select>
                               </div>
@@ -218,7 +230,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" onclick="simpan()" type="button">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" onclick="simpan()" type="button">Update</button>
                   </div>
                </div>
             </div>
@@ -243,7 +255,7 @@
       });
       $('.simpan').attr('disabled', 'disabled');
       $.ajax({
-         url: "{{ route('create-penduduk') }}",
+         url: "{{ route('update-penduduk') }}",
          type: 'POST',
          data: $('#data').serialize(),
          success: function (response) {
