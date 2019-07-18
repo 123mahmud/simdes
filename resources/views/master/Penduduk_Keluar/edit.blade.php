@@ -1,555 +1,440 @@
 @extends('main')
-
 @section('content')
-
-
 <article class="content">
-
-  <div class="title-block text-primary">
-      <h1 class="title"> Edit Data Barang </h1>
+   <div class="title-block text-primary">
+      <h1 class="title"> Tambah Data Penduduk Keluar </h1>
       <p class="title-description">
-        <i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
+         <i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
          / <span>Master Data</span>
-         / <a href="{{route('databarang')}}"><span>Data Barang</span></a>
-         / <span class="text-primary" style="font-weight: bold;">Edit Data Barang</span>
-       </p>
-  </div>
-<form id="formsukses">
-  <section class="section">
-
-    <div class="row">
-
-      <div class="col-12">
-
-        <div class="card">
-                    <div class="card-header bordered p-2">
-                      <div class="header-block">
-                        <h3 class="title">Edit Data Barang </h3>
-                      </div>
-                      <div class="header-block pull-right">
-                        <a href="{{route('databarang')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
-                      </div>
-                    </div>
-                    <div class="card-block">
-                        <section>
-                          @foreach($data['barang'] as $barang)
-                          <div class="row">
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Nama Barang</label>
-                            </div>
-
-                            <div class="col-md-9 col-sm-6 col-xs-12">
+         / <a href="{{route('pkeluar')}}"><span>Data Penduduk Keluar</span></a>
+         / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk Keluar</span>
+      </p>
+   </div>
+   <form id="data">
+      <section class="section">
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-header bordered p-2">
+                     <div class="header-block">
+                        <h3 class="title">Tambah Data Penduduk Keluar </h3>
+                     </div>
+                     <div class="header-block pull-right">
+                        <a href="{{route('pkeluar')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
+                     </div>
+                  </div>
+                  <div class="card-block">
+                     <section>
+                        <div class="row" id="myRow">
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>NIK<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" name="nama_barang" value="{{$barang->i_name}}" required="">
-                                 <input type="hidden" class="form-control form-control-sm" name="id_barang" value="{{$barang->i_id}}">
+                                 <input type="text" class="form-control-sm form-control currency-x ui-autocomplete" id="nik" name="nik">
+                                 <input type="hidden" class="form-control-sm form-control" id="id_penduduk" name="id_penduduk">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Type Barang</label>
-                            </div>
-
-                            <div class="col-md-9 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Nama<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <select class="form-control form-control-sm tipe_barang" name="tipe_barang" required="">
-                                  <option value="" disabled="">--Pilih Type Barang--</option>
-                                  @if($barang->i_type = 'BB')
-                                    <option value="BB" selected="">Bahan Baku</option>
-                                      <!-- <option value="BP">Bahan Produksi</option>
-                                    <option value="SP">Spare Part</option>
-                                    <option value="BJ">Barang Jual</option>
-                                    <option value="LL">Lain-lain</option> -->
-                                  @elseif($barang->i_type = 'SP')
-                                    <!-- <option value="BB">Bahan Baku</option>
-                                      <option value="BP">Bahan Produksi</option> -->
-                                    <option value="SP" selected="">Spare Part</option>
-                                    <!-- <option value="BJ">Barang Jual</option>
-                                     <option value="LL">Lain-lain</option> -->
-                                  @elseif($barang->i_type = 'BJ')
-                                    <!-- <option value="BB">Bahan Baku</option>
-                                      <option value="BP">Bahan Produksi</option>
-                                    <option value="SP">Spare Part</option> -->
-                                    <option value="BJ" selected="">Barang Jual</option>
-                                     <!-- <option value="LL">Lain-lain</option> -->
-                                  @elseif($barang->i_type = 'LL')
-                                       <!-- <option value="BB">Bahan Baku</option>
-                                         <option value="BP">Bahan Produksi</option>
-                                    <option value="SP">Spare Part</option>
-                                    <option value="BJ">Barang Jual</option> -->
-                                     <option value="LL" selected="">Lain-lain</option>
-                                  @elseif($barang->i_type = 'BP')
-                                     <!-- <option value="BB">Bahan Baku</option> -->
-                                      <option value="BP" selected="">Bahan Produksi</option>
-                                    <!-- <option value="SP">Spare Part</option>
-                                    <option value="BJ">Barang Jual</option>
-                                     <option value="LL">Lain-lain</option> -->
-
-
-                                  @endif
-
-
-                                </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Kelompok Barang</label>
-                            </div>
-
-                            <div class="col-md-9 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>No. Urut Kartu Keluarga<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <input type="hidden" id="group_hidden" value="{{ $barang->i_code_group }}">
-                                <select class="form-control form-control-sm" name="kelompok_barang" id="group" required="">
-                                  @foreach($data['group'] as $group)
-                                    <option value="{{ $group->m_gcode }}">{{ $group->m_gname }}</option>
-                                  @endforeach
-                                </select>
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="urut_kk">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Kode Barang</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Jenis Kelamin<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <input type="text" class="form-control form-control-sm kode_barang" readonly="" name="kode_barang" value="{{$barang->i_code}}" required="">
+                                 <input readonly type="text" class="form-control-sm form-control" name="kelamin">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Min Stock</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Tempat Lahir<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <input type="number" class="form-control form-control-sm" name="min_stock" value="{{$barang->i_min_stock}}" required="">
+                                 <input readonly type="text" class="form-control-sm form-control" name="tempat_lahir">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Satuan Utama</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Tanggal Lahir<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <select class="form-control form-control-sm satuan_utama" name="satuan_utama" required="">
-                                  <option value="">--Pilih--</option>
-                                   @foreach($data['satuan'] as $satuan)
-                                    <option value="{{$satuan->s_id}}" @if($barang->i_sat1 == $satuan->s_id) selected="" @endif> {{$satuan->s_name}} </option>
-                                  @endforeach
-                                </select>
+                                 <input readonly type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Isi Satuan Utama</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Golongan Darah</label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                               <input type="number" class="form-control-sm form-control isi_satuan_utama"  step="0.1" name="isi_satuan_utama" value="{{$barang->i_sat_isi1}}" required="" readonly="" value="1">
-                                <input type="hidden" class="form-control-sm form-control"  value="1" name="username">
+                                 <input readonly type="text" class="form-control-sm form-control" name="gol_darah">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Satuan Alternatif 1</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Agama<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <select class="form-control form-control-sm satuan_1" name="satuan_1">
-                                  <option value="">--Pilih--</option>
-                                   @foreach($data['satuan'] as $satuan)
-                                    <option value="{{$satuan->s_id}}" @if($barang->i_sat2 == $satuan->s_id) selected="" @endif> {{$satuan->s_name}} </option>
-                                  @endforeach
-                                </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="agama">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Isi Satuan Alternatif 1</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Status Nikah<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                               <input type="number" class="form-control-sm form-control isi_satuan_1" min="0" name="isi_satuan_1" value="{{$barang->i_sat_isi2}}">
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_nikah">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Satuan Alternatif 2</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Status Keluarga<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <select class="form-control form-control-sm satuan_2" name="satuan_2">
-                                  <option value="">--Pilih--</option>
-                                  @foreach($data['satuan'] as $satuan)
-                                    <option value="{{$satuan->s_id}}" @if($barang->i_sat3 == $satuan->s_id) selected="" @endif> {{$satuan->s_name}} </option>
-                                  @endforeach
-                                </select>
+                                 <input readonly type="text" class="form-control-sm form-control" name="status_keluarga">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Isi Satuan Alternatif 2</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Pendidikan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                               <input type="number" class="form-control-sm form-control isi_satuan_2" min="0" name="isi_satuan_2" value="{{$barang->i_sat_isi3}}">
+                                 <input readonly type="text" class="form-control-sm form-control" name="pendidikan">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Detail</label>
-                            </div>
-
-                            <div class="col-md-9 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Pekerjaan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <textarea class="form-control" name="detail" required=""> {{$barang->i_det}}</textarea>
+                                 <input readonly type="text" class="form-control-sm form-control" name="pekerjaan">
                               </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                              <label>Persentase Produksi Rusak</label>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Nama Ibu<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                <div class="input-group">
-                                  <input type="number" class="form-control-sm form-control persentase" max="100" min="0" name="persentase" value="{{$barang->i_persentase}}" required="">
-                                  <span class="input-group-addon">
-                                    %
-                                  </span>
-                                </div>
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ibu">
                               </div>
-                            </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Nama Ayah<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ayah">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Nomor Kartu Keluarga<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="no_kk">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RT<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rt">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RW<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rw">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Warga Negara<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input readonly type="text" class="form-control-sm form-control" value="INDONESIA" name="warga_negara">
+                              </div>
+                           </div>
+                           {{-- garis --}}
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Alamat Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="alamat_tujuan">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RT Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rt_tujuan">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>RW Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rw_tujuan">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Kecamatan Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="hidden" class="form-control-sm form-control ui-autocomplete" name="kecamatan_tujuan">
+                                 <input type="text" class="form-control-sm form-control ui-autocomplete" id="kecamatan" name="nama_kecamatan">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Kabupaten Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="kabupaten_tujuan">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_kabupaten">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Provinsi Tujuan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="provinsi_tujuan">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_provinsi">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Tanggal Pindah<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_pindah">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <label>Keterangan<font color="red">*</font></label>
+                           </div>
+                           <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                 <input type="text" class="form-control-sm form-control" name="keterangan">
+                              </div>
+                           </div>
 
-
-
-                          </div>
-                          @endforeach
-                        </section>
-                    </div>
-
-                    <div class="card-footer text-right">
-                      <button class="btn btn-primary btn-submit" type="button">Simpan</button>
-                      <a href="{{route('databarang')}}" class="btn btn-secondary">Kembali</a>
-                    </div>
-                </div>
-
-      </div>
-
-    </div>
-
-  </section>
-</form>
+                        </div>
+                     </section>
+                  </div>
+                  <div class="card-footer text-right">
+                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Simpan</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </form>
 </article>
 
 @endsection
 @section('extra_script')
 <script type="text/javascript">
-
-   function addCommas(nStr) {
-            nStr += '';
-            x = nStr.split('.');
-            x1 = x[0];
-            x2 = x.length > 1 ? ',' + x[1] : '';
-            var rgx = /(\d+)(\d{3})/;
-            while (rgx.test(x1)) {
-                x1 = x1.replace(rgx, '$1' + '.' + '$2');
-            }
-            return x1 + x2;
-    }
-
-  $('.isi_satuan_1').change(function(){
-    isi_satuan_1 = $(this).val();
-    satuan_1 = $('.satuan_1').val();
-    harga = $('.harga_satuan_utama').val();
-    if(satuan_1 == ''){
-       $.toast({
-              heading: 'Warning',
-              text: 'Satuan Alternatif 1 Tidak di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-         $(this).val('');
-    }
-    else {
-      if(harga != ''){
-        if(isi_satuan_1 != ''){
-                 harga = harga.replace(/\./g,'');
-                 harga = harga.replace(/,/g,'.');
-
-                 hasilharga2 = parseFloat(parseFloat(isi_satuan_1) * parseFloat(harga)).toFixed(2);
-
-                $('.harga_satuan_1').val(addCommas(hasilharga2));
-          }
-          else {
-            $('.harga_satuan_1').val('');
-          }
-      }
-    }
-  });
-
-
-   $('.isi_satuan_2').change(function(){
-    isi_satuan_1 = $(this).val();
-    satuan_1 = $('.satuan_2').val();
-    harga = $('.harga_satuan_utama').val();
-    if(satuan_1 == ''){
-       $.toast({
-              heading: 'Warning',
-              text: 'Satuan Alternatif 2 Tidak di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-         $(this).val('');
-    }
-    else {
-      if(harga != ''){
-         if(isi_satuan_1 != ''){
-              harga = harga.replace(/\./g,'');
-             harga = harga.replace(/,/g,'.');
-
-             hasilharga2 = parseFloat(parseFloat(isi_satuan_1) * parseFloat(harga)).toFixed(2);
-
-            $('.harga_satuan_2').val(addCommas(hasilharga2));
-         }
-         else {
-          $('.harga_satuan_2').val('');
-         }
-      }
-    }
-  });
-   $('.harga_satuan_utama').change(function(){
-    satuan_1 = $('.satuan_1').val();
-    harga = $(this).val();
-    harga = harga.replace(/\./g,'');
-    harga = harga.replace(/,/g,'.');
-    if(satuan_1 != ''){
-      isi_satuan_1 = $('.isi_satuan_1').val();
-
-
-       hasilharga = parseFloat(parseFloat(isi_satuan_1) * parseFloat(harga));
-       $('.harga_satuan_1').val(hasilharga);
-    }
-
-      satuan_2 = $('.satuan_2').val();
-    if(satuan_2 != ''){
-      isi_satuan_2 = $('.isi_satuan_2').val();
-      if(isi_satuan_2 != ''){
-          hasilharga2 = parseFloat(parseFloat(isi_satuan_2) * parseFloat(harga)).toFixed(2);
-
-        $('.harga_satuan_2').val(addCommas(hasilharga2));
-      }
-    }
-   });
-
-   $('.harga_satuan_1').change(function(){
-      isi_satuan_1 = $(this).val();
-      satuan_1 = $('.satuan_1').val();
-      if(satuan_1 == ''){
-         $.toast({
-                heading: 'Warning',
-                text: 'Satuan Alternatif 1 Tidak di isi :)',
-                showHideTransition: 'plain',
-                icon: 'warning'
-            });
-           $(this).val('');
-      }
-   });
-
-   $('.harga_satuan_2').change(function(){
-      isi_satuan_1 = $(this).val();
-      satuan_1 = $('.satuan_2').val();
-      if(satuan_1 == ''){
-         $.toast({
-                heading: 'Warning',
-                text: 'Satuan Alternatif 2 Tidak di isi :)',
-                showHideTransition: 'plain',
-                icon: 'warning'
-            });
-           $(this).val('');
-      }
-   });
-
-  $('.tipe_barang').change(function(){
-    tipe_barang = $(this).val();
-
-    $.ajax({
-      data : {tipe_barang},
-      type : "get",
-      url : baseUrl + '/master/databarang/tipe_barang',
-      dataType : "json",
-      success : function(response){
-        console.log(response);
-        console.log('response');
-          $('.kode_barang').val(response);
-      }
-    })
-  })
-
-  $('.harga').maskMoney({thousands:'.', decimal:',', precision:2});
-
-
-  $(document).ready(function(){
-    // set selected 'group-list'
-    group_hidden = $('#group_hidden').val();
-    $("#group option[value='" + group_hidden + "']").prop("selected", true);
-
-    $(document).on('click', '.btn-submit', function(){
-      form_data = $('#formsukses').serialize();
-      satuan_utama = $('.satuan_utama').val();
-      satuan_1 = $('.satuan_1').val();
-      satuan_2 = $('.satuan_2').val();
-
-      if(satuan_utama != ''){
-        isi_satuan_utama = $('.isi_satuan_utama').val();
-        harga_satuan_utama = $('.harga_satuan_utama').val();
-
-        if(isi_satuan_utama == ''){
-          $.toast({
-              heading: 'Warning',
-              text: 'Satuan Utama Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-          return false;
-        }
-        if(harga_satuan_utama == ''){
-           $.toast({
-              heading: 'Warning',
-              text: 'Harga Utama Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-            return false;
-        }
-
-      } // satuan utama
-
-      if(satuan_1 != ''){
-        isi_satuan_1 = $('.isi_satuan_1').val();
-       harga_satuan_1 = $('.harga_satuan_1').val();
-
-        if(isi_satuan_1 == ''){
-           $.toast({
-              heading: 'Warning',
-              text: 'Satuan Alternatif 1 Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-            return false;
-        }
-        if(harga_satuan_1== ''){
-           $.toast({
-              heading: 'Warning',
-              text: 'Harga Satuan 1 Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-            return false;
-        }
-      } // satuan 1
-
-      if(satuan_2 != ''){
-        isi_satuan_2 = $('.isi_satuan_2').val();
-        harga_satuan_2 = $('.harga_satuan_2').val();
-
-        if(isi_satuan_2 == ''){
-           $.toast({
-              heading: 'Warning',
-              text: 'Satuan Alternatif 2 Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-            return false;
-        }
-
-        if(harga_satuan_2 == ''){
-           $.toast({
-              heading: 'Warning',
-              text: 'Harga Alternatif 2 Belum di isi :)',
-              showHideTransition: 'plain',
-              icon: 'warning'
-          });
-            return false;
-        }
-      } // end satuan 2
-
-
-       $.confirm({
-        animation: 'RotateY',
-        closeAnimation: 'scale',
-        icon: 'fa fa-disc',
-          title: 'Update',
-        content: 'Apa anda yakin mau update data ini?',
-        theme: 'disable',
-          buttons: {
-              info: {
-            btnClass: 'btn-blue',
-                text:'Ya',
-                action : function(){
-
-                    $.ajax({
-                      data : form_data,
-                      url : baseUrl + '/master/databarang/update',
-                      dataType : "json",
-                      type : "post",
-                      success : function(response){
-
-                        $.toast({
-                            heading: 'Success',
-                            text: 'Data Berhasil di Simpan',
-                            bgColor: '#00b894',
-                            textColor: 'white',
-                            loaderBg: '#55efc4',
-                            icon: 'success'
-                          })
-
-                          setTimeout(function(){
-                          window.location.href = baseUrl + '/master/databarang/index';
-
-                            },500);
-                      }
-                    });
-
-                }
-              },
-              cancel:{
-                text: 'Tidak',
-              action: function () {
-                      // tutup confirm
-                  }
-              }
-          }
+$(document).ready(function() {
+      $('#kecamatan').on('click', function() {
+         clear();
       });
 
-    });
+      $('#kecamatan').autocomplete({
+         source: "{{ route('autocomplete-kecamatan') }}",
+         minLength: 2,
+         select: function(event, data){
+            $("input[name=kecamatan_tujuan]").val(data.item.id);
+            $("input[name=kabupaten_tujuan]").val(data.item.id_kabupaten);
+            $("input[name=nama_kabupaten]").val(data.item.nama_kabupaten);
+            $("input[name=provinsi_tujuan]").val(data.item.id_provinsi);
+            $("input[name=nama_provinsi]").val(data.item.nama_provinsi);
+         }
+      });
 
-
-
-
-    $('.persentase').on('keyup blur focus', function(){
-      // console.log('persentase');
-      var min, max, ini;
-
-      ini = $(this);
-
-      min = 0;
-
-      max = 100;
-
-      if(parseFloat(ini.val()) > max){
-        ini.val(max);
+      function clear()
+      {
+         $("input[name=kecamatan_tujuan]").val('');
+         $("input[name=nama_kecamatan]").val('');
+         $("input[name=kabupaten_tujuan]").val('');
+         $("input[name=nama_kabupaten]").val('');
+         $("input[name=provinsi_tujuan]").val('');
+         $("input[name=nama_provinsi]").val('');
       }
 
-    });
-  });
+      $('#nik').on('click', function() {
+         clear2();
+      });
+      $('#nik').autocomplete({
+         source: "{{ route('autocomplete-kematian') }}",
+         minLength: 2,
+         select: function(event, data){
+            $("input[name=id_penduduk]").val(data.item.id);
+            $("input[name=nik]").val(data.item.nik);
+            $("input[name=nama]").val(data.item.nama);
+            $("input[name=urut_kk]").val(data.item.urut_kk);
+            if (data.item.kelamin == 'L'){
+               var kelamin = 'Laki-laki'
+            }else{
+               var kelamin = 'Perempuan'
+            }
+            $("input[name=kelamin]").val(kelamin);
+            $("input[name=tempat_lahir]").val(data.item.tempat_lahir);
+            $("input[name=tgl_lahir]").val(data.item.tgl_lahir);
+            $("input[name=gol_darah]").val(data.item.gol_darah);
+            if (data.item.agama == 'IL'){
+               var agama = 'Islam'
+            }else if(data.item.agama == 'HD'){
+               var agama = 'Hindu'
+            }else if(data.item.agama == 'BD'){
+               var agama = 'Budha'
+            }else if(data.item.agama == 'KP'){
+               var agama = 'Kristen Prostetan'
+            }else if(data.item.agama == 'KL'){
+               var agama = 'Katolik'
+            }else if(data.item.agama == 'KC'){
+               var agama = 'Kong Hu Cu'
+            }
+            $("input[name=agama]").val(agama);
+            if (data.item.status_nikah == 'KW'){
+               var status_nikah = 'Kawin'
+            }else if(data.item.status_nikah == 'BK'){
+               var status_nikah = 'Belum Kawin'
+            }else if(data.item.status_nikah == 'CH'){
+               var status_nikah = 'Cerai Hidup'
+            }else if(data.item.status_nikah == 'CM'){
+               var status_nikah = 'Cerai Mati'
+            }
+            $("input[name=status_nikah]").val(status_nikah);
+            if (data.item.status_keluarga == 'SM'){
+               var status_keluarga = 'Suami'
+            }else if(data.item.status_keluarga == 'IS'){
+               var status_keluarga = 'Istri'
+            }else if(data.item.status_keluarga == 'AN'){
+               var status_keluarga = 'Anak'
+            }else if(data.item.status_keluarga == 'CU'){
+               var status_keluarga = 'Cucu'
+            }else if(data.item.status_keluarga == 'OT'){
+               var status_keluarga = 'Orang Tua'
+            }else if(data.item.status_keluarga == 'ME'){
+               var status_keluarga = 'Mertua'
+            }else if(data.item.status_keluarga == 'FL'){
+               var status_keluarga = 'Family Lain'
+            }else if(data.item.status_keluarga == 'LA'){
+               var status_keluarga = 'Lainnya'
+            }
+            $("input[name=status_keluarga]").val(status_keluarga);
+            if (data.item.pendidikan == 'TBS'){
+               var pendidikan = 'TIDAK / BELUM SEKOLAH'
+            }else if(data.item.pendidikan == 'BTS'){
+               var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
+            }else if(data.item.pendidikan == 'TSS'){
+               var pendidikan = 'TAMAT SD / SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMP'){
+               var pendidikan = 'SLTP/SEDERAJAT'
+            }else if(data.item.pendidikan == 'SMA'){
+               var pendidikan = 'SLTA / SEDERAJAT'
+            }else if(data.item.pendidikan == 'D1'){
+               var pendidikan = 'DIPLOMA I / II'
+            }else if(data.item.pendidikan == 'D2'){
+               var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
+            }else if(data.item.pendidikan == 'S1'){
+               var pendidikan = 'DIPLOMA IV/ STRATA I'
+            }else if(data.item.pendidikan == 'S2'){
+               var pendidikan = 'STRATA II'
+            }else if(data.item.pendidikan == 'S3'){
+               var pendidikan = 'STRATA III'
+            }
+            $("input[name=pendidikan]").val(pendidikan);
+            $("input[name=pekerjaan]").val(data.item.pekerjaan);
+            $("input[name=nama_ibu]").val(data.item.nama_ibu);
+            $("input[name=nama_ayah]").val(data.item.nama_ayah);
+            $("input[name=no_kk]").val(data.item.no_kk);
+            $("input[name=rt]").val(data.item.rt);
+            $("input[name=rw]").val(data.item.rw);
+         }
+      });
+
+      function clear2(){
+         $("input[name=id_penduduk]").val('');
+         $("input[name=nik]").val('');
+         $("input[name=nama]").val('');
+         $("input[name=urut_kk]").val('');
+         $("input[name=kelamin]").val('');
+         $("input[name=tempat_lahir]").val('');
+         $("input[name=tgl_lahir]").val('');
+         $("input[name=gol_darah]").val('');
+         $("input[name=agama]").val('');
+         $("input[name=status_nikah]").val('');
+         $("input[name=status_keluarga]").val('');
+         $("input[name=pendidikan]").val('');
+         $("input[name=pekerjaan]").val('');
+         $("input[name=nama_ibu]").val('');
+         $("input[name=nama_ayah]").val('');
+         $("input[name=no_kk]").val('');
+         $("input[name=rt]").val('');
+         $("input[name=rw]").val('');
+      }
+
+
+   });
+
+   function simpan()
+   {
+      $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      $('.simpan').attr('disabled', 'disabled');
+      $.ajax({
+         url: "{{ route('create-pkeluar') }}",
+         type: 'POST',
+         data: $('#data').serialize(),
+         success: function (response) {
+             if (response.status == 'sukses') {
+                 $.toast({
+                     heading: response.code,
+                     text: 'Berhasil di Simpan',
+                     bgColor: '#00b894',
+                     textColor: 'white',
+                     loaderBg: '#55efc4',
+                     icon: 'success'
+                  });
+                 window.location.href = "{{ route('pkeluar') }}";
+             } else {
+                  $.toast({
+                      heading: 'Ada yang salah',
+                      text: 'Periksa data anda.',
+                      showHideTransition: 'plain',
+                      icon: 'warning'
+                  })
+                 $('.simpan').removeAttr('disabled', 'disabled');
+             }
+         }
+      })
+   }
+
 </script>
 @endsection

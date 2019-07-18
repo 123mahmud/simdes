@@ -45,7 +45,6 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('/master/datajabatan/update-jabatan/{id}', 'Master\JabatanController@updateJabatan');
 	Route::get('/master/datajabatan/data-jabatan', 'Master\JabatanController@jabatanData');
 	Route::get('/master/datajabatanman/ubahstatus', 'Master\JabatanController@ubahStatusMan');
-
 // Penduduk
 	Route::get('master/penduduk/index', 'Master\pendudukController@index')->name('penduduk');
 	Route::get('penduduk/get', 'Master\pendudukController@get')->name('get-penduduk');
@@ -54,6 +53,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::put('penduduk/change', 'Master\pendudukController@change')->name('change-penduduk');
 	Route::delete('penduduk/delete', 'Master\pendudukController@destroy')->name('delete-penduduk');
 	Route::get('penduduk/detail/{id}', 'Master\pendudukController@show')->name('show-penduduk');
+	Route::get('penduduk/edit', 'Master\pendudukController@edit')->name('edit-penduduk');
 // Kelahiran
 	Route::get('master/kelahiran/index', 'Master\kelahiranController@index')->name('kelahiran');
 	Route::get('kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
 	Route::delete('kelahiran/delete', 'Master\kelahiranController@destroy')->name('delete-kelahiran');
 	Route::get('kelahiran/detail/{id}', 'Master\kelahiranController@show')->name('detail-kelahiran');
+	Route::get('kelahiran/edit', 'Master\kelahiranController@edit')->name('edit-kelahiran');
 // Kematian
 	Route::get('master/kematian/index', 'Master\kematianController@index')->name('kematian');
 	Route::get('kematian/get', 'Master\kematianController@get')->name('get-kematian');
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('kematian/create', 'Master\kematianController@create')->name('create-kematian');
 	Route::get('kematian/detail/{id}', 'Master\kematianController@show')->name('detail-kematian');
 	Route::delete('kematian/delete', 'Master\kematianController@destroy')->name('delete-kematian');
+	Route::get('kematian/edit', 'Master\kematianController@edit')->name('edit-kematian');
 // Penduduk Masuk
 	Route::get('master/pmasuk/index', 'Master\pendudukMasukController@index')->name('pmasuk');
 	Route::get('pmasuk/get', 'Master\pendudukMasukController@get')->name('get-pmasuk');
@@ -77,6 +79,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pmasuk/autocomplete', 'Master\pendudukMasukController@autocomplete')->name('autocomplete-kecamatan');
 	Route::get('pmasuk/detail/{id}', 'Master\pendudukMasukController@show')->name('detail-kecamatan');
 	Route::delete('pmasuk/delete', 'Master\pendudukMasukController@destroy')->name('delete-pmasuk');
+	Route::get('pmasuk/edit', 'Master\pendudukMasukController@edit')->name('edit-pmasuk');
 // Penduduk Keluar
 	Route::get('/master/pkeluar/index', 'Master\pendudukKeluarController@index')->name('pkeluar');
 	Route::get('pkeluar/get', 'Master\pendudukKeluarController@get')->name('get-pkeluar');
@@ -84,11 +87,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
 	Route::get('pkeluar/detail/{id}', 'Master\pendudukKeluarController@show')->name('detail-pkeluar');
 	Route::delete('pkeluar/delete', 'Master\pendudukKeluarController@destroy')->name('delete-pkeluar');
-// Master Pegawai
-	Route::get('/master/datapegawai/datapegawai', 'MasterController@datapegawai')->name('datapegawai');
-	Route::get('/master/datapegawai/tambah_datapegawai', 'MasterController@tambah_datapegawai')->name('tambah_datapegawai');
-	Route::get('/master/datapegawai/edit_datapegawai', 'MasterController@edit_datapegawai')->name('edit_datapegawai');
-	
+	Route::get('pkeluar/edit', 'Master\pendudukKeluarController@edit')->name('edit-pkeluar');
 //pindah Rt
 	Route::get('/master/pindahrt/index', 'Master\pindahRtController@index')->name('pindahrt');
 	Route::post('pindahrt/create', 'Master\pindahRtController@create')->name('create-pindahrt');
@@ -96,6 +95,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pindahrt/add', 'Master\pindahRtController@add')->name('add-pindahrt');
 	Route::get('pindahrt/detail/{id}', 'Master\pindahRtController@show')->name('detail-pindahrt');
 	Route::delete('pindahrt/delete', 'Master\pindahRtController@destroy')->name('delete-pindahrt');
+	Route::get('pindahrt/edit', 'Master\pindahRtController@edit')->name('edit-pindahrt');
 // Pembuatan Surat
 	Route::get('pembuatan/surat/index', 'Pembuatan\SuratController@index')->name('surat');
 	Route::post('surat/store', 'Pembuatan\SuratController@store')->name('store-surat');

@@ -12,6 +12,7 @@ use App\d_pekerjaan;
 use App\provinsi;
 use App\kabupaten;
 use App\kecamatan;
+use Crypt;
 
 class pendudukKeluarController extends Controller
 {
@@ -103,9 +104,10 @@ class pendudukKeluarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+
+        return view('master.Penduduk_Keluar.edit');
     }
 
     /**
@@ -151,7 +153,7 @@ class pendudukKeluarController extends Controller
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_penduduk_keluar) .'\'" 
+                                    onclick=edit("'.Crypt::encrypt($data->id_penduduk_keluar).'")
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>

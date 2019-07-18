@@ -253,6 +253,25 @@
       });
    }
 
+   function edit(id)
+   {
+      $.ajax({
+         type: "GET",
+         url: "{{ route('edit-pmasuk') }}",
+         data: {id:id},
+         success: function(response){
+            window.location=(this.url)
+         },
+         complete:function (argument) {
+            
+         },
+         error: function(){
+            alert('Error get data from ajax');
+         },
+         // async: false
+      });
+   }
+
 
 </script>
 @endsection

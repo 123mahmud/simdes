@@ -14,6 +14,7 @@ use App\d_kematian;
 use App\d_penduduk_masuk;
 use App\d_penduduk_keluar;
 use App\d_pindah_rt;
+use Crypt;
 
 class pendudukController extends Controller
 {
@@ -47,7 +48,8 @@ class pendudukController extends Controller
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id) .'\'" 
+                                    id="edit"
+                                    onclick=edit("'.Crypt::encrypt($data->id).'")
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
@@ -211,6 +213,12 @@ class pendudukController extends Controller
             'rw' => $penduduk->rw,
             'warga_negara' => $penduduk->warga_negara,
         ]);
+    }
+
+    public function edit(Request $request)
+    {   
+
+        return view('master.Penduduk.edit');
     }
 
 }

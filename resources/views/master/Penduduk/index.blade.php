@@ -302,6 +302,25 @@
        });
    }
 
+   function edit(id)
+   {
+      $.ajax({
+         type: "GET",
+         url: "{{ route('edit-penduduk') }}",
+         data: {id:id},
+         success: function(response){
+            window.location=(this.url)
+         },
+         complete:function (argument) {
+            
+         },
+         error: function(jqXHR, textStatus, errorThrown) {
+               alert('Error get data from ajax');
+         }
+         // async: false
+      });
+   }
+
 
 </script>
 @endsection

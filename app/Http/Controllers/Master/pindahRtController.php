@@ -11,6 +11,7 @@ use App\d_pindah_rt;
 use App\d_penduduk;
 use App\d_pekerjaan;
 use App\kabupaten;
+use Crypt;
 
 class pindahRtController extends Controller
 {
@@ -44,7 +45,7 @@ class pindahRtController extends Controller
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_pindah_rt) .'\'" 
+                                    onclick=edit("'.Crypt::encrypt($data->id_pindah_rt).'")
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
@@ -159,5 +160,11 @@ class pindahRtController extends Controller
             ]);
          }
    }
+
+    public function edit(Request $request)
+    {
+
+        return view('master.Pindah_RT.edit');
+    }
 
 }

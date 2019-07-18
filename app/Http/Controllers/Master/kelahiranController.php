@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Master;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use Crypt;
 use carbon\Carbon;
 use App\MasterBarang;
 use DataTables;
@@ -13,6 +12,7 @@ use App\d_kelahiran;
 use App\d_penduduk;
 use App\kabupaten;
 use App\d_pekerjaan;
+use Crypt;
 
 class kelahiranController extends Controller
 {
@@ -44,7 +44,7 @@ class kelahiranController extends Controller
                                     <i class="fa fa-exclamation-circle"></i>
                             </button>'.'
                             <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_kelahiran) .'\'" 
+                                    onclick=edit("'.Crypt::encrypt($data->id_kelahiran).'")
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
@@ -163,6 +163,12 @@ class kelahiranController extends Controller
          'warga_negara' => $kelahiran->warga_negara,
       ]);
    }
+
+   public function edit(Request $request)
+    {
+
+        return view('master.Kelahiran.edit');
+    }
  
 }
 

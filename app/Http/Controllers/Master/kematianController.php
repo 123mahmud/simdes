@@ -48,7 +48,7 @@ class kematianController extends Controller
                                     <i class="fa fa-exclamation-circle"></i>
                            </button>'.'
                            <button class="btn btn-warning btn-edit btn-sm" 
-                                    onclick="window.location.href=\''. url("master/databarang/edit/".$data->id_kematian) .'\'" 
+                                    onclick=edit("'.Crypt::encrypt($data->id_kematian).'")
                                     type="button" 
                                     title="Edit">
                                     <i class="fa fa-pencil"></i>
@@ -198,5 +198,11 @@ class kematianController extends Controller
                'data' => $e
             ]);
          }
+   }
+
+   public function edit(Request $request)
+   {
+
+      return view('master.Penduduk.edit');
    }
 }
