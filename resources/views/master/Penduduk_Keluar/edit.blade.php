@@ -2,12 +2,12 @@
 @section('content')
 <article class="content">
    <div class="title-block text-primary">
-      <h1 class="title"> Tambah Data Penduduk Keluar </h1>
+      <h1 class="title"> Edit Data Penduduk Keluar </h1>
       <p class="title-description">
          <i class="fa fa-home"></i>&nbsp;<a href="{{url('/home')}}">Home</a>
          / <span>Master Data</span>
          / <a href="{{route('pkeluar')}}"><span>Data Penduduk Keluar</span></a>
-         / <span class="text-primary" style="font-weight: bold;">Tambah Data Penduduk Keluar</span>
+         / <span class="text-primary" style="font-weight: bold;">Edit Data Penduduk Keluar</span>
       </p>
    </div>
    <form id="data">
@@ -17,7 +17,7 @@
                <div class="card">
                   <div class="card-header bordered p-2">
                      <div class="header-block">
-                        <h3 class="title">Tambah Data Penduduk Keluar </h3>
+                        <h3 class="title">Edit Data Penduduk Keluar </h3>
                      </div>
                      <div class="header-block pull-right">
                         <a href="{{route('pkeluar')}}" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></a>
@@ -31,8 +31,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x ui-autocomplete" id="nik" name="nik">
-                                 <input type="hidden" class="form-control-sm form-control" id="id_penduduk" name="id_penduduk">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="nik" value="{{ $penduduk->nik }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -40,7 +39,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="nama">
+                                 <input type="text" class="form-control-sm form-control" name="nama" value="{{ $penduduk->nama }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -48,7 +47,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="urut_kk">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="urut_kk" value="{{ $penduduk->urut_kk }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -56,7 +55,15 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="kelamin">
+                                 <select class="form-control form-control-sm" name="kelamin" disabled="">
+                                    @if ($penduduk->kelamin == 'L')
+                                       <option value="L" selected="">Laki-laki</option>
+                                       <option value="P">Perempuan</option>
+                                    @else
+                                       <option value="L">Laki-laki</option>
+                                       <option value="P" selected="">Perempuan</option>
+                                    @endif
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -64,7 +71,16 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="tempat_lahir">
+                                 <select class="form-control form-control-sm select2" name="tempat_lahir" disabled>
+                                    @foreach ($kabupaten as $data)
+                                       @if ($penduduk->tempat_lahir == $data->id)
+                                          <option value="{{ $data->id }}" selected="">{{ $data->name }}</option>
+                                       @else
+                                          <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                       @endif
+                                       
+                                    @endforeach
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -72,7 +88,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control datepicker" name="tgl_lahir">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_lahir" value="{{ $penduduk->tgl_lahir }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -80,7 +96,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="gol_darah">
+                                 <input type="text" class="form-control-sm form-control" name="gol_darah" value="{{ $penduduk->gol_darah }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -88,7 +104,51 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="agama">
+                                 <select class="form-control form-control-sm" name="agama" disabled="">
+                                    @if ($penduduk->agama == 'IL')
+                                       <option value="IL" selected="">Islam</option>
+                                       <option value="HD">Hindu</option>
+                                       <option value="BD">Budha</option>
+                                       <option value="KP">Kristen Prostestan</option>
+                                       <option value="KL">Katolik</option>
+                                       <option value="KC">Kong Hu Cu</option>
+                                    @elseif($penduduk->agama == 'HD')
+                                       <option value="IL">Islam</option>
+                                       <option value="HD" selected="">Hindu</option>
+                                       <option value="BD">Budha</option>
+                                       <option value="KP">Kristen Prostestan</option>
+                                       <option value="KL">Katolik</option>
+                                       <option value="KC">Kong Hu Cu</option>
+                                    @elseif($penduduk->agama == 'BD')
+                                       <option value="IL">Islam</option>
+                                       <option value="HD">Hindu</option>
+                                       <option value="BD" selected="">Budha</option>
+                                       <option value="KP">Kristen Prostestan</option>
+                                       <option value="KL">Katolik</option>
+                                       <option value="KC">Kong Hu Cu</option>
+                                    @elseif($penduduk->agama == 'KP')
+                                       <option value="IL">Islam</option>
+                                       <option value="HD">Hindu</option>
+                                       <option value="BD">Budha</option>
+                                       <option value="KP" selected="">Kristen Prostestan</option>
+                                       <option value="KL">Katolik</option>
+                                       <option value="KC">Kong Hu Cu</option>
+                                    @elseif($penduduk->agama == 'KL')
+                                       <option value="IL">Islam</option>
+                                       <option value="HD">Hindu</option>
+                                       <option value="BD">Budha</option>
+                                       <option value="KP">Kristen Prostestan</option>
+                                       <option value="KL" selected="">Katolik</option>
+                                       <option value="KC">Kong Hu Cu</option>
+                                    @elseif($penduduk->agama == 'KC')
+                                       <option value="IL">Islam</option>
+                                       <option value="HD">Hindu</option>
+                                       <option value="BD">Budha</option>
+                                       <option value="KP">Kristen Prostestan</option>
+                                       <option value="KL">Katolik</option>
+                                       <option value="KC" selected="">Kong Hu Cu</option>
+                                    @endif
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -96,7 +156,29 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="status_nikah">
+                                 <select class="form-control form-control-sm" name="status_nikah" disabled="">
+                                    @if ($penduduk->status_nikah == 'KW')
+                                       <option value="KW" selected="">Kawin</option>
+                                       <option value="BK">Belum Kawin</option>
+                                       <option value="CH">Cerai Hidup</option>
+                                       <option value="CM">Cerai Mati</option>
+                                    @elseif($penduduk->status_nikah == 'BK')
+                                       <option value="KW">Kawin</option>
+                                       <option value="BK" selected="">Belum Kawin</option>
+                                       <option value="CH">Cerai Hidup</option>
+                                       <option value="CM">Cerai Mati</option>
+                                    @elseif($penduduk->status_nikah == 'CH')
+                                       <option value="KW">Kawin</option>
+                                       <option value="BK">Belum Kawin</option>
+                                       <option value="CH" selected="">Cerai Hidup</option>
+                                       <option value="CM">Cerai Mati</option>
+                                    @elseif($penduduk->status_nikah == 'CM')
+                                       <option value="KW">Kawin</option>
+                                       <option value="BK">Belum Kawin</option>
+                                       <option value="CH">Cerai Hidup</option>
+                                       <option value="CM" selected="">Cerai Mati</option>
+                                    @endif
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -104,7 +186,81 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="status_keluarga">
+                                 <select class="form-control form-control-sm" name="status_keluarga" disabled="">
+                                    @if ($penduduk->status_keluarga == 'SM')
+                                       <option value="SM" selected="">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'IS')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS" selected="">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'AN')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN" selected="">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'CU')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU" selected="">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'OT')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT" selected="">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'ME')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME" selected="">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'FL')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL" selected="">Famili Lain</option>
+                                       <option value="LA">Lainnya</option>
+                                    @elseif ($penduduk->status_keluarga == 'LA')
+                                       <option value="SM">Suami</option>
+                                       <option value="IS">Istri</option>
+                                       <option value="AN">Anak</option>
+                                       <option value="CU">Cucu</option>
+                                       <option value="OT">Orang Tua</option>
+                                       <option value="ME">Mertua</option>
+                                       <option value="FL">Famili Lain</option>
+                                       <option value="LA" selected="">Lainnya</option>
+                                    @endif
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -112,7 +268,119 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="pendidikan">
+                                 <select class="form-control form-control-sm" name="pendidikan" disabled="">
+                                    @if ($penduduk->pendidikan == 'TBS')
+                                       <option value="TBS" selected="">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'BTS')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS" selected="">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'TSS')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS" selected="">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'SMP')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP" selected="">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'SMA')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA"  selected="">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'D1')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1" selected="">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'D2')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2" selected="">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'S1')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1"  selected="">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'S2')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2" selected="">STRATA II</option>
+                                       <option value="S3">STRATA III</option>
+                                    @elseif ($penduduk->pendidikan == 'S3')
+                                       <option value="TBS">TIDAK / BELUM SEKOLAH</option>
+                                       <option value="BTS">BELUM TAMAT SD/SEDERAJAT</option>
+                                       <option value="TSS">TAMAT SD / SEDERAJAT</option>
+                                       <option value="SMP">SLTP/SEDERAJAT</option>
+                                       <option value="SMA">SLTA / SEDERAJAT</option>
+                                       <option value="D1">DIPLOMA I / II</option>
+                                       <option value="D2">AKADEMI/ DIPLOMA III/S. MUDA</option>
+                                       <option value="S1">DIPLOMA IV/ STRATA I</option>
+                                       <option value="S2">STRATA II</option>
+                                       <option value="S3" selected="">STRATA III</option>
+                                    @endif
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -120,7 +388,15 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="pekerjaan">
+                                 <select class="form-control form-control-sm" name="pekerjaan" disabled="">
+                                    @foreach ($pekerjaan as $data)
+                                       @if ($penduduk->pekerjaan == $data->id)
+                                          <option value="{{ $data->id }}" selected="">{{ $data->nama }}</option>
+                                       @else
+                                          <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                       @endif
+                                    @endforeach
+                                 </select>
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -128,7 +404,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ibu">
+                                 <input type="text" class="form-control-sm form-control" name="nama_ibu" value="{{ $penduduk->nama_ibu }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -136,7 +412,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" name="nama_ayah">
+                                 <input type="text" class="form-control-sm form-control" name="nama_ayah" value="{{ $penduduk->nama_ayah }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -144,7 +420,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="no_kk">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="no_kk" value="{{ $penduduk->no_kk }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -152,7 +428,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rt">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rt" value="{{ $penduduk->rt }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -160,7 +436,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control currency-x" name="rw">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rw" value="{{ $penduduk->rw }}" readonly="">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -168,7 +444,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input readonly type="text" class="form-control-sm form-control" value="INDONESIA" name="warga_negara">
+                                 <input type="text" class="form-control-sm form-control" value="INDONESIA" readonly name="warga_negara" value="{{ $penduduk->warga_negara }}">
                               </div>
                            </div>
                            {{-- garis --}}
@@ -177,7 +453,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="alamat_tujuan">
+                                 <input type="text" class="form-control-sm form-control" name="alamat_tujuan" value="{{ $penduduk_keluar->alamat_tujuan }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -185,7 +461,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rt_tujuan">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rt_tujuan" value="{{ $penduduk_keluar->rt_tujuan }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -193,7 +469,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control currency-x" name="rw_tujuan">
+                                 <input type="text" class="form-control-sm form-control currency-x" name="rw_tujuan" value="{{ $penduduk_keluar->rw_tujuan }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -201,8 +477,8 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="hidden" class="form-control-sm form-control ui-autocomplete" name="kecamatan_tujuan">
-                                 <input type="text" class="form-control-sm form-control ui-autocomplete" id="kecamatan" name="nama_kecamatan">
+                                 <input type="hidden" class="form-control-sm form-control ui-autocomplete" name="kecamatan_tujuan" value="{{ $kec->id }}">
+                                 <input type="text" class="form-control-sm form-control ui-autocomplete" id="kecamatan" name="nama_kecamatan" value="{{ $kec->name }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -210,8 +486,8 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="kabupaten_tujuan">
-                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_kabupaten">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="kabupaten_tujuan" value="{{ $kab->id }}">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_kabupaten" value="{{ $kab->name }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -219,8 +495,8 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="provinsi_tujuan">
-                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_provinsi">
+                                 <input type="hidden" class="form-control-sm form-control" readonly="" name="provinsi_tujuan" value="{{ $pro->id }}">
+                                 <input type="text" class="form-control-sm form-control" readonly="" name="nama_provinsi" value="{{ $pro->name }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -228,7 +504,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_pindah">
+                                 <input type="text" class="form-control-sm form-control datepicker" name="tgl_pindah" value="{{ date('d-m-Y', strtotime($penduduk_keluar->tgl_pindah)) }}">
                               </div>
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
@@ -236,7 +512,7 @@
                            </div>
                            <div class="col-md-3 col-sm-6 col-xs-12">
                               <div class="form-group">
-                                 <input type="text" class="form-control-sm form-control" name="keterangan">
+                                 <input type="text" class="form-control-sm form-control" name="keterangan" value="{{ $penduduk_keluar->keterangan }}">
                               </div>
                            </div>
 
@@ -244,7 +520,7 @@
                      </section>
                   </div>
                   <div class="card-footer text-right">
-                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan()">Simpan</button>
+                     <button class="btn btn-primary btn-submit simpan" type="button" onclick="simpan('{{ Crypt::encrypt($penduduk_keluar->id) }}')">Update</button>
                   </div>
                </div>
             </div>
@@ -256,7 +532,7 @@
 @endsection
 @section('extra_script')
 <script type="text/javascript">
-$(document).ready(function() {
+   $(document).ready(function() {
       $('#kecamatan').on('click', function() {
          clear();
       });
@@ -282,125 +558,8 @@ $(document).ready(function() {
          $("input[name=provinsi_tujuan]").val('');
          $("input[name=nama_provinsi]").val('');
       }
-
-      $('#nik').on('click', function() {
-         clear2();
-      });
-      $('#nik').autocomplete({
-         source: "{{ route('autocomplete-kematian') }}",
-         minLength: 2,
-         select: function(event, data){
-            $("input[name=id_penduduk]").val(data.item.id);
-            $("input[name=nik]").val(data.item.nik);
-            $("input[name=nama]").val(data.item.nama);
-            $("input[name=urut_kk]").val(data.item.urut_kk);
-            if (data.item.kelamin == 'L'){
-               var kelamin = 'Laki-laki'
-            }else{
-               var kelamin = 'Perempuan'
-            }
-            $("input[name=kelamin]").val(kelamin);
-            $("input[name=tempat_lahir]").val(data.item.tempat_lahir);
-            $("input[name=tgl_lahir]").val(data.item.tgl_lahir);
-            $("input[name=gol_darah]").val(data.item.gol_darah);
-            if (data.item.agama == 'IL'){
-               var agama = 'Islam'
-            }else if(data.item.agama == 'HD'){
-               var agama = 'Hindu'
-            }else if(data.item.agama == 'BD'){
-               var agama = 'Budha'
-            }else if(data.item.agama == 'KP'){
-               var agama = 'Kristen Prostetan'
-            }else if(data.item.agama == 'KL'){
-               var agama = 'Katolik'
-            }else if(data.item.agama == 'KC'){
-               var agama = 'Kong Hu Cu'
-            }
-            $("input[name=agama]").val(agama);
-            if (data.item.status_nikah == 'KW'){
-               var status_nikah = 'Kawin'
-            }else if(data.item.status_nikah == 'BK'){
-               var status_nikah = 'Belum Kawin'
-            }else if(data.item.status_nikah == 'CH'){
-               var status_nikah = 'Cerai Hidup'
-            }else if(data.item.status_nikah == 'CM'){
-               var status_nikah = 'Cerai Mati'
-            }
-            $("input[name=status_nikah]").val(status_nikah);
-            if (data.item.status_keluarga == 'SM'){
-               var status_keluarga = 'Suami'
-            }else if(data.item.status_keluarga == 'IS'){
-               var status_keluarga = 'Istri'
-            }else if(data.item.status_keluarga == 'AN'){
-               var status_keluarga = 'Anak'
-            }else if(data.item.status_keluarga == 'CU'){
-               var status_keluarga = 'Cucu'
-            }else if(data.item.status_keluarga == 'OT'){
-               var status_keluarga = 'Orang Tua'
-            }else if(data.item.status_keluarga == 'ME'){
-               var status_keluarga = 'Mertua'
-            }else if(data.item.status_keluarga == 'FL'){
-               var status_keluarga = 'Family Lain'
-            }else if(data.item.status_keluarga == 'LA'){
-               var status_keluarga = 'Lainnya'
-            }
-            $("input[name=status_keluarga]").val(status_keluarga);
-            if (data.item.pendidikan == 'TBS'){
-               var pendidikan = 'TIDAK / BELUM SEKOLAH'
-            }else if(data.item.pendidikan == 'BTS'){
-               var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
-            }else if(data.item.pendidikan == 'TSS'){
-               var pendidikan = 'TAMAT SD / SEDERAJAT'
-            }else if(data.item.pendidikan == 'SMP'){
-               var pendidikan = 'SLTP/SEDERAJAT'
-            }else if(data.item.pendidikan == 'SMA'){
-               var pendidikan = 'SLTA / SEDERAJAT'
-            }else if(data.item.pendidikan == 'D1'){
-               var pendidikan = 'DIPLOMA I / II'
-            }else if(data.item.pendidikan == 'D2'){
-               var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
-            }else if(data.item.pendidikan == 'S1'){
-               var pendidikan = 'DIPLOMA IV/ STRATA I'
-            }else if(data.item.pendidikan == 'S2'){
-               var pendidikan = 'STRATA II'
-            }else if(data.item.pendidikan == 'S3'){
-               var pendidikan = 'STRATA III'
-            }
-            $("input[name=pendidikan]").val(pendidikan);
-            $("input[name=pekerjaan]").val(data.item.pekerjaan);
-            $("input[name=nama_ibu]").val(data.item.nama_ibu);
-            $("input[name=nama_ayah]").val(data.item.nama_ayah);
-            $("input[name=no_kk]").val(data.item.no_kk);
-            $("input[name=rt]").val(data.item.rt);
-            $("input[name=rw]").val(data.item.rw);
-         }
-      });
-
-      function clear2(){
-         $("input[name=id_penduduk]").val('');
-         $("input[name=nik]").val('');
-         $("input[name=nama]").val('');
-         $("input[name=urut_kk]").val('');
-         $("input[name=kelamin]").val('');
-         $("input[name=tempat_lahir]").val('');
-         $("input[name=tgl_lahir]").val('');
-         $("input[name=gol_darah]").val('');
-         $("input[name=agama]").val('');
-         $("input[name=status_nikah]").val('');
-         $("input[name=status_keluarga]").val('');
-         $("input[name=pendidikan]").val('');
-         $("input[name=pekerjaan]").val('');
-         $("input[name=nama_ibu]").val('');
-         $("input[name=nama_ayah]").val('');
-         $("input[name=no_kk]").val('');
-         $("input[name=rt]").val('');
-         $("input[name=rw]").val('');
-      }
-
-
    });
-
-   function simpan()
+   function simpan(id)
    {
       $.ajaxSetup({
          headers: {
@@ -409,9 +568,9 @@ $(document).ready(function() {
       });
       $('.simpan').attr('disabled', 'disabled');
       $.ajax({
-         url: "{{ route('create-pkeluar') }}",
+         url: "{{ route('update-pkeluar') }}",
          type: 'POST',
-         data: $('#data').serialize(),
+         data: $('#data').serialize() + '&id=' + id,
          success: function (response) {
              if (response.status == 'sukses') {
                  $.toast({

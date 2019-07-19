@@ -105,65 +105,65 @@
                $("#gol_darah").text(data.gol_darah);
                if (data.agama == 'IL'){
                   var agama = 'Islam'
-               }else if(data.item.agama == 'HD'){
+               }else if(data.agama == 'HD'){
                   var agama = 'Hindu'
-               }else if(data.item.agama == 'BD'){
+               }else if(data.agama == 'BD'){
                   var agama = 'Budha'
-               }else if(data.item.agama == 'KP'){
+               }else if(data.agama == 'KP'){
                   var agama = 'Kristen Prostetan'
-               }else if(data.item.agama == 'KL'){
+               }else if(data.agama == 'KL'){
                   var agama = 'Katolik'
-               }else if(data.item.agama == 'KC'){
+               }else if(data.agama == 'KC'){
                   var agama = 'Kong Hu Cu'
                }
                $('#agama').text(agama);
                if (data.status_nikah == 'KW'){
                   var status_nikah = 'Kawin'
-               }else if(data.item.status_nikah == 'BK'){
+               }else if(data.status_nikah == 'BK'){
                   var status_nikah = 'Belum Kawin'
-               }else if(data.item.status_nikah == 'CH'){
+               }else if(data.status_nikah == 'CH'){
                   var status_nikah = 'Cerai Hidup'
-               }else if(data.item.status_nikah == 'CM'){
+               }else if(data.status_nikah == 'CM'){
                   var status_nikah = 'Cerai Mati'
                }
                $('#status_nikah').text(status_nikah);
                if (data.status_keluarga == 'SM'){
                   var status_keluarga = 'Suami'
-               }else if(data.item.status_keluarga == 'IS'){
+               }else if(data.status_keluarga == 'IS'){
                   var status_keluarga = 'Istri'
-               }else if(data.item.status_keluarga == 'AN'){
+               }else if(data.status_keluarga == 'AN'){
                   var status_keluarga = 'Anak'
-               }else if(data.item.status_keluarga == 'CU'){
+               }else if(data.status_keluarga == 'CU'){
                   var status_keluarga = 'Cucu'
-               }else if(data.item.status_keluarga == 'OT'){
+               }else if(data.status_keluarga == 'OT'){
                   var status_keluarga = 'Orang Tua'
-               }else if(data.item.status_keluarga == 'ME'){
+               }else if(data.status_keluarga == 'ME'){
                   var status_keluarga = 'Mertua'
-               }else if(data.item.status_keluarga == 'FL'){
+               }else if(data.status_keluarga == 'FL'){
                   var status_keluarga = 'Family Lain'
-               }else if(data.item.status_keluarga == 'LA'){
+               }else if(data.status_keluarga == 'LA'){
                   var status_keluarga = 'Lainnya'
                }
                $('#status_keluarga').text(status_keluarga);
                if (data.pendidikan == 'TBS'){
                   var pendidikan = 'TIDAK / BELUM SEKOLAH'
-               }else if(data.item.pendidikan == 'BTS'){
+               }else if(data.pendidikan == 'BTS'){
                   var pendidikan = 'BELUM TAMAT SD/SEDERAJAT'
-               }else if(data.item.pendidikan == 'TSS'){
+               }else if(data.pendidikan == 'TSS'){
                   var pendidikan = 'TAMAT SD / SEDERAJAT'
-               }else if(data.item.pendidikan == 'SMP'){
+               }else if(data.pendidikan == 'SMP'){
                   var pendidikan = 'SLTP/SEDERAJAT'
-               }else if(data.item.pendidikan == 'SMA'){
+               }else if(data.pendidikan == 'SMA'){
                   var pendidikan = 'SLTA / SEDERAJAT'
-               }else if(data.item.pendidikan == 'D1'){
+               }else if(data.pendidikan == 'D1'){
                   var pendidikan = 'DIPLOMA I / II'
-               }else if(data.item.pendidikan == 'D2'){
+               }else if(data.pendidikan == 'D2'){
                   var pendidikan = 'AKADEMI/ DIPLOMA III/S. MUDA'
-               }else if(data.item.pendidikan == 'S1'){
+               }else if(data.pendidikan == 'S1'){
                   var pendidikan = 'DIPLOMA IV/ STRATA I'
-               }else if(data.item.pendidikan == 'S2'){
+               }else if(data.pendidikan == 'S2'){
                   var pendidikan = 'STRATA II'
-               }else if(data.item.pendidikan == 'S3'){
+               }else if(data.pendidikan == 'S3'){
                   var pendidikan = 'STRATA III'
                }
                $('#pendidikan').text(pendidikan);

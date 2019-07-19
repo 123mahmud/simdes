@@ -106,8 +106,15 @@ class pendudukKeluarController extends Controller
      */
     public function edit(Request $request)
     {
+        $penduduk_keluar = d_penduduk_keluar::where('id', Crypt::decrypt($request->id))->first();
+        $penduduk = d_penduduk::where('id', $penduduk_keluar->id_penduduk)->first();
+        $kabupaten = kabupaten::all();
+        $pekerjaan = d_pekerjaan::all();
+        $kec = DB::table('kecamatan')->where('id',$penduduk_keluar->kecamatan_tujuan)->first();
+        $kab = DB::table('kabupaten')->where('id',$penduduk_keluar->kabupaten_tujuan)->first();
+        $pro = DB::table('provinsi')->where('id',$penduduk_keluar->provinsi_tujuan)->first();
 
-        return view('master.Penduduk_Keluar.edit');
+        return view('master.Penduduk_Keluar.edit',compact('penduduk','kabupaten','pekerjaan','penduduk_keluar','kec','kab','pro'));
     }
 
     /**
@@ -117,9 +124,31 @@ class pendudukKeluarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $penduduk_keluar = d_penduduk_keluar::find(Crypt::decrypt($request->id));
+            $penduduk_keluar->alamat_tujuan = $request->alamat_tujuan;
+            $penduduk_keluar->rt_tujuan = $request->rt_tujuan;
+            $penduduk_keluar->rw_tujuan = $request->rw_tujuan;
+            $penduduk_keluar->kecamatan_tujuan = $request->kecamatan_tujuan;
+            $penduduk_keluar->kabupaten_tujuan = $request->kabupaten_tujuan;
+            $penduduk_keluar->provinsi_tujuan = $request->provinsi_tujuan;
+            $penduduk_keluar->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
+            $penduduk_keluar->keterangan = $request->keterangan;
+            $penduduk_keluar->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
     /**

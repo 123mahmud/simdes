@@ -108,6 +108,7 @@ class pendudukMasukController extends Controller
             $penduduk_masuk->id_penduduk = $penduduk->id;
             $penduduk_masuk->alamat_asal = $request->alamat_asal;
             $penduduk_masuk->rt_asal = $request->rt_asal;
+            $penduduk_masuk->rw_asal = $request->rw_asal;
             $penduduk_masuk->kecamatan_asal = $request->kecamatan_asal;
             $penduduk_masuk->kabupaten_asal = $request->kabupaten_asal;
             $penduduk_masuk->provinsi_asal = $request->provinsi_asal;
@@ -220,8 +221,42 @@ class pendudukMasukController extends Controller
 
     public function edit(Request $request)
     {
+        $penduduk_masuk = d_penduduk_masuk::where('id', Crypt::decrypt($request->id))->first();
+        $penduduk = d_penduduk::where('id', $penduduk_masuk->id_penduduk)->first();
+        $kabupaten = kabupaten::all();
+        $pekerjaan = d_pekerjaan::all();
+        $kec = DB::table('kecamatan')->where('id',$penduduk_masuk->kecamatan_asal)->first();
+        $kab = DB::table('kabupaten')->where('id',$penduduk_masuk->kabupaten_asal)->first();
+        $pro = DB::table('provinsi')->where('id',$penduduk_masuk->provinsi_asal)->first();
 
-        return view('master.Penduduk_Masuk.edit');
+        return view('master.Penduduk_Masuk.edit',compact('penduduk','kabupaten','pekerjaan','penduduk_masuk','kec','kab','pro'));
+    }
+
+    public function update(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $penduduk_masuk = d_penduduk_masuk::find(Crypt::decrypt($request->id));
+            $penduduk_masuk->alamat_asal = $request->alamat_asal;
+            $penduduk_masuk->rt_asal = $request->rt_asal;
+            $penduduk_masuk->rw_asal = $request->rw_asal;
+            $penduduk_masuk->kecamatan_asal = $request->kecamatan_asal;
+            $penduduk_masuk->kabupaten_asal = $request->kabupaten_asal;
+            $penduduk_masuk->provinsi_asal = $request->provinsi_asal;
+            $penduduk_masuk->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
+            $penduduk_masuk->keterangan = $request->keterangan;
+            $penduduk_masuk->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
 }

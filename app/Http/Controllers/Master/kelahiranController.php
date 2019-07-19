@@ -165,10 +165,53 @@ class kelahiranController extends Controller
    }
 
    public function edit(Request $request)
-    {
+   {
+      $kelahiran = d_kelahiran::where('id', Crypt::decrypt($request->id))->first();
+      $penduduk = d_penduduk::where('id', $kelahiran->id_penduduk)->first();
+      $kabupaten = kabupaten::all();
+      $pekerjaan = d_pekerjaan::all();
 
-        return view('master.Kelahiran.edit');
-    }
+      return view('master.Kelahiran.edit',compact('penduduk','kabupaten','pekerjaan','kelahiran'));
+   }
+
+   public function update(Request $request)
+   {
+        DB::beginTransaction();
+        try {
+            $kelahiran = d_kelahiran::find(Crypt::decrypt($request->id));
+
+            $penduduk = d_penduduk::find($kelahiran->id_penduduk);
+            $penduduk->nik = $request->nik;
+            $penduduk->nama = $request->nama;
+            $penduduk->urut_kk = $request->urut_kk;
+            $penduduk->kelamin = $request->kelamin;
+            $penduduk->tempat_lahir = $request->tempat_lahir;
+            $penduduk->tgl_lahir = date('Y-m-d',strtotime($request->tgl_lahir));
+            $penduduk->gol_darah = $request->gol_darah;
+            $penduduk->agama = $request->agama;
+            $penduduk->status_nikah = $request->status_nikah;
+            $penduduk->status_keluarga = $request->status_keluarga;
+            $penduduk->pendidikan = $request->pendidikan;
+            $penduduk->pekerjaan = $request->pekerjaan;
+            $penduduk->nama_ibu = $request->nama_ibu;
+            $penduduk->nama_ayah = $request->nama_ayah;
+            $penduduk->no_kk = $request->no_kk;
+            $penduduk->rt = $request->rt;
+            $penduduk->rw = $request->rw;
+            $penduduk->warga_negara = $request->warga_negara;
+            $penduduk->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
+   }
  
 }
 

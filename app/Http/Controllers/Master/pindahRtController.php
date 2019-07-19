@@ -163,8 +163,41 @@ class pindahRtController extends Controller
 
     public function edit(Request $request)
     {
+        $pindah_rt = d_pindah_rt::where('id', Crypt::decrypt($request->id))->first();
+        $penduduk = d_penduduk::where('id', $pindah_rt->id_penduduk)->first();
+        $kabupaten = kabupaten::all();
+        $pekerjaan = d_pekerjaan::all();
 
-        return view('master.Pindah_RT.edit');
+        return view('master.Pindah_RT.edit',compact('penduduk','kabupaten','pekerjaan','pindah_rt'));
+    }
+
+    public function update(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $pindah_rt = d_pindah_rt::find(Crypt::decrypt($request->id));
+            $pindah_rt->rt_tujuan = $request->rt_tujuan;
+            $pindah_rt->rw_tujuan = $request->rw_tujuan;
+            $pindah_rt->tgl_pindah = date('Y-m-d',strtotime($request->tgl_pindah));
+            $pindah_rt->keterangan = $request->keterangan;
+            $pindah_rt->save();
+
+            $penduduk = d_penduduk::findOrFail($pindah_rt->id_penduduk);
+            $penduduk->rt = $request->rt_tujuan;
+            $penduduk->rw = $request->rw_tujuan;
+            $penduduk->save();
+
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
     }
 
 }

@@ -202,7 +202,33 @@ class kematianController extends Controller
 
    public function edit(Request $request)
    {
+      $kematian = d_kematian::where('id', Crypt::decrypt($request->id))->first();
+      $penduduk = d_penduduk::where('id', $kematian->id_penduduk)->first();
+      $kabupaten = kabupaten::all();
+      $pekerjaan = d_pekerjaan::all();
 
-      return view('master.Penduduk.edit');
+      return view('master.Kematian.edit',compact('penduduk','kabupaten','pekerjaan','kematian'));
+   }
+
+   public function update(Request $request)
+   {
+        DB::beginTransaction();
+        try {
+            $kematian = d_kematian::find(Crypt::decrypt($request->id));
+            $kematian->tempat_meninggal = $request->tempat_meninggal;
+            $kematian->sebab_meninggal = $request->sebab_meninggal;
+            $kematian->tanggal_meninggal = date('Y-m-d',strtotime($request->tanggal_meninggal));
+            $kematian->save();
+        DB::commit();
+        return response()->json([
+         'status' => 'sukses'
+        ]);
+        } catch (\Exception $e) {
+        DB::rollback();
+            return response()->json([
+            'status' => 'gagal',
+            'data' => $e
+         ]);
+        }
    }
 }
