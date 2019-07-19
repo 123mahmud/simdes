@@ -176,7 +176,7 @@ class hakuserController extends Controller
           })->orderBy('a_id')->get();
         
          $mem = mMember::leftjoin('m_pegawai_man', 'd_mem.m_pegawai_id', '=', 'm_pegawai_man.c_id' )
-                      ->select('d_mem.*', 'm_pegawai_man.c_lahir')
+                      ->select('d_mem.*', 'm_pegawai_man.c_lahir','m_pegawai_man.c_nama')
                       ->where('m_id',$id)->first();
  
           if ($mem->m_pegawai_id != null) 

@@ -67,6 +67,8 @@
                                             <input type="text" class="form-control form-control-sm  input-sm" name="NamaLengkap"
                                             value="{{$mem->m_name}}" readonly>
                                             @endif
+                                            <input type="text" name="IdPegawai" class="form-control form-control-sm  input-sm"
+                                            value="{{$mem->c_nama}}" readonly="">
                                             <input type="hidden" name="IdPegawai" class="form-control form-control-sm  input-sm"
                                             value="{{$mem->m_pegawai_id}}">
                                         </div>
@@ -76,8 +78,7 @@
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-sm  input-sm" name="PassLama"
-                                            disabled>
+                                            <input type="text" class="form-control form-control-sm  input-sm" name="PassLama">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-4 col-xs-12">
