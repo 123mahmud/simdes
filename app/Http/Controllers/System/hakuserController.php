@@ -247,6 +247,12 @@ class hakuserController extends Controller
               $mMember->m_update = Carbon::now('Asia/Jakarta');
               if ($pass_lama == $mMember->m_passwd) {
                   $mMember->m_passwd = sha1(md5('passwordAllah').trim($request->PassBaru));
+              }else{
+                DB::commit();
+                return response()->json([
+                    'status' => 'gagal',
+                    'pesan' => 'Tidak terdapat data yang akan diubah'
+                ]); 
               }
               $mMember->save();
 
