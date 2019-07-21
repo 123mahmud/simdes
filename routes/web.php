@@ -110,8 +110,8 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 // Pembuatan Laporan
 	Route::get('pembuatan/laporan/index', 'Pembuatan\LaporanController@index')->name('laporan');
 	Route::get('laporan/get', 'Pembuatan\LaporanController@get')->name('get-laporan');
+	Route::post('laporan/store', 'Pembuatan\LaporanController@store')->name('store-laporan');
 	Route::get('laporan/create', 'Pembuatan\LaporanController@create')->name('create-laporan');
-
 // reff kode
 	Route::get('/reff/rkode/index', 'Reff\KodeController@index')->name('rkode');
 	Route::put('rkode/update', 'Reff\KodeController@update')->name('update-rkode');

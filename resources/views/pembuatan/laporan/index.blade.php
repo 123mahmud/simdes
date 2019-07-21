@@ -30,14 +30,14 @@
                <div class="card-block">
 
                   <section>
-                     <form id="form">
+                     <form id="data">
                      <div class="row">
                         <div class="col-md-3 col-sm-4 col-xs-12">
                            <label>Dari Tanggal</label>
                         </div>
                         <div class="col-md-3 col-sm-4 col-xs-12">
                            <div class="form-group">
-                              <input type="text" class="form-control form-control-sm datepicker" name="dari_tanggal">
+                              <input type="text" class="form-control form-control-sm datepicker" name="tanggal1">
                            </div>
                         </div>
                         <div class="col-md-3 col-sm-4 col-xs-12">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-3 col-sm-4 col-xs-12">
                            <div class="form-group">
-                              <input type="text" class="form-control form-control-sm datepicker" name="sampai_tanggal">
+                              <input type="text" class="form-control form-control-sm datepicker" name="tanggal2">
                            </div>
                         </div>
                         <div class="col-md-3 col-sm-4 col-xs-12">
@@ -61,24 +61,12 @@
                               </select>
                            </div>
                         </div>
-                        <div class="col-md-3 col-sm-4 col-xs-12">
-                           <label>Pendanda Tangan</label>
-                        </div>
-                        <div class="col-md-9 col-sm-8 col-xs-12">
-                           <div class="form-group">
-                              <select class="form-control form-control-sm" name="pegawai">
-                                 @foreach ($pegawai as $data)
-                                    <option value="{{ $data->c_nama }}">{{ $data->c_posisi }} - {{ $data->c_nama }}</option>
-                                 @endforeach
-                              </select>
-                           </div>
-                        </div>
                      </div>
                      </form>
                   </section>
                </div>
                <div class="card-footer text-right">
-                  <button class="btn btn-primary btn-submit" type="button" id="button-simpan" onclick="simpan()">Cetak</button>
+                  <button class="btn btn-primary btn-submit" type="button" id="print">Cetak</button>
                </div>
             </div>
          </div>
@@ -91,43 +79,35 @@
 @section('extra_script')
 <script type="text/javascript">
    $(document).ready(function(){
+      $('#print').on('click', function() {
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         $('.simpan').attr('disabled', 'disabled');
+         $.ajax({
+            url: "{{ route('store-laporan') }}",
+            type: 'POST',
+            data: $('#data').serialize(),
+            success: function (response) {
+                if (response.status == 'sukses') {
+                    window.open("{{ route('create-laporan') }}");
+                } else {
+                     $.toast({
+                         heading: 'Ada yang salah',
+                         text: 'Periksa data anda.',
+                         showHideTransition: 'plain',
+                         icon: 'warning'
+                     })
+                    $('.simpan').removeAttr('disabled', 'disabled');
+                }
+            }
+         })
+      });
 
    });
 
-   function simpan()
-   {
-      $.ajaxSetup({
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         }
-      });
-      $('.button-simpan').attr('disabled', 'disabled');
-      $.ajax({
-         url: "{{ route('store-rpekerjaan') }}",
-         type: 'POST',
-         data: $('#form').serialize(),
-         success: function (response,) {
-             if (response.status == 'sukses') {
-                 $.toast({
-                     heading: response.code,
-                     text: 'Berhasil di Simpan',
-                     bgColor: '#00b894',
-                     textColor: 'white',
-                     loaderBg: '#55efc4',
-                     icon: 'success'
-                  });
-                 window.location.href = "{{ route('rpekerjaan') }}";
-             } else {
-                  $.toast({
-                      heading: 'Ada yang salah',
-                      text: 'Periksa data anda.',
-                      showHideTransition: 'plain',
-                      icon: 'warning'
-                  })
-                 $('.button-simpan').removeAttr('disabled', 'disabled');
-             }
-         }
-      })
-   }
+   
 </script>
 @endsection
