@@ -45,7 +45,7 @@ class LaporanController extends Controller
                                         'd_penduduk.rw')
                 ->join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
-                ->whereBetween('d_kelahiran.created_at', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->whereBetween('d_penduduk.tgl_lahir', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
                 ->get();
         }elseif ($laporan[0]->laporan == 'd_kematian') {
             $data = d_kematian::select('d_penduduk.nik',
@@ -57,7 +57,7 @@ class LaporanController extends Controller
                                         'd_penduduk.rw')
                 ->join('d_penduduk','d_penduduk.id','=','d_kematian.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
-                ->whereBetween('d_kematian.created_at', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->whereBetween('d_kematian.tanggal_meninggal', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
                 ->get();
         }elseif ($laporan[0]->laporan == 'd_penduduk_masuk') {
             $data = d_penduduk_masuk::select('d_penduduk.nik',
@@ -69,7 +69,7 @@ class LaporanController extends Controller
                                         'd_penduduk.rw')
                 ->join('d_penduduk','d_penduduk.id','=','d_penduduk_masuk.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
-                ->whereBetween('d_penduduk_masuk.created_at', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->whereBetween('d_penduduk_masuk.tgl_pindah', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
                 ->get();
         }elseif ($laporan[0]->laporan == 'd_penduduk_keluar') {
             $data = d_penduduk_keluar::select('d_penduduk.nik',
@@ -81,7 +81,7 @@ class LaporanController extends Controller
                                         'd_penduduk.rw')
                 ->join('d_penduduk','d_penduduk.id','=','d_penduduk_keluar.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
-                ->whereBetween('d_penduduk_keluar.created_at', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->whereBetween('d_penduduk_keluar.tgl_pindah', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
                 ->get();
         }
         return view('pembuatan.laporan.laporan',compact('laporan','data'));
