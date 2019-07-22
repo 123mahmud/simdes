@@ -46,6 +46,7 @@ class LaporanController extends Controller
                 ->join('d_penduduk','d_penduduk.id','=','d_kelahiran.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
                 ->whereBetween('d_penduduk.tgl_lahir', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->where('d_penduduk.active',1)
                 ->get();
         }elseif ($laporan[0]->laporan == 'd_kematian') {
             $data = d_kematian::select('d_penduduk.nik',
@@ -70,6 +71,7 @@ class LaporanController extends Controller
                 ->join('d_penduduk','d_penduduk.id','=','d_penduduk_masuk.id_penduduk')
                 ->join('kabupaten','kabupaten.id','=','d_penduduk.tempat_lahir')
                 ->whereBetween('d_penduduk_masuk.tgl_pindah', [$laporan[0]->tanggal1, $laporan[0]->tanggal2])
+                ->where('d_penduduk.active',1)
                 ->get();
         }elseif ($laporan[0]->laporan == 'd_penduduk_keluar') {
             $data = d_penduduk_keluar::select('d_penduduk.nik',

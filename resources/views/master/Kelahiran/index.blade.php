@@ -76,10 +76,10 @@
 				}
 			},
 			columns: [
-				{data: 'nik', "width": "20%"},
+				{data: 'nik', "width": "15%"},
 				{data: 'nama', "width": "25%"},
-				{data: 'tempat_tgl_lahir', "width": "20%"},
-				{data: 'nama_ayah', "width": "20%"},
+				{data: 'tempat_tgl_lahir', "width": "30%"},
+				{data: 'nama_ayah', "width": "15%"},
 				{data: 'action', "width": "15%"}
 			],
 			pageLength: 10,

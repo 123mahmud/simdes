@@ -48,7 +48,8 @@ class pendudukMasukController extends Controller
       return Datatables::of($data)
         ->addIndexColumn()
         ->addColumn('tempat_tgl_lahir', function($data) {
-            return $data->tempat_lahir .'-'. $data->tgl_lahir;
+            $tempat_lahir = kabupaten::select('name')->where('id',$data->tempat_lahir)->first();
+            return  $tempat_lahir->name .', '. date('d M Y', strtotime($data->tgl_lahir));
         })        
 
         ->addColumn('action', function($data) {
