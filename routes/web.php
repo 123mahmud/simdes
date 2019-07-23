@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pkeluar/add', 'Master\pendudukKeluarController@add')->name('add-pkeluar');
 	Route::post('pkeluar/create', 'Master\pendudukKeluarController@create')->name('create-pkeluar');
 	Route::get('pkeluar/detail/{id}', 'Master\pendudukKeluarController@show')->name('detail-pkeluar');
-	Route::delete('pkeluar/delete', 'Master\pendudukKeluarController@destroy')->name('delete-pkeluar');
+	Route::get('pkeluar/delete', 'Master\pendudukKeluarController@destroy')->name('delete-pkeluar');
 	Route::get('pkeluar/edit', 'Master\pendudukKeluarController@edit')->name('edit-pkeluar');
 	Route::post('pkeluar/update', 'Master\pendudukKeluarController@update')->name('update-pkeluar');
 //pindah Rt
