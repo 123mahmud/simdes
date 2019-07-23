@@ -102,7 +102,7 @@
                action: function(){
                   $.ajax({
                      url: "{{ route('delete-kelahiran') }}",
-                     type: "DELETE",
+                     type: "GET",
                      dataType: "JSON",
                      data: {id:id},
                      success: function(response)

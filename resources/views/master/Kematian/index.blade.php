@@ -240,7 +240,7 @@
                action: function(){
                   $.ajax({
                      url: "{{ route('delete-kematian') }}",
-                     type: "DELETE",
+                     type: "GET",
                      dataType: "JSON",
                      data: {id:id},
                      success: function(response)

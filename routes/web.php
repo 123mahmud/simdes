@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('kelahiran/get', 'Master\kelahiranController@get')->name('get-kelahiran');
 	Route::get('kelahiran/add', 'Master\kelahiranController@add')->name('add-kelahiran');
 	Route::post('kelahiran/create', 'Master\kelahiranController@create')->name('create-kelahiran');
-	Route::delete('kelahiran/delete', 'Master\kelahiranController@destroy')->name('delete-kelahiran');
+	Route::get('kelahiran/delete', 'Master\kelahiranController@destroy')->name('delete-kelahiran');
 	Route::get('kelahiran/detail/{id}', 'Master\kelahiranController@show')->name('detail-kelahiran');
 	Route::get('kelahiran/edit', 'Master\kelahiranController@edit')->name('edit-kelahiran');
 	Route::post('kelahiran/update', 'Master\kelahiranController@update')->name('update-kelahiran');
@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('kematian/autocomplete', 'Master\kematianController@autocomplete')->name('autocomplete-kematian');
 	Route::post('kematian/create', 'Master\kematianController@create')->name('create-kematian');
 	Route::get('kematian/detail/{id}', 'Master\kematianController@show')->name('detail-kematian');
-	Route::delete('kematian/delete', 'Master\kematianController@destroy')->name('delete-kematian');
+	Route::get('kematian/delete', 'Master\kematianController@destroy')->name('delete-kematian');
 	Route::get('kematian/edit', 'Master\kematianController@edit')->name('edit-kematian');
 	Route::post('kematian/update', 'Master\kematianController@update')->name('update-kematian');
 // Penduduk Masuk
@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::post('pmasuk/create', 'Master\pendudukMasukController@create')->name('create-pmasuk');
 	Route::get('pmasuk/autocomplete', 'Master\pendudukMasukController@autocomplete')->name('autocomplete-kecamatan');
 	Route::get('pmasuk/detail/{id}', 'Master\pendudukMasukController@show')->name('detail-kecamatan');
-	Route::delete('pmasuk/delete', 'Master\pendudukMasukController@destroy')->name('delete-pmasuk');
+	Route::get('pmasuk/delete', 'Master\pendudukMasukController@destroy')->name('delete-pmasuk');
 	Route::get('pmasuk/edit', 'Master\pendudukMasukController@edit')->name('edit-pmasuk');
 	Route::post('pmasuk/update', 'Master\pendudukMasukController@update')->name('update-pmasuk');
 // Penduduk Keluar
@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth', 'web']], function() {
 	Route::get('pindahrt/get', 'Master\pindahRtController@get')->name('get-pindahrt');
 	Route::get('pindahrt/add', 'Master\pindahRtController@add')->name('add-pindahrt');
 	Route::get('pindahrt/detail/{id}', 'Master\pindahRtController@show')->name('detail-pindahrt');
-	Route::delete('pindahrt/delete', 'Master\pindahRtController@destroy')->name('delete-pindahrt');
+	Route::get('pindahrt/delete', 'Master\pindahRtController@destroy')->name('delete-pindahrt');
 	Route::get('pindahrt/edit', 'Master\pindahRtController@edit')->name('edit-pindahrt');
 	Route::post('pindahrt/update', 'Master\pindahRtController@update')->name('update-pindahrt');
 // Pembuatan Surat

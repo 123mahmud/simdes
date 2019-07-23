@@ -216,7 +216,7 @@
                action: function(){
                   $.ajax({
                      url: "{{ route('delete-pmasuk') }}",
-                     type: "DELETE",
+                     type: "GET",
                      dataType: "JSON",
                      data: {id:id},
                      success: function(response)
