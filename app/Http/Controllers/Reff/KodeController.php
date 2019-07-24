@@ -75,9 +75,9 @@ class KodeController extends Controller
     {
         DB::beginTransaction();
         try {
-            $surat = surat::where('id','1')->first();
-            $surat->kode_surat = $surat->kode_surat;
-            $surat->kode_desa = $surat->kode_desa;
+            $surat = surat::find('1');
+            $surat->kode_surat = $request->kode_surat;
+            $surat->kode_desa = $request->kode_desa;
             $surat->save();
         DB::commit();
         return response()->json([
