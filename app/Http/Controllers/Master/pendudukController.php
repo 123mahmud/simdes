@@ -81,7 +81,7 @@ class pendudukController extends Controller
     public function add()
     {
         $kabupaten = kabupaten::all();
-        $pekerjaan = d_pekerjaan::where('active',1)->all();
+        $pekerjaan = d_pekerjaan::where('active',1)->get();
 
         return view('master.Penduduk.add', compact('kabupaten','pekerjaan'));
     }
