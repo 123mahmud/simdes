@@ -66,7 +66,7 @@ $(document).ready(function() {
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
       });
-      $('.simpan').attr('disabled', 'disabled');
+      // $('.simpan').attr('disabled', 'disabled');
       $.ajax({
          url: "{{ route('update-rkode') }}",
          type: 'PUT',
@@ -88,7 +88,7 @@ $(document).ready(function() {
                       showHideTransition: 'plain',
                       icon: 'warning'
                   })
-                 $('.simpan').removeAttr('disabled', 'disabled');
+                 // $('.simpan').removeAttr('disabled', 'disabled');
              }
          }
       })
