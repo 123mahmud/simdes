@@ -66,7 +66,7 @@ class kelahiranController extends Controller
    public function add()
    {
       $kabupaten = kabupaten::all();
-      $pekerjaan = d_pekerjaan::all();   
+      $pekerjaan = d_pekerjaan::where('active',1)->get();   
                 
       return view('master.Kelahiran.add',compact('kabupaten','pekerjaan'));
    }
