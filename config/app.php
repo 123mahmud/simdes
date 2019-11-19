@@ -168,7 +168,6 @@ return [
          */
         Barryvdh\DomPDF\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
